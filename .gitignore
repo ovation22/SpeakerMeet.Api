@@ -3,6 +3,15 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# ASP.NET Core appsettings
+appsettings.[Dd]evelopment.json
+
+# Logs
+log*.txt
+
+# .NET Core
+**/Properties/launchSettings.json
+
 # User-specific files
 *.rsuser
 *.suo
