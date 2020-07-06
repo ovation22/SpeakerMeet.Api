@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Api", "SpeakerMeet.Api\SpeakerMeet.Api.csproj", "{4DED4745-1FB4-44FB-9D37-1F859A73066D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Api", "SpeakerMeet.Api\SpeakerMeet.Api.csproj", "{4DED4745-1FB4-44FB-9D37-1F859A73066D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E28C99EC-6179-4930-A765-99EA555F0E25}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,9 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Core", "SpeakerMeet.Core\SpeakerMeet.Core.csproj", "{CBEA56C0-5230-48A6-99AD-B4F985315AB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Core", "SpeakerMeet.Core\SpeakerMeet.Core.csproj", "{CBEA56C0-5230-48A6-99AD-B4F985315AB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Infrastructure", "SpeakerMeet.Infrastructure\SpeakerMeet.Infrastructure.csproj", "{1C833B7D-D0E8-431D-B2FE-85DAE6529F7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Infrastructure", "SpeakerMeet.Infrastructure\SpeakerMeet.Infrastructure.csproj", "{1C833B7D-D0E8-431D-B2FE-85DAE6529F7D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Api.Tests", "SpeakerMeet.Api.Tests\SpeakerMeet.Api.Tests.csproj", "{2766B131-5EC6-4DFC-899E-8D7E7067F704}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Core.Tests", "SpeakerMeet.Core.Tests\SpeakerMeet.Core.Tests.csproj", "{C4FCCCBD-7918-4B52-B96F-974324F38E3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Infrastructure.Tests", "SpeakerMeet.Infrastructure.Tests\SpeakerMeet.Infrastructure.Tests.csproj", "{1FF6A4B7-9A35-4598-913E-F260703282CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,9 +43,26 @@ Global
 		{1C833B7D-D0E8-431D-B2FE-85DAE6529F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C833B7D-D0E8-431D-B2FE-85DAE6529F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C833B7D-D0E8-431D-B2FE-85DAE6529F7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2766B131-5EC6-4DFC-899E-8D7E7067F704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2766B131-5EC6-4DFC-899E-8D7E7067F704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2766B131-5EC6-4DFC-899E-8D7E7067F704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2766B131-5EC6-4DFC-899E-8D7E7067F704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4FCCCBD-7918-4B52-B96F-974324F38E3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4FCCCBD-7918-4B52-B96F-974324F38E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4FCCCBD-7918-4B52-B96F-974324F38E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4FCCCBD-7918-4B52-B96F-974324F38E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF6A4B7-9A35-4598-913E-F260703282CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF6A4B7-9A35-4598-913E-F260703282CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF6A4B7-9A35-4598-913E-F260703282CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF6A4B7-9A35-4598-913E-F260703282CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2766B131-5EC6-4DFC-899E-8D7E7067F704} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
+		{C4FCCCBD-7918-4B52-B96F-974324F38E3F} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
+		{1FF6A4B7-9A35-4598-913E-F260703282CA} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2B1E90C-5AF5-4A8A-BB74-5F5FF469E7ED}
