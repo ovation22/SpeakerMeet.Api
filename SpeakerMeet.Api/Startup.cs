@@ -1,11 +1,18 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SpeakerMeet.Api.Config;
+using SpeakerMeet.Core.Interfaces.Repositories;
+using SpeakerMeet.Core.Interfaces.Utilities;
+using SpeakerMeet.Infrastructure.Data.Repositories;
+using SpeakerMeet.Infrastructure.Utilities;
 
 namespace SpeakerMeet.Api
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -18,7 +25,14 @@ namespace SpeakerMeet.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddCorsConfig();
+            services.AddControllersConfig();
+            services.AddDatabaseConfig(Configuration);
+            services.AddSwaggerConfig();
+            services.AddApplicationInsightsTelemetry();
+
+            services.AddSingleton<ITimeManager, TimeManager>();
+            services.AddScoped(typeof(ISpeakerMeetRepository), typeof(SpeakerMeetRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +44,11 @@ namespace SpeakerMeet.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwaggerConfig();
+            app.UseCorsConfig();
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
 
             app.UseRouting();
 
