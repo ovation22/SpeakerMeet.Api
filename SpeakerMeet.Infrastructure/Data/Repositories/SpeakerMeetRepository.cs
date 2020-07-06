@@ -12,7 +12,7 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
     {
         private readonly SpeakerMeetContext _context;
 
-        protected SpeakerMeetRepository(SpeakerMeetContext context)
+        public SpeakerMeetRepository(SpeakerMeetContext context)
         {
             _context = context;
         }
