@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SpeakerMeet.Core.Entities;
 
 namespace SpeakerMeet.Infrastructure.Data
 {
@@ -8,6 +9,8 @@ namespace SpeakerMeet.Infrastructure.Data
         {
         }
 
+        public virtual DbSet<Speaker> Speakers { get; set; } = null!;
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }
