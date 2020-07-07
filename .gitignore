@@ -9,6 +9,9 @@ appsettings.[Dd]evelopment.json
 # Logs
 log*.txt
 
+# TestResults
+**/TestResults/*
+
 # .NET Core
 **/Properties/launchSettings.json
 
