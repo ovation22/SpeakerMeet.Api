@@ -6,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SpeakerMeet.Api.Config;
 using SpeakerMeet.Core.Interfaces.Repositories;
+using SpeakerMeet.Core.Interfaces.Services;
 using SpeakerMeet.Core.Interfaces.Utilities;
+using SpeakerMeet.Core.Services;
 using SpeakerMeet.Infrastructure.Data.Repositories;
 using SpeakerMeet.Infrastructure.Utilities;
 
