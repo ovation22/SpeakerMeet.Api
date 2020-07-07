@@ -44,5 +44,25 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
 
             return await dbSet.Include(include).Where(expression).ToListAsync();
         }
+
+        public async Task<T> Add<T>(T entity) where T : class
+        {
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+
+            return entity;
+        }
+
+        public async Task Update<T>(T entity) where T : class
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete<T>(T entity) where T : class
+        {
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
+        }
     }
 }
