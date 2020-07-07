@@ -23,8 +23,13 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+    - name: Install Report Generator
+      run: dotnet tool install -g dotnet-reportgenerator-globaltool
+    - name: Generate Report
+      run: reportgenerator -reports:**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:Cobertura
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        file: ./coverage.xml # optional
         name: codecov-umbrella # optional
         fail_ci_if_error: true # optional (default = false)
