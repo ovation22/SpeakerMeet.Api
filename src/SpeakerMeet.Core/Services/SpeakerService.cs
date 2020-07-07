@@ -2,5 +2,9 @@
 {
     public class SpeakerService : ISpeakerService
     {
+        public SpeakerService()
+        {
+            
+        }
     }
 }
