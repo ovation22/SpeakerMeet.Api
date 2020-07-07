@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SpeakerMeet.Infrastructure\SpeakerMeet.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\SpeakerMeet.Infrastructure\SpeakerMeet.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
