@@ -22,13 +22,9 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
-    - name: Generate coverage report
-      run: dotnet test --collect:"XPlat Code Coverage" --no-restore
+      run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        file: ./TestResults/coverage.cobertura.xml # optional
-        flags: unittests # optional
         name: codecov-umbrella # optional
         fail_ci_if_error: true # optional (default = false)
