@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Infrastructure.Data;
 using SpeakerMeet.Infrastructure.Data.Repositories;
@@ -8,10 +9,14 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
 {
     public class Get : SpeakerMeetRepositoryTestBase
     {
+        private readonly Guid _id;
+
         public Get()
         {
+            _id = Guid.NewGuid();
+
             using var context = new SpeakerMeetContext(Options);
-            context.Speakers.Add(new Speaker {Id = 4});
+            context.Speakers.Add(new Speaker {Id = _id});
             context.SaveChanges();
         }
 
@@ -23,7 +28,7 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
             var repository = new SpeakerMeetRepository(context);
 
             // Act
-            var speaker = await repository.Get<Speaker>(x => x.Id == 4);
+            var speaker = await repository.Get<Speaker>(x => x.Id == _id);
 
             // Assert
             Assert.IsAssignableFrom<Speaker>(speaker);

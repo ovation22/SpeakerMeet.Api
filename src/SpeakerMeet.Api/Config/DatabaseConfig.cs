@@ -12,7 +12,8 @@ namespace SpeakerMeet.Api.Config
         public static void AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContextPool<SpeakerMeetContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("SpeakerMeet")));
+                //options.UseSqlServer(configuration.GetConnectionString("SpeakerMeet")));
+                options.UseSqlServer(configuration.GetConnectionString("Azure")));
         }
     }
 }
