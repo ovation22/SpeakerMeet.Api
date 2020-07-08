@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SpeakerMeet.Core.Entities
 {
-    public class Speaker
+    public class Community
     {
         [Key]
         public Guid Id { get; set; }
@@ -24,7 +23,5 @@ namespace SpeakerMeet.Core.Entities
         public Guid UpdatedBy { get; set; }
 
         public DateTime UpdatedOn { get; set; }
-
-        public IEnumerable<SpeakerTag>? SpeakerTags { get; set; }
     }
 }

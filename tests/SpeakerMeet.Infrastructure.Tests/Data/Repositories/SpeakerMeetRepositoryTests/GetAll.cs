@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SpeakerMeet.Core.Entities;
@@ -13,9 +14,9 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
         public GetAll()
         {
             using var context = new SpeakerMeetContext(Options);
-            context.Speakers.Add(new Speaker {Id = 1});
-            context.Speakers.Add(new Speaker {Id = 2});
-            context.Speakers.Add(new Speaker {Id = 3});
+            context.Speakers.Add(new Speaker {Id = Guid.NewGuid()});
+            context.Speakers.Add(new Speaker {Id = Guid.NewGuid()});
+            context.Speakers.Add(new Speaker {Id = Guid.NewGuid()});
             context.SaveChanges();
         }
 
