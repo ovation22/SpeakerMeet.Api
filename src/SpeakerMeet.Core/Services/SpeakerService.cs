@@ -1,10 +1,8 @@
-﻿using SpeakerMeet.Core.Interfaces.Services;namespace SpeakerMeet.Core.Services
+﻿using SpeakerMeet.Core.Interfaces.Services;
+
+namespace SpeakerMeet.Core.Services
 {
     public class SpeakerService : ISpeakerService
     {
-        public SpeakerService()
-        {
-            
-        }
     }
 }

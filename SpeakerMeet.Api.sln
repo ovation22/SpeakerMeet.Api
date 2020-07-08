@@ -7,6 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Api", "src\Spea
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E28C99EC-6179-4930-A765-99EA555F0E25}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
 		LICENSE = LICENSE
@@ -19,11 +20,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Infrastructure"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Api.Tests", "tests\SpeakerMeet.Api.Tests\SpeakerMeet.Api.Tests.csproj", "{2766B131-5EC6-4DFC-899E-8D7E7067F704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Api.Tests", "tests\SpeakerMeet.Api.Tests\SpeakerMeet.Api.Tests.csproj", "{2766B131-5EC6-4DFC-899E-8D7E7067F704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Core.Tests", "tests\SpeakerMeet.Core.Tests\SpeakerMeet.Core.Tests.csproj", "{C4FCCCBD-7918-4B52-B96F-974324F38E3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Core.Tests", "tests\SpeakerMeet.Core.Tests\SpeakerMeet.Core.Tests.csproj", "{C4FCCCBD-7918-4B52-B96F-974324F38E3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Infrastructure.Tests", "tests\SpeakerMeet.Infrastructure.Tests\SpeakerMeet.Infrastructure.Tests.csproj", "{1FF6A4B7-9A35-4598-913E-F260703282CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Infrastructure.Tests", "tests\SpeakerMeet.Infrastructure.Tests\SpeakerMeet.Infrastructure.Tests.csproj", "{1FF6A4B7-9A35-4598-913E-F260703282CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
