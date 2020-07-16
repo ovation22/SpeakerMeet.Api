@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SpeakerMeet.Core.Interfaces.Logging;
+using SpeakerMeet.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace SpeakerMeet.Api.Controllers
 {
@@ -7,18 +11,58 @@ namespace SpeakerMeet.Api.Controllers
     [ApiController]
     public class SpeakersController : ControllerBase
     {
+        private readonly ISpeakerService _speakerService;
+        private readonly ILoggerAdapter<SpeakersController> _logger;
+
+        public SpeakersController(
+            ISpeakerService speakerService,
+            ILoggerAdapter<SpeakersController> logger
+        )
+        {
+            _logger = logger;
+            _speakerService = speakerService;
+        }
+
         // GET: api/Speakers
         [HttpGet]
-        public IEnumerable<string> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var result = await _speakerService.GetAll();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return BadRequest("Unable to return Speakers");
         }
 
         // GET: api/Speakers/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> Get(Guid id)
         {
-            return "value";
+            try
+            {
+                var result = await _speakerService.Get(id);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return BadRequest("Unable to return Speaker");
         }
 
         // POST: api/Speakers
