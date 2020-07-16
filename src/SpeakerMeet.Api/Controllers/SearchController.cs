@@ -7,7 +7,7 @@ namespace SpeakerMeet.Api.Controllers
     [ApiController]
     public class SearchController : ControllerBase
     {
-        // GET: api/Conferences
+        // GET: api/Search
         [HttpGet]
         public IEnumerable<string> GetAll([FromQuery] string term)
         {

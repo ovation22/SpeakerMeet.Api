@@ -6,14 +6,21 @@ using Xunit;
 
 namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
 {
-    public class GetAll : SpeakersControllerTestBase
+    public class Get : SpeakersControllerTestBase
     {
+        private readonly Guid _id;
+
+        public Get()
+        {
+            _id = new Guid("170E1003-5346-4E57-8721-FBBDFBC28EF6");
+        }
+
         [Fact]
         public async Task ItReturnsOkObjectResult()
         {
             // Arrange
             // Act
-            var result = await Controller.GetAll();
+            var result = await Controller.Get(_id);
 
             // Assert
             Assert.IsType<OkObjectResult>(result);
@@ -24,20 +31,20 @@ namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
         {
             // Arrange
             // Act
-            await Controller.GetAll();
+            await Controller.Get(_id);
 
             // Assert
-            SpeakerService.Verify(x => x.GetAll(), Times.Once());
+            SpeakerService.Verify(x => x.Get(_id), Times.Once());
         }
 
         [Fact]
         public async Task GivenException_ThenBadRequestResult()
         {
             // Arrange
-            SpeakerService.Setup(x => x.GetAll()).Throws(new Exception());
+            SpeakerService.Setup(x => x.Get(_id)).Throws(new Exception());
 
             // Act
-            var result = await Controller.GetAll();
+            var result = await Controller.Get(_id);
 
             // Assert
             Assert.IsAssignableFrom<BadRequestObjectResult>(result);
@@ -48,10 +55,10 @@ namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
         {
             // Arrange
             var ex = new Exception();
-            SpeakerService.Setup(x => x.GetAll()).Throws(ex);
+            SpeakerService.Setup(x => x.Get(_id)).Throws(ex);
 
             // Act
-            await Controller.GetAll();
+            await Controller.Get(_id);
 
             // Assert
             Logger.Verify(x => x.LogError(ex, ex.Message), Times.Once());
