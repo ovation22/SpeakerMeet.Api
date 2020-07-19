@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Moq;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
-using SpeakerMeet.Core.Services;
 using Xunit;
 
 namespace SpeakerMeet.Core.Tests.Services.SpeakerServiceTests

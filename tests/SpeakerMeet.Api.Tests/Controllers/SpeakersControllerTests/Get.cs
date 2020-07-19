@@ -27,7 +27,7 @@ namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
         }
 
         [Fact]
-        public async Task ItGetsSpeakers()
+        public async Task ItGetsSpeaker()
         {
             // Arrange
             // Act
