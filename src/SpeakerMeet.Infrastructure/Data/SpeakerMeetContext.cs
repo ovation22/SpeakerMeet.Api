@@ -9,10 +9,10 @@ namespace SpeakerMeet.Infrastructure.Data
         {
         }
 
+        public virtual DbSet<Search> Searches { get; set; } = null!;
         public virtual DbSet<Speaker> Speakers { get; set; } = null!;
         public virtual DbSet<Community> Communities { get; set; } = null!;
         public virtual DbSet<Conference> Conferences { get; set; } = null!;
-        public virtual DbSet<Search> Searches { get; set; } = null!;
         public virtual DbSet<SpeakerTag> SpeakerTags { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
