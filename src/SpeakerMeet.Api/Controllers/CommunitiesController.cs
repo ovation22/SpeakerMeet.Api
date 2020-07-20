@@ -66,6 +66,27 @@ namespace SpeakerMeet.Api.Controllers
             return BadRequest("Unable to return Community");
         }
 
+        // GET: api/Communities/Slug/slug-name
+        [HttpGet("Slug/{slug}")]
+        [ProducesResponseType(typeof(CommunityResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetBySlug(string slug)
+        {
+            try
+            {
+                var result = await _communityService.Get(slug);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return BadRequest("Unable to return Community");
+        }
+
         // POST: api/Communities
         [HttpPost]
         public void Post([FromBody] string value)
