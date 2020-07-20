@@ -12,7 +12,7 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
         public SpeakerMeetRepositoryTestBase()
         {
             Options = new DbContextOptionsBuilder<SpeakerMeetContext>()
-                .UseInMemoryDatabase("MovieListDatabase")
+                .UseInMemoryDatabase("SpeakerMeet")
                 .Options;
         }
     }

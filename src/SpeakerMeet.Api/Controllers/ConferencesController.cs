@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Interfaces.Logging;
 using SpeakerMeet.Core.Interfaces.Services;
 
@@ -26,7 +27,7 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Conferences
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ConferencesResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetAll()
@@ -47,7 +48,7 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Conferences/5
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ConferenceResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Get(Guid id)
