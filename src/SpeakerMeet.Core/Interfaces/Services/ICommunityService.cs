@@ -8,6 +8,7 @@ namespace SpeakerMeet.Core.Interfaces.Services
     public interface ICommunityService
     {
         Task<CommunityResult> Get(Guid id);
+        Task<CommunityResult> Get(string slug);
         Task<IEnumerable<CommunitiesResult>> GetAll();
     }
 }

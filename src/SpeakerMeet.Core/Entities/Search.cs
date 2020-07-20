@@ -14,9 +14,9 @@ namespace SpeakerMeet.Core.Entities
 
         public bool IsActive { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTime Created { get; set; }
 
-        public DateTime UpdatedOn { get; set; }
+        public DateTime Updated { get; set; }
 
         public string Type { get; set; } = null!;
 
