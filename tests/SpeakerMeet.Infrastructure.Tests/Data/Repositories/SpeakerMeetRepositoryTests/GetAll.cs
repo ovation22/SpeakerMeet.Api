@@ -21,7 +21,7 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
         }
 
         [Fact]
-        public async Task ItReturnsAllThings()
+        public async Task ItReturnsAllSpeaker()
         {
             // Arrange
             await using var context = new SpeakerMeetContext(Options);
