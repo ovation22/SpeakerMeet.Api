@@ -27,7 +27,8 @@ namespace SpeakerMeet.Core.Services
                 Id = community.Id,
                 Location = community.Location,
                 Name = community.Name,
-                Slug = community.Slug
+                Slug = community.Slug,
+                Description = community.Description
             };
         }
 
@@ -40,7 +41,8 @@ namespace SpeakerMeet.Core.Services
                 Id = community.Id,
                 Location = community.Location,
                 Name = community.Name,
-                Slug = community.Slug
+                Slug = community.Slug,
+                Description = community.Description
             };
         }
 
@@ -53,7 +55,8 @@ namespace SpeakerMeet.Core.Services
                 Id = x.Id,
                 Location = x.Location,
                 Name = x.Name,
-                Slug = x.Slug
+                Slug = x.Slug,
+                Description = x.Description
             });
         }
     }

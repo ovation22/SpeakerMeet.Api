@@ -14,6 +14,8 @@ namespace SpeakerMeet.Core.Entities
 
         public string Location { get; set; } = null!;
 
+        public string Description { get; set; } = null!;
+
         public bool IsActive { get; set; }
 
         public Guid? CreatedBy { get; set; }

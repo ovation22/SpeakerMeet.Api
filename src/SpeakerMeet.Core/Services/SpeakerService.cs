@@ -27,7 +27,22 @@ namespace SpeakerMeet.Core.Services
                 Id = speaker.Id,
                 Location = speaker.Location,
                 Name = speaker.Name,
-                Slug = speaker.Slug
+                Slug = speaker.Slug,
+                Description = speaker.Description
+            };
+        }
+
+        public async Task<SpeakerResult> Get(string slug)
+        {
+            var speaker =  await _repository.Get<Speaker>(x => x.Slug == slug);
+
+            return new SpeakerResult
+            {
+                Id = speaker.Id,
+                Location = speaker.Location,
+                Name = speaker.Name,
+                Slug = speaker.Slug,
+                Description = speaker.Description
             };
         }
 
@@ -40,7 +55,8 @@ namespace SpeakerMeet.Core.Services
                 Id = x.Id,
                 Location = x.Location,
                 Name = x.Name,
-                Slug = x.Slug
+                Slug = x.Slug,
+                Description = x.Description
             });
         }
     }

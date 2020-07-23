@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +55,27 @@ namespace SpeakerMeet.Api.Controllers
             try
             {
                 var result = await _conferenceService.Get(id);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return BadRequest("Unable to return Conference");
+        }
+
+        // GET: api/Conferences/Slug/slug-name
+        [HttpGet("Slug/{slug}")]
+        [ProducesResponseType(typeof(ConferenceResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetBySlug(string slug)
+        {
+            try
+            {
+                var result = await _conferenceService.Get(slug);
 
                 return Ok(result);
             }

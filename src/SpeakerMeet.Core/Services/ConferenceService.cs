@@ -27,7 +27,22 @@ namespace SpeakerMeet.Core.Services
                 Id = conference.Id,
                 Location = conference.Location,
                 Name = conference.Name,
-                Slug = conference.Slug
+                Slug = conference.Slug,
+                Description = conference.Description
+            };
+        }
+
+        public async Task<ConferenceResult> Get(string slug)
+        {
+            var conference =  await _repository.Get<Conference>(x => x.Slug == slug);
+
+            return new ConferenceResult
+            {
+                Id = conference.Id,
+                Location = conference.Location,
+                Name = conference.Name,
+                Slug = conference.Slug,
+                Description = conference.Description
             };
         }
 
@@ -40,7 +55,8 @@ namespace SpeakerMeet.Core.Services
                 Id = x.Id,
                 Location = x.Location,
                 Name = x.Name,
-                Slug = x.Slug
+                Slug = x.Slug,
+                Description = x.Description
             });
         }
     }
