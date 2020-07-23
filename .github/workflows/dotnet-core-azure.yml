@@ -18,7 +18,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: 'SpeakerMeet'              # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: './src/**/*.csproj'      # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_PACKAGE_PATH: './src/**/SpeakerMeet.Api.csproj'      # set this to the path to your web app project, defaults to the repository root
   NETCORE_VERSION: '3.1.101'                    # set this to the .NET Core version to use
 
 jobs:
