@@ -11,5 +11,7 @@ namespace SpeakerMeet.Core.DTOs
         public string Slug { get; set; } = null!;
 
         public string Location { get; set; } = null!;
+
+        public string Description { get; set; } = null!;
     }
 }
