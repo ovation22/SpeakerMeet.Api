@@ -14,9 +14,9 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
         public GetAll()
         {
             using var context = new SpeakerMeetContext(Options);
-            context.Speakers.Add(new Speaker {Id = Guid.NewGuid()});
-            context.Speakers.Add(new Speaker {Id = Guid.NewGuid()});
-            context.Speakers.Add(new Speaker {Id = Guid.NewGuid()});
+            context.Speakers.Add(new Speaker {Id = Guid.NewGuid(), IsActive = true});
+            context.Speakers.Add(new Speaker {Id = Guid.NewGuid(), IsActive = true });
+            context.Speakers.Add(new Speaker {Id = Guid.NewGuid(), IsActive = true });
             context.SaveChanges();
         }
 
@@ -29,6 +29,21 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
 
             // Act
             var speakers = (List<Speaker>) await repository.GetAll<Speaker>();
+
+            // Assert
+            Assert.IsAssignableFrom<IEnumerable<Speaker>>(speakers);
+            Assert.Equal(context.Speakers.Count(), speakers.Count);
+        }
+
+        [Fact]
+        public async Task ItReturnsAllSpeakerByExpression()
+        {
+            // Arrange
+            await using var context = new SpeakerMeetContext(Options);
+            var repository = new SpeakerMeetRepository(context);
+
+            // Act
+            var speakers = (List<Speaker>) await repository.GetAll<Speaker>(x => true);
 
             // Assert
             Assert.IsAssignableFrom<IEnumerable<Speaker>>(speakers);
