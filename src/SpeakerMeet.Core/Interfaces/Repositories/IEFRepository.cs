@@ -7,6 +7,7 @@ namespace SpeakerMeet.Core.Interfaces.Repositories
 {
     public interface IEFRepository
     {
+        Task<int> Count<T>() where T : class;
         Task<T> Get<T>(Expression<Func<T, bool>> expression) where T : class;
         Task<IEnumerable<T>> GetAll<T>() where T : class;
         Task<IEnumerable<T>> GetAll<T>(Expression<Func<T, bool>> expression) where T : class;

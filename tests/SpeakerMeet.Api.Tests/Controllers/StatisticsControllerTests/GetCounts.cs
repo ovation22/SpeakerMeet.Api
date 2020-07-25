@@ -4,47 +4,40 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
-namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
+namespace SpeakerMeet.Api.Tests.Controllers.StatisticsControllerTests
 {
-    public class Counts : SpeakersControllerTestBase
+    public class GetCounts : StatisticsControllerTestBase
     {
-        private readonly Guid _id;
-
-        public Counts()
-        {
-            _id = new Guid("170E1003-5346-4E57-8721-FBBDFBC28EF6");
-        }
-
         [Fact]
         public async Task ItReturnsOkObjectResult()
         {
             // Arrange
             // Act
-            var result = await Controller.Get(_id);
+            var result = await Controller.GetCounts();
 
             // Assert
             Assert.IsType<OkObjectResult>(result);
         }
 
         [Fact]
-        public async Task ItGetsSpeaker()
+        public async Task ItGetsStatistics()
         {
             // Arrange
             // Act
-            await Controller.Get(_id);
+            await Controller.GetCounts();
 
             // Assert
-            SpeakerService.Verify(x => x.Get(_id), Times.Once());
+            StatisticsService.Verify(x => x.GetCounts(), Times.Once());
         }
 
         [Fact]
         public async Task GivenException_ThenBadRequestResult()
         {
             // Arrange
-            SpeakerService.Setup(x => x.Get(_id)).Throws(new Exception());
+            StatisticsService.Setup(x => x.GetCounts()).Throws(new Exception());
 
             // Act
-            var result = await Controller.Get(_id);
+            var result = await Controller.GetCounts();
 
             // Assert
             Assert.IsAssignableFrom<BadRequestObjectResult>(result);
@@ -55,10 +48,10 @@ namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
         {
             // Arrange
             var ex = new Exception();
-            SpeakerService.Setup(x => x.Get(_id)).Throws(ex);
+            StatisticsService.Setup(x => x.GetCounts()).Throws(ex);
 
             // Act
-            await Controller.Get(_id);
+            await Controller.GetCounts();
 
             // Assert
             Logger.Verify(x => x.LogError(ex, ex.Message), Times.Once());
