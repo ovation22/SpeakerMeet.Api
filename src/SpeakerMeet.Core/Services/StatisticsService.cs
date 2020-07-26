@@ -14,9 +14,9 @@ namespace SpeakerMeet.Core.Services
 {
     public class StatisticsService : IStatisticsService
     {
+        private readonly int _cacheExpirationMinutes;
         private readonly IDistributedCacheAdapter _cache;
         private readonly ISpeakerMeetRepository _repository;
-        private readonly int _cacheExpirationMinutes;
 
         public StatisticsService(
             IDistributedCacheAdapter cache,
