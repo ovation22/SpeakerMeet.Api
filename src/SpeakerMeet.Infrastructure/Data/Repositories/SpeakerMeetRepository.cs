@@ -8,11 +8,11 @@ using SpeakerMeet.Core.Interfaces.Repositories;
 
 namespace SpeakerMeet.Infrastructure.Data.Repositories
 {
-    public class SpeakerMeetRepository : ISpeakerMeetRepository
+    public class SpeakerMeetRepository : EFRepository, ISpeakerMeetRepository
     {
         private readonly SpeakerMeetContext _context;
 
-        public SpeakerMeetRepository(SpeakerMeetContext context)
+        public SpeakerMeetRepository(SpeakerMeetContext context) : base(context)
         {
             _context = context;
         }
@@ -31,13 +31,6 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
             return await dbSet.SingleOrDefaultAsync(expression);
         }
 
-        public async Task<IEnumerable<T>> GetAll<T>() where T : class
-        {
-            var dbSet = _context.Set<T>();
-
-            return await dbSet.ToListAsync();
-        }
-
         public async Task<IEnumerable<T>> GetAll<T>(Expression<Func<T, bool>> expression) where T : class
         {
             var dbSet = _context.Set<T>();
@@ -52,24 +45,11 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
             return await dbSet.Include(include).Where(expression).ToListAsync();
         }
 
-        public async Task<T> Add<T>(T entity) where T : class
+        public async Task<IEnumerable<T>> GetRandom<T>(int count) where T : class
         {
-            await _context.Set<T>().AddAsync(entity);
-            await _context.SaveChangesAsync();
+            var dbSet = _context.Set<T>();
 
-            return entity;
-        }
-
-        public async Task Update<T>(T entity) where T : class
-        {
-            _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task Delete<T>(T entity) where T : class
-        {
-            _context.Set<T>().Remove(entity);
-            await _context.SaveChangesAsync();
+            return await dbSet.OrderBy(x => Guid.NewGuid()).Take(count).ToListAsync();
         }
     }
 }

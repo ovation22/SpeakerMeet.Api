@@ -87,6 +87,27 @@ namespace SpeakerMeet.Api.Controllers
             return BadRequest("Unable to return Speaker");
         }
 
+        // GET: api/Speakers/Featured
+        [HttpGet("Featured")]
+        [ProducesResponseType(typeof(SpeakersResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetFeatured()
+        {
+            try
+            {
+                var result = await _speakerService.GetFeatured();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return BadRequest("Unable to return Speakers");
+        }
+
         // POST: api/Speakers
         [HttpPost]
         public void Post([FromBody] string value)
