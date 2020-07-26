@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SpeakerMeet.Api.Config;
+using SpeakerMeet.Core.Cache;
 using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Logging;
 using SpeakerMeet.Core.Interfaces.Repositories;
@@ -44,6 +45,7 @@ namespace SpeakerMeet.Api
             services.AddScoped(typeof(ISpeakerMeetRepository), typeof(SpeakerMeetRepository));
 
             services.AddDistributedMemoryCache();
+            services.Configure<CacheConfig>(Configuration.GetSection("Cache"));
             services.AddSingleton(typeof(IDistributedCacheAdapter), typeof(DistributedCacheAdapter));
 
             services.AddScoped<ISpeakerService, SpeakerService>();
