@@ -21,12 +21,14 @@ namespace SpeakerMeet.Api
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+        private readonly IWebHostEnvironment _hostContext;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment hostContext)
         {
             Configuration = configuration;
+            _hostContext = hostContext;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -48,6 +50,19 @@ namespace SpeakerMeet.Api
             services.AddScoped<ICommunityService, CommunityService>();
             services.AddScoped<IConferenceService, ConferenceService>();
             services.AddScoped<IStatisticsService, StatisticsService>();
+
+            if (_hostContext.IsDevelopment())
+            {
+                services.AddDistributedMemoryCache();
+            }
+            else
+            {
+                services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = Configuration["Cache:Configuration"];
+                    options.InstanceName = Configuration["Cache:InstanceName"];
+                });
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
