@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpeakerMeet.Core.Interfaces.Logging;
@@ -26,7 +27,7 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Speakers
         [HttpGet]
-        [ProducesResponseType(typeof(SpeakersResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<SpeakersResult>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetAll()
@@ -89,7 +90,7 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Speakers/Featured
         [HttpGet("Featured")]
-        [ProducesResponseType(typeof(SpeakersResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<SpeakersResult>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetFeatured()
