@@ -53,6 +53,9 @@ namespace SpeakerMeet.Api
             services.AddScoped<IConferenceService, ConferenceService>();
             services.AddScoped<IStatisticsService, StatisticsService>();
 
+            services.AddSingleton<ISearchService>(
+                new SearchService(Configuration["SearchServiceName"], Configuration["SearchServiceQueryApiKey"], Configuration["SearchIndexName"]));
+
             if (_hostContext.IsDevelopment())
             {
                 services.AddDistributedMemoryCache();
