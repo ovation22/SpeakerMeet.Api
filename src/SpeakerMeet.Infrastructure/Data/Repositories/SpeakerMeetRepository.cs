@@ -24,13 +24,6 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
             return await dbSet.CountAsync();
         }
 
-        public async Task<T> Get<T>(Expression<Func<T, bool>> expression) where T : class
-        {
-            var dbSet = _context.Set<T>();
-
-            return await dbSet.SingleOrDefaultAsync(expression);
-        }
-
         public async Task<IEnumerable<T>> GetAll<T>(Expression<Func<T, bool>> expression) where T : class
         {
             var dbSet = _context.Set<T>();

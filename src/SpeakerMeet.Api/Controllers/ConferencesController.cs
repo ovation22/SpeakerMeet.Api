@@ -87,6 +87,27 @@ namespace SpeakerMeet.Api.Controllers
             return BadRequest("Unable to return Conference");
         }
 
+        // GET: api/Conferences/Featured
+        [HttpGet("Featured")]
+        [ProducesResponseType(typeof(ConferencesResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetFeatured()
+        {
+            try
+            {
+                var result = await _conferenceService.GetFeatured();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return BadRequest("Unable to return Conferences");
+        }
+
         // POST: api/Conferences
         [HttpPost]
         public void Post([FromBody] string value)
