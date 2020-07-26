@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,13 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
         protected EFRepository(SpeakerMeetContext context)
         {
             _context = context;
+        }
+
+        public async Task<T> Get<T>(Expression<Func<T, bool>> expression) where T : class
+        {
+            var dbSet = _context.Set<T>();
+
+            return await dbSet.SingleOrDefaultAsync(expression);
         }
 
         public async Task<IEnumerable<T>> GetAll<T>() where T : class
