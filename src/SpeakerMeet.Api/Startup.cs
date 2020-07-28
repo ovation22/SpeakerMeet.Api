@@ -39,14 +39,17 @@ namespace SpeakerMeet.Api
             services.AddDatabaseConfig(Configuration);
             services.AddSwaggerConfig();
             services.AddApplicationInsightsTelemetry();
+            
+            if (_hostContext.IsProduction())
+            {
+                services.AddHealthCheckConfig(Configuration);
+            }
 
             services.AddSingleton<ITimeManager, TimeManager>();
             services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
             services.AddScoped(typeof(ISpeakerMeetRepository), typeof(SpeakerMeetRepository));
 
-            services.AddDistributedMemoryCache();
-            services.Configure<CacheConfig>(Configuration.GetSection("Cache"));
-            services.AddSingleton(typeof(IDistributedCacheAdapter), typeof(DistributedCacheAdapter));
+            services.AddCaching(Configuration, _hostContext);
 
             services.AddScoped<ISpeakerService, SpeakerService>();
             services.AddScoped<ICommunityService, CommunityService>();
@@ -55,19 +58,6 @@ namespace SpeakerMeet.Api
 
             services.AddSingleton<ISearchService>(
                 new SearchService(Configuration["SearchServiceName"], Configuration["SearchServiceQueryApiKey"], Configuration["SearchIndexName"]));
-
-            if (_hostContext.IsDevelopment())
-            {
-                services.AddDistributedMemoryCache();
-            }
-            else
-            {
-                services.AddStackExchangeRedisCache(options =>
-                {
-                    options.Configuration = Configuration["Cache:Configuration"];
-                    options.InstanceName = Configuration["Cache:InstanceName"];
-                });
-            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,6 +83,8 @@ namespace SpeakerMeet.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseHealthCheckConfig();
         }
     }
 }
