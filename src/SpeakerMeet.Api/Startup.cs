@@ -84,7 +84,10 @@ namespace SpeakerMeet.Api
                 endpoints.MapControllers();
             });
 
-            app.UseHealthCheckConfig();
+            if (_hostContext.IsProduction())
+            {
+                app.UseHealthCheckConfig();
+            }
         }
     }
 }
