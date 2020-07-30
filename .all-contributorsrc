@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ovation22",
+      "name": "John Callaway",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7606265?v=4",
+      "profile": "http://6figuredev.com/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "SpeakerMeet.Api",
+  "projectOwner": "ovation22",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
