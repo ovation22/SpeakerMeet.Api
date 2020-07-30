@@ -1,9 +1,7 @@
-[![.NET Core](https://github.com/ovation22/SpeakerMeet.Api/workflows/.NET%20Core/badge.svg)](https://github.com/ovation22/SpeakerMeet.Api/actions?query=workflow%3A%22.NET+Core%22) 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-[![codecov](https://codecov.io/gh/ovation22/SpeakerMeet.Api/branch/master/graph/badge.svg?token=Z09SQN3Q3N)](https://codecov.io/gh/ovation22/SpeakerMeet.Api/branch/master)
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/ovation22/SpeakerMeet.Api/blob/master/LICENSE)
+[![Node.js CI](https://github.com/ovation22/SpeakerMeet.UI/workflows/Node.js%20CI/badge.svg)](https://github.com/ovation22/SpeakerMeet.UI/actions?query=workflow%3A%22Node.js+CI%22)
+[![Azure Deploy](https://github.com/ovation22/SpeakerMeet.UI/workflows/.github/workflows/azure.yml/badge.svg)](https://github.com/ovation22/SpeakerMeet.UI/actions?query=workflow%3A%22Azure+Deploy%22)
+[![codecov](https://codecov.io/gh/ovation22/SpeakerMeet.UI/branch/master/graph/badge.svg?token=0V6GCY7F55)](https://codecov.io/gh/ovation22/SpeakerMeet.UI)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/ovation22/SpeakerMeet.UI/blob/master/LICENSE)
 
 # SpeakerMeet.Api
 SpeakerMeet Api
