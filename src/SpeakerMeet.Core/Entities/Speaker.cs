@@ -27,6 +27,6 @@ namespace SpeakerMeet.Core.Entities
 
         public DateTime Updated { get; set; }
 
-        public IEnumerable<SpeakerTag>? SpeakerTags { get; set; }
+        public virtual ICollection<SpeakerTag> SpeakerTags { get; set; } = new List<SpeakerTag>();
     }
 }
