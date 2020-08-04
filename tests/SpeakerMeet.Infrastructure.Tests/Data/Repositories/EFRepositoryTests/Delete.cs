@@ -5,33 +5,32 @@ using SpeakerMeet.Infrastructure.Data;
 using SpeakerMeet.Infrastructure.Data.Repositories;
 using Xunit;
 
-namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetRepositoryTests
+namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
 {
-    public class Get : SpeakerMeetRepositoryTestBase
+    public class Delete : EFRepositoryTestBase
     {
-        private readonly Guid _id;
+        private readonly Speaker _speaker;
 
-        public Get()
+        public Delete()
         {
-            _id = Guid.NewGuid();
-
+            _speaker = new Speaker{Id = new Guid("D6012CB6-6184-4AB4-BE14-B29C61F2CB32")};
             using var context = new SpeakerMeetContext(Options);
-            context.Speakers.Add(new Speaker {Id = _id});
+            context.Speakers.Add(_speaker);
             context.SaveChanges();
         }
 
         [Fact]
-        public async Task ItReturnsSpeaker()
+        public async Task ItRemovesSpeaker()
         {
             // Arrange
             await using var context = new SpeakerMeetContext(Options);
             var repository = new SpeakerMeetRepository(context);
 
             // Act
-            var speaker = await repository.Get<Speaker>(x => x.Id == _id);
+            await repository.Delete(_speaker);
 
             // Assert
-            Assert.IsAssignableFrom<Speaker>(speaker);
+            Assert.DoesNotContain(context.Speakers, x => x == _speaker);
         }
     }
 }
