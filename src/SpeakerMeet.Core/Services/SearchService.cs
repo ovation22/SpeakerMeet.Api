@@ -29,9 +29,12 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<DocumentSearchResult<SearchResults>> Search(string terms)
         {
+            var fuzzyTerms = terms + "~";
+            var splitTerms = terms.Replace(" ", "~ ");
+
             var payload = new Search
             {
-                Text = terms.Replace(" ", "~ "),
+                Text = $"{terms} OR {fuzzyTerms} OR {splitTerms}",
                 QueryType = "full"
             };
 
