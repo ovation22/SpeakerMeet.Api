@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using SpeakerMeet.Core.Entities;
-using SpeakerMeet.Infrastructure.Data;
-using SpeakerMeet.Infrastructure.Data.Repositories;
 using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
@@ -11,24 +9,20 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
     {
         private readonly Guid _id;
 
-        public Get()
+        public Get(ContextFixture fixture) : base(fixture)
         {
             _id = Guid.NewGuid();
 
-            using var context = new SpeakerMeetContext(Options);
-            context.Speakers.Add(new Speaker {Id = _id});
-            context.SaveChanges();
+            Context.Speakers.Add(new Speaker { Id = _id });
+            Context.SaveChanges();
         }
 
         [Fact]
         public async Task ItReturnsSpeaker()
         {
             // Arrange
-            await using var context = new SpeakerMeetContext(Options);
-            var repository = new SpeakerMeetRepository(context);
-
             // Act
-            var speaker = await repository.Get<Speaker>(x => x.Id == _id);
+            var speaker = await Repository.Get<Speaker>(x => x.Id == _id);
 
             // Assert
             Assert.IsAssignableFrom<Speaker>(speaker);

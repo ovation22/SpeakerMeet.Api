@@ -1,17 +1,25 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Infrastructure.Data;
+using SpeakerMeet.Infrastructure.Data.Repositories;
+using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
 {
-    public class EFRepositoryTestBase
+    public class EFRepositoryTestBase : IClassFixture<ContextFixture>
     {
-        protected DbContextOptions<SpeakerMeetContext> Options;
+        protected readonly SpeakerMeetContext Context;
+        protected readonly SpeakerMeetRepository Repository;
 
-        public EFRepositoryTestBase()
+        public EFRepositoryTestBase(ContextFixture fixture)
         {
-            Options = new DbContextOptionsBuilder<SpeakerMeetContext>()
-                .UseInMemoryDatabase("SpeakerMeet")
-                .Options;
+            Context = fixture.Context;
+            Context.Speakers.Add(new Speaker { Id = Guid.NewGuid() });
+            Context.Speakers.Add(new Speaker { Id = Guid.NewGuid() });
+            Context.Speakers.Add(new Speaker { Id = Guid.NewGuid() });
+            Context.SaveChanges();
+
+            Repository = new SpeakerMeetRepository(Context);
         }
     }
 }
