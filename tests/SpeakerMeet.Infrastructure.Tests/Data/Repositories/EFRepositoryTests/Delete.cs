@@ -5,6 +5,8 @@ using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
 {
+    [Collection("ContextFixture")]
+    [Trait("Category", "SpeakerMeetRepository")]
     public class Delete : EFRepositoryTestBase
     {
         private readonly Speaker _speaker;

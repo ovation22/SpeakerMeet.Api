@@ -5,6 +5,8 @@ using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
 {
+    [Collection("ContextFixture")]
+    [Trait("Category", "SpeakerMeetRepository")]
     public class Get : EFRepositoryTestBase
     {
         private readonly Guid _id;

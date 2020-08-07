@@ -6,6 +6,8 @@ using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
 {
+    [Collection("ContextFixture")]
+    [Trait("Category", "SpeakerMeetRepository")]
     public class GetAll : EFRepositoryTestBase
     {
         public GetAll(ContextFixture fixture) : base(fixture)
