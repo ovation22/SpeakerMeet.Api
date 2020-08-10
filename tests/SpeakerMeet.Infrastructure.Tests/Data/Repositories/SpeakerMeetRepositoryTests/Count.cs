@@ -5,6 +5,8 @@ using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetRepositoryTests
 {
+    [Collection("ContextFixture")]
+    [Trait("Category", "SpeakerMeetRepository")]
     public class Count : SpeakerMeetRepositoryTestBase
     {
         public Count(ContextFixture fixture) : base(fixture)

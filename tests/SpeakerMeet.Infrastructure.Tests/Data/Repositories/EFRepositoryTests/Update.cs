@@ -5,6 +5,7 @@ using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
 {
+    [Collection("ContextFixture")]
     public class Update : EFRepositoryTestBase
     {
         private readonly Speaker _speaker;
