@@ -13,6 +13,11 @@ Please read our [Contributing Guidelines](/.github/CONTRIBUTING.md)
 Any and all are welcome to contribute to this project.
 Please read our [Code of Conduct](/.github/CODE_OF_CONDUCT.md)
 
+If you're looking for the front-end Api, check out the [SpeakerMeet.UI](https://github.com/ovation22/SpeakerMeet.UI) repository.
+
+## Give a Star! :star:
+If you like the project, please consider giving it a star!
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
