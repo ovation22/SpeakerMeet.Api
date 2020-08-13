@@ -5,7 +5,7 @@
 # SpeakerMeet.Api
 .NET Core Api for SpeakerMeet.net.
 
-If you're looking for the front-end Api, check out the [SpeakerMeet.UI](https://github.com/ovation22/SpeakerMeet.UI) repository.
+If you're looking for the front-end UI, check out the [SpeakerMeet.UI](https://github.com/ovation22/SpeakerMeet.UI) repository.
 
 ## Give a Star! :star:
 If you like the project, please consider giving it a star!
