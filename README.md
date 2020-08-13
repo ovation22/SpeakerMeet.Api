@@ -3,7 +3,12 @@
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/ovation22/SpeakerMeet.Api/blob/master/LICENSE)
 
 # SpeakerMeet.Api
-SpeakerMeet Api
+.NET Core Api for SpeakerMeet.net.
+
+If you're looking for the front-end Api, check out the [SpeakerMeet.UI](https://github.com/ovation22/SpeakerMeet.UI) repository.
+
+## Give a Star! :star:
+If you like the project, please consider giving it a star!
 
 ## Contributing
 Any and all are welcome to contribute to this project.
@@ -12,11 +17,6 @@ Please read our [Contributing Guidelines](/.github/CONTRIBUTING.md)
 ## Code of Conduct
 Any and all are welcome to contribute to this project.
 Please read our [Code of Conduct](/.github/CODE_OF_CONDUCT.md)
-
-If you're looking for the front-end Api, check out the [SpeakerMeet.UI](https://github.com/ovation22/SpeakerMeet.UI) repository.
-
-## Give a Star! :star:
-If you like the project, please consider giving it a star!
 
 ## Contributors ✨
 
