@@ -11,6 +11,7 @@ using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Repositories;
 using SpeakerMeet.Core.Interfaces.Services;
+using SpeakerMeet.Core.Specifications;
 
 namespace SpeakerMeet.Core.Services
 {
@@ -33,7 +34,7 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<ConferenceResult> Get(Guid id)
         {
-            var conference =  await _repository.Get<Conference>(x => x.Id == id);
+            var conference =  await _repository.Get(new ConferenceSpecification(id));
 
             return new ConferenceResult
             {
@@ -47,7 +48,7 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<ConferenceResult> Get(string slug)
         {
-            var conference =  await _repository.Get<Conference>(x => x.Slug == slug);
+            var conference =  await _repository.Get(new ConferenceSpecification(slug));
 
             return new ConferenceResult
             {
@@ -105,7 +106,7 @@ namespace SpeakerMeet.Core.Services
 
         private async Task<IEnumerable<ConferencesResult>> GetRandomConferences()
         {
-            var conferences = await _repository.GetRandom<Conference>(4);
+            var conferences = await _repository.List(new ConferenceRandomSpecification());
 
             var results = conferences.Select(x => new ConferencesResult
             {

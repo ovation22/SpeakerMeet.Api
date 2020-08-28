@@ -19,11 +19,11 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
         {
             // Arrange
             // Act
-            var horses = (List<Speaker>)await Repository.GetAll<Speaker>();
+            var speakers = (List<Speaker>)await Repository.GetAll<Speaker>();
 
             // Assert
-            Assert.IsAssignableFrom<IEnumerable<Speaker>>(horses);
-            Assert.Equal(Context.Speakers.Count(), horses.Count);
+            Assert.IsAssignableFrom<IEnumerable<Speaker>>(speakers);
+            Assert.Equal(Context.Speakers.Count(), speakers.Count);
         }
     }
 }

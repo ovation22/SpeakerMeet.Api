@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Moq;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Specifications;
 using Xunit;
 
 namespace SpeakerMeet.Core.Tests.Services.SpeakerServiceTests
@@ -21,7 +21,7 @@ namespace SpeakerMeet.Core.Tests.Services.SpeakerServiceTests
                     Id = _id
                 };
 
-            Repository.Setup(x => x.Get(It.IsAny<Expression<Func<Speaker, bool>>>())).ReturnsAsync(_speaker);
+            Repository.Setup(x => x.Get(It.IsAny<SpeakerSpecification>())).ReturnsAsync(_speaker);
         }
 
         [Fact]

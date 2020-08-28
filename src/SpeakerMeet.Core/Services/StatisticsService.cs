@@ -61,18 +61,16 @@ namespace SpeakerMeet.Core.Services
 
         private async Task<CountResult> GetCountResult()
         {
-            CountResult result;
             var speakers = await _repository.Count<Speaker>();
             var communities = await _repository.Count<Community>();
             var conferences = await _repository.Count<Conference>();
 
-            result = new CountResult
+            return new CountResult
             {
                 SpeakerCount = speakers,
                 CommunityCount = communities,
                 ConferenceCount = conferences
             };
-            return result;
         }
     }
 }

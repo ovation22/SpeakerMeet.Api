@@ -11,6 +11,7 @@ using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Repositories;
 using SpeakerMeet.Core.Interfaces.Services;
+using SpeakerMeet.Core.Specifications;
 
 namespace SpeakerMeet.Core.Services
 {
@@ -33,7 +34,7 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<CommunityResult> Get(Guid id)
         {
-            var community =  await _repository.Get<Community>(x => x.Id == id);
+            var community =  await _repository.Get(new CommunitySpecification(id));
 
             return new CommunityResult
             {
@@ -47,7 +48,7 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<CommunityResult> Get(string slug)
         {
-            var community =  await _repository.Get<Community>(x => x.Slug == slug);
+            var community =  await _repository.Get(new CommunitySpecification(slug));
 
             return new CommunityResult
             {
@@ -105,7 +106,7 @@ namespace SpeakerMeet.Core.Services
 
         private async Task<IEnumerable<CommunitiesResult>> GetRandomCommunities()
         {
-            var communities = await _repository.GetRandom<Community>(4);
+            var communities = await _repository.List(new CommunityRandomSpecification());
 
             var results = communities.Select(x => new CommunitiesResult
             {
