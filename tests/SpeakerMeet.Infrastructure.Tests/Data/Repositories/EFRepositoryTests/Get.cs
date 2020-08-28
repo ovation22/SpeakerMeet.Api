@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Specifications;
 using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
@@ -24,7 +25,7 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
         {
             // Arrange
             // Act
-            var speaker = await Repository.Get<Speaker>(x => x.Id == _id);
+            var speaker = await Repository.Get(new SpeakerSpecification(_id));
 
             // Assert
             Assert.IsAssignableFrom<Speaker>(speaker);

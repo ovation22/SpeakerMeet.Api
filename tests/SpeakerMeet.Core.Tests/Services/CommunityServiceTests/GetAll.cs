@@ -14,11 +14,11 @@ namespace SpeakerMeet.Core.Tests.Services.CommunityServiceTests
         {
             // Arrange
             // Act
-            var speakers = await Service.GetAll();
+            var communities = await Service.GetAll();
 
             // Assert
-            Assert.NotNull(speakers);
-            Assert.IsAssignableFrom<IEnumerable<CommunitiesResult>>(speakers);
+            Assert.NotNull(communities);
+            Assert.IsAssignableFrom<IEnumerable<CommunitiesResult>>(communities);
         }
 
         [Fact]

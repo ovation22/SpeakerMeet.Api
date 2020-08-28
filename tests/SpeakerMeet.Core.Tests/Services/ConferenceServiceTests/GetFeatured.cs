@@ -3,12 +3,19 @@ using System.Threading.Tasks;
 using Moq;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Specifications;
 using Xunit;
 
 namespace SpeakerMeet.Core.Tests.Services.ConferenceServiceTests
 {
     public class GetFeatured : ConferenceServiceTestBase
     {
+        public GetFeatured()
+        {
+            Repository.Setup(x => x.List(It.IsAny<ConferenceRandomSpecification>()))
+                .ReturnsAsync(new List<Conference>());
+        }
+
         [Fact]
         public async Task ItReturnsFeaturedConferences()
         {
@@ -29,7 +36,7 @@ namespace SpeakerMeet.Core.Tests.Services.ConferenceServiceTests
             await Service.GetFeatured();
 
             // Assert
-            Repository.Verify(x => x.GetRandom<Conference>(4), Times.Once());
+            Repository.Verify(x => x.List(It.IsAny<ConferenceRandomSpecification>()), Times.Once());
         }
     }
 }

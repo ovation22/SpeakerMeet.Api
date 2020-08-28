@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Moq;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Specifications;
 using Xunit;
 
 namespace SpeakerMeet.Core.Tests.Services.ConferenceServiceTests
@@ -21,7 +20,7 @@ namespace SpeakerMeet.Core.Tests.Services.ConferenceServiceTests
                     Slug = _slug
                 };
 
-            Repository.Setup(x => x.Get(It.IsAny<Expression<Func<Conference, bool>>>())).ReturnsAsync(_conference);
+            Repository.Setup(x => x.Get(It.IsAny<ConferenceSpecification>())).ReturnsAsync(_conference);
         }
 
         [Fact]

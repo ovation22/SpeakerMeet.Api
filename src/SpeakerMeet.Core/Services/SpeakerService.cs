@@ -11,6 +11,7 @@ using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Repositories;
 using SpeakerMeet.Core.Interfaces.Services;
+using SpeakerMeet.Core.Specifications;
 
 namespace SpeakerMeet.Core.Services
 {
@@ -33,7 +34,7 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<SpeakerResult> Get(Guid id)
         {
-            var speaker =  await _repository.Get<Speaker>(x => x.Id == id);
+            var speaker =  await _repository.Get(new SpeakerSpecification(id));
 
             return new SpeakerResult
             {
@@ -47,7 +48,7 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<SpeakerResult> Get(string slug)
         {
-            var speaker =  await _repository.Get<Speaker>(x => x.Slug == slug);
+            var speaker =  await _repository.Get(new SpeakerSpecification(slug));
 
             return new SpeakerResult
             {
@@ -55,7 +56,13 @@ namespace SpeakerMeet.Core.Services
                 Location = speaker.Location,
                 Name = speaker.Name,
                 Slug = speaker.Slug,
-                Description = speaker.Description
+                Description = speaker.Description,
+                Tags = speaker.SpeakerTags.Select(x => x.Tag.Name),
+                SocialPlatforms = speaker.SpeakerSocialPlatforms.Select(x => new SocialMedia
+                {
+                    Name = x.SocialPlatform.Name,
+                    Url = x.Url
+                })
             };
         }
 
@@ -105,7 +112,7 @@ namespace SpeakerMeet.Core.Services
 
         private async Task<IEnumerable<SpeakersResult>> GetRandomSpeakers()
         {
-            var speakers = await _repository.GetRandom<Speaker>(4);
+            var speakers = await _repository.List(new SpeakerRandomSpecification());
 
             var results = speakers.Select(x => new SpeakersResult
             {

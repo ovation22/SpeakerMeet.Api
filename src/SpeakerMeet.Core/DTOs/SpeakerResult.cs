@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SpeakerMeet.Core.DTOs
 {
@@ -13,5 +14,9 @@ namespace SpeakerMeet.Core.DTOs
         public string Location { get; set; } = null!;
 
         public string Description { get; set; } = null!;
+
+        public IEnumerable<string>? Tags { get; set; }
+
+        public IEnumerable<SocialMedia>? SocialPlatforms { get; set; }
     }
 }

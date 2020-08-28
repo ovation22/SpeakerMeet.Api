@@ -28,5 +28,7 @@ namespace SpeakerMeet.Core.Entities
         public DateTime Updated { get; set; }
 
         public virtual ICollection<SpeakerTag> SpeakerTags { get; set; } = new List<SpeakerTag>();
+
+        public virtual ICollection<SpeakerSocialPlatform> SpeakerSocialPlatforms { get; set; } = new List<SpeakerSocialPlatform>();
     }
 }
