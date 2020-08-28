@@ -4,16 +4,15 @@ using SpeakerMeet.Core.Entities;
 
 namespace SpeakerMeet.Core.Specifications
 {
-    public class ConferenceRandomSpecification : Specification<Conference>
+    public sealed class ConferenceRandomSpecification : Specification<Conference>
     {
         public ConferenceRandomSpecification()
         {
-            Take = 4;
             Query
                 .Where(x => x.IsActive)
                 .OrderBy(x => Guid.NewGuid());
-        }
 
-        public new int Take { get; internal set; }
+            Query.Paginate(0, 4);
+        }
     }
 }
