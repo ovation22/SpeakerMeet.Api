@@ -10,6 +10,7 @@ namespace SpeakerMeet.Core.Specifications
         {
             Take = 4;
             Query
+                .Where(x => x.IsActive)
                 .OrderBy(x => Guid.NewGuid());
         }
 
