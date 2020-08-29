@@ -13,7 +13,7 @@ namespace SpeakerMeet.Api.Tests.Controllers.ConferencesControllerTests
         {
             // Arrange
             // Act
-            var result = await Controller.GetAll();
+            var result = await Controller.GetAll(0, 1);
 
             // Assert
             Assert.IsType<OkObjectResult>(result);
@@ -24,20 +24,20 @@ namespace SpeakerMeet.Api.Tests.Controllers.ConferencesControllerTests
         {
             // Arrange
             // Act
-            await Controller.GetAll();
+            await Controller.GetAll(0, 1);
 
             // Assert
-            ConferenceService.Verify(x => x.GetAll(), Times.Once());
+            ConferenceService.Verify(x => x.GetAll(0, 1), Times.Once());
         }
 
         [Fact]
         public async Task GivenException_ThenBadRequestResult()
         {
             // Arrange
-            ConferenceService.Setup(x => x.GetAll()).Throws(new Exception());
+            ConferenceService.Setup(x => x.GetAll(0, 1)).Throws(new Exception());
 
             // Act
-            var result = await Controller.GetAll();
+            var result = await Controller.GetAll(0, 1);
 
             // Assert
             Assert.IsAssignableFrom<BadRequestObjectResult>(result);
@@ -48,10 +48,10 @@ namespace SpeakerMeet.Api.Tests.Controllers.ConferencesControllerTests
         {
             // Arrange
             var ex = new Exception();
-            ConferenceService.Setup(x => x.GetAll()).Throws(ex);
+            ConferenceService.Setup(x => x.GetAll(0, 1)).Throws(ex);
 
             // Act
-            await Controller.GetAll();
+            await Controller.GetAll(0, 1);
 
             // Assert
             Logger.Verify(x => x.LogError(ex, ex.Message), Times.Once());

@@ -13,5 +13,7 @@ namespace SpeakerMeet.Core.DTOs
         public string Description { get; set; } = null!;
 
         public string Location { get; set; } = null!;
+
+        public PaginationInfo PaginationInfo { get; set; } = default!;
     }
 }

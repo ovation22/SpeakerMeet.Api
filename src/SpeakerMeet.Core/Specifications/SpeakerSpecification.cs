@@ -20,6 +20,12 @@ namespace SpeakerMeet.Core.Specifications
             WithIncludes();
         }
 
+        public SpeakerSpecification(int skip, int take)
+        {
+            Query
+                .Paginate(skip, take);
+        }
+
         private void WithIncludes()
         {
             Query.Include(x => x.SpeakerTags).ThenInclude(x => x.Tag);
