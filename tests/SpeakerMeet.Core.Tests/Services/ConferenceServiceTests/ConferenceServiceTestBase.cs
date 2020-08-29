@@ -1,9 +1,12 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 using Moq;
 using SpeakerMeet.Core.Cache;
+using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Repositories;
 using SpeakerMeet.Core.Services;
+using SpeakerMeet.Core.Specifications;
 
 namespace SpeakerMeet.Core.Tests.Services.ConferenceServiceTests
 {
@@ -19,6 +22,9 @@ namespace SpeakerMeet.Core.Tests.Services.ConferenceServiceTests
             Cache = new Mock<IDistributedCacheAdapter>();
             Repository = new Mock<ISpeakerMeetRepository>();
             CacheOptions = new Mock<IOptions<CacheConfig>>();
+
+            Repository.Setup(x => x.List(It.IsAny<ConferenceSpecification>()))
+                .ReturnsAsync(new List<Conference>());
 
             CacheOptions.Setup(x => x.Value).Returns(() => new CacheConfig { DefaultExpirationMinutes = 2 });
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -66,9 +67,12 @@ namespace SpeakerMeet.Core.Services
             };
         }
 
-        public async Task<IEnumerable<CommunitiesResult>> GetAll()
+        public async Task<IEnumerable<CommunitiesResult>> GetAll(int pageIndex, int itemsPage)
         {
-            var communities = await _repository.GetAll<Community>();
+            var spec = new CommunitySpecification(itemsPage * pageIndex, itemsPage);
+
+            var communities = await _repository.List(spec);
+            var total = await _repository.Count<Community>();
 
             return communities.Select(x => new CommunitiesResult
             {
@@ -76,7 +80,21 @@ namespace SpeakerMeet.Core.Services
                 Location = x.Location,
                 Name = x.Name,
                 Slug = x.Slug,
-                Description = x.Description
+                Description = x.Description,
+                PaginationInfo = new PaginationInfo
+                {
+                    ActualPage = pageIndex,
+                    ItemsPerPage = communities.Count,
+                    TotalItems = total,
+                    TotalPages =
+                        int.Parse(Math.Ceiling((decimal)total / itemsPage)
+                            .ToString(CultureInfo.InvariantCulture)),
+                    Next = pageIndex == int.Parse(Math.Ceiling((decimal)total / itemsPage)
+                        .ToString(CultureInfo.InvariantCulture)) - 1
+                        ? "is-disabled"
+                        : "",
+                    Previous = pageIndex == 0 ? "is-disabled" : ""
+                }
             });
         }
 

@@ -30,11 +30,11 @@ namespace SpeakerMeet.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<CommunitiesResult>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(int pageIndex = 0, int itemsPage = 100)
         {
             try
             {
-                var result = await _communityService.GetAll();
+                var result = await _communityService.GetAll(pageIndex, itemsPage);
 
                 return Ok(result);
             }

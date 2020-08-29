@@ -21,7 +21,7 @@ namespace SpeakerMeet.Core.Tests.Services.SpeakerServiceTests
         {
             // Arrange
             // Act
-            var speakers = await Service.GetAll();
+            var speakers = await Service.GetFeatured();
 
             // Assert
             Assert.NotNull(speakers);
