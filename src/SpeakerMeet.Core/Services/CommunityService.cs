@@ -56,7 +56,13 @@ namespace SpeakerMeet.Core.Services
                 Location = community.Location,
                 Name = community.Name,
                 Slug = community.Slug,
-                Description = community.Description
+                Description = community.Description,
+                Tags = community.CommunityTags.Select(x => x.Tag.Name),
+                SocialPlatforms = community.CommunitySocialPlatforms.Select(x => new SocialMedia
+                {
+                    Name = x.SocialPlatform.Name,
+                    Url = x.Url
+                })
             };
         }
 

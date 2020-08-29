@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SpeakerMeet.Core.Entities
@@ -25,5 +26,9 @@ namespace SpeakerMeet.Core.Entities
         public Guid? UpdatedBy { get; set; }
 
         public DateTime Updated { get; set; }
+
+        public virtual ICollection<CommunityTag> CommunityTags { get; set; } = new List<CommunityTag>();
+
+        public virtual ICollection<CommunitySocialPlatform> CommunitySocialPlatforms { get; set; } = new List<CommunitySocialPlatform>();
     }
 }

@@ -12,5 +12,9 @@ namespace SpeakerMeet.Core.Entities
         public string Name { get; set; } = null!;
 
         public IEnumerable<SpeakerSocialPlatform>? SpeakerSocialPlatforms { get; set; }
+
+        public IEnumerable<CommunitySocialPlatform>? CommunitySocialPlatforms { get; set; }
+
+        public IEnumerable<ConferenceSocialPlatform>? ConferenceSocialPlatforms { get; set; }
     }
 }

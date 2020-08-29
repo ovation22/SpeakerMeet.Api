@@ -22,5 +22,9 @@ namespace SpeakerMeet.Core.Entities
         public DateTime Updated { get; set; }
 
         public IEnumerable<SpeakerTag>? SpeakerTags { get; set; }
+
+        public IEnumerable<CommunityTag>? CommunityTags { get; set; }
+
+        public IEnumerable<ConferenceTag>? ConferenceTags { get; set; }
     }
 }

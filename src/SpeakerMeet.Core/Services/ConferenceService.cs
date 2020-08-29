@@ -56,7 +56,13 @@ namespace SpeakerMeet.Core.Services
                 Location = conference.Location,
                 Name = conference.Name,
                 Slug = conference.Slug,
-                Description = conference.Description
+                Description = conference.Description,
+                Tags = conference.ConferenceTags.Select(x => x.Tag.Name),
+                SocialPlatforms = conference.ConferenceSocialPlatforms.Select(x => new SocialMedia
+                {
+                    Name = x.SocialPlatform.Name,
+                    Url = x.Url
+                })
             };
         }
 
