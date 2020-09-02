@@ -15,14 +15,17 @@ namespace SpeakerMeet.Api.Controllers
     {
         private readonly ISpeakerService _speakerService;
         private readonly ILoggerAdapter<SpeakersController> _logger;
+        private readonly ISpeakerPresentationService _speakerPresentationServiceService;
 
         public SpeakersController(
             ISpeakerService speakerService,
-            ILoggerAdapter<SpeakersController> logger
+            ILoggerAdapter<SpeakersController> logger,
+            ISpeakerPresentationService speakerPresentationServiceService
         )
         {
             _logger = logger;
             _speakerService = speakerService;
+            _speakerPresentationServiceService = speakerPresentationServiceService;
         }
 
         // GET: api/Speakers
@@ -65,6 +68,27 @@ namespace SpeakerMeet.Api.Controllers
             }
 
             return BadRequest("Unable to return Speaker");
+        }
+
+        // GET: api/Speakers/5/Presentations
+        [HttpGet("{id}/Presentations")]
+        [ProducesResponseType(typeof(IEnumerable<SpeakerPresentationsResult>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetPresentations(Guid id)
+        {
+            try
+            {
+                var result = await _speakerPresentationServiceService.GetAll(id);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return BadRequest("Unable to return Speaker Presentations");
         }
 
         // GET: api/Speakers/slug/slug
