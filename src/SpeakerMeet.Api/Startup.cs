@@ -52,6 +52,7 @@ namespace SpeakerMeet.Api
             services.AddScoped<ICommunityService, CommunityService>();
             services.AddScoped<IConferenceService, ConferenceService>();
             services.AddScoped<IStatisticsService, StatisticsService>();
+            services.AddScoped<ISpeakerPresentationService, SpeakerPresentationService>();
 
             services.AddSingleton<ISearchService>(
                 new SearchService(Configuration["SearchServiceName"], Configuration["SearchServiceQueryApiKey"], Configuration["SearchIndexName"]));

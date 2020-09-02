@@ -18,6 +18,7 @@ namespace SpeakerMeet.Infrastructure.Data
         public virtual DbSet<CommunityTag> CommunityTags { get; set; } = null!;
         public virtual DbSet<ConferenceTag> ConferenceTags { get; set; } = null!;
         public virtual DbSet<SocialPlatform> SocialPlatforms { get; set; } = null!;
+        public virtual DbSet<SpeakerPresentation> SpeakerPresentations { get; set; } = null!;
         public virtual DbSet<SpeakerSocialPlatform> SpeakerSocialPlatforms { get; set; } = null!;
         public virtual DbSet<CommunitySocialPlatform> CommunitySocialPlatforms { get; set; } = null!;
         public virtual DbSet<ConferenceSocialPlatform> ConferenceSocialPlatforms { get; set; } = null!;

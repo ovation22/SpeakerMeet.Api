@@ -68,15 +68,13 @@ namespace SpeakerMeet.Core.Tests.Specifications
 
         private IEnumerable<Speaker> GetTestCollection()
         {
-            var horses = new List<Speaker>
+            return new List<Speaker>
             {
                 new Speaker{ Id = new Guid("D7728576-CC03-40E2-A92B-2E47FC791C60") }, 
                 new Speaker{ Id = new Guid("B067FA84-7940-4D6D-9170-F0EDAD986C87") }, 
                 new Speaker{ Id = _id, Slug = _slug }, 
                 new Speaker{ Id = new Guid("D6506015-E4E5-4057-9B42-A112C8B08C56") }
             };
-
-            return horses;
         }
     }
 }

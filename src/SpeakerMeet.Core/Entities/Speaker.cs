@@ -29,6 +29,8 @@ namespace SpeakerMeet.Core.Entities
 
         public virtual ICollection<SpeakerTag> SpeakerTags { get; set; } = new List<SpeakerTag>();
 
+        public virtual ICollection<SpeakerPresentation> SpeakerPresentation { get; set; } = new List<SpeakerPresentation>();
+
         public virtual ICollection<SpeakerSocialPlatform> SpeakerSocialPlatforms { get; set; } = new List<SpeakerSocialPlatform>();
     }
 }
