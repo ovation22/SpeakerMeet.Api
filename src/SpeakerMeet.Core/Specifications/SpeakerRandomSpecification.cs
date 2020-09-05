@@ -12,7 +12,7 @@ namespace SpeakerMeet.Core.Specifications
                 .Where(x => x.IsActive)
                 .OrderBy(x => Guid.NewGuid());
 
-            Query.Paginate(0, 4);
+            Query.Take(4);
         }
     }
 }
