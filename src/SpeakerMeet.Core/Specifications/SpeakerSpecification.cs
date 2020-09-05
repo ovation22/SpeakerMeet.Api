@@ -23,7 +23,8 @@ namespace SpeakerMeet.Core.Specifications
         public SpeakerSpecification(int skip, int take)
         {
             Query
-                .Paginate(skip, take);
+                .Skip(skip)
+                .Take(take);
         }
 
         private void WithIncludes()
