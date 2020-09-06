@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SpeakerMeet.Api.Controllers
@@ -15,8 +16,8 @@ namespace SpeakerMeet.Api.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id:Guid}")]
+        public string Get(Guid id)
         {
             return "value";
         }
