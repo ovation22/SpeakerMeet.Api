@@ -47,7 +47,7 @@ namespace SpeakerMeet.Api.Controllers
         }
 
         // GET: api/Conferences/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:Guid}")]
         [ProducesResponseType(typeof(ConferenceResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
@@ -67,12 +67,33 @@ namespace SpeakerMeet.Api.Controllers
             return BadRequest("Unable to return Conference");
         }
 
+        // GET: api/Conferences/slug-name
+        [HttpGet("{slug}")]
+        [ProducesResponseType(typeof(ConferenceResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetBySlug(string slug)
+        {
+            try
+            {
+                var result = await _conferenceService.Get(slug);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return BadRequest("Unable to return Conference");
+        }
+
         // GET: api/Conferences/Slug/slug-name
         [HttpGet("Slug/{slug}")]
         [ProducesResponseType(typeof(ConferenceResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetBySlug(string slug)
+        public async Task<IActionResult> GetBySlugOld(string slug)
         {
             try
             {
