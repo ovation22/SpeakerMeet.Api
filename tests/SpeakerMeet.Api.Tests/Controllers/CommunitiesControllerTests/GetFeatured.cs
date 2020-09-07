@@ -2,12 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using SpeakerMeet.Api.Tests.Controllers.ConferencesControllerTests;
 using Xunit;
 
 namespace SpeakerMeet.Api.Tests.Controllers.CommunitiesControllerTests
 {
-    public class GetFeatured : ConferencesControllerTestBase
+    public class GetFeatured : CommunitiesControllerTestBase
     {
         [Fact]
         public async Task ItReturnsOkObjectResult()
@@ -28,14 +27,14 @@ namespace SpeakerMeet.Api.Tests.Controllers.CommunitiesControllerTests
             await Controller.GetFeatured();
 
             // Assert
-            ConferenceService.Verify(x => x.GetFeatured(), Times.Once());
+            CommunityService.Verify(x => x.GetFeatured(), Times.Once());
         }
 
         [Fact]
         public async Task GivenException_ThenBadRequestResult()
         {
             // Arrange
-            ConferenceService.Setup(x => x.GetFeatured()).Throws(new Exception());
+            CommunityService.Setup(x => x.GetFeatured()).Throws(new Exception());
 
             // Act
             var result = await Controller.GetFeatured();
@@ -49,7 +48,7 @@ namespace SpeakerMeet.Api.Tests.Controllers.CommunitiesControllerTests
         {
             // Arrange
             var ex = new Exception();
-            ConferenceService.Setup(x => x.GetFeatured()).Throws(ex);
+            CommunityService.Setup(x => x.GetFeatured()).Throws(ex);
 
             // Act
             await Controller.GetFeatured();

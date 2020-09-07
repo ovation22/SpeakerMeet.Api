@@ -88,27 +88,6 @@ namespace SpeakerMeet.Api.Controllers
             return BadRequest("Unable to return Conference");
         }
 
-        // GET: api/Conferences/Slug/slug-name
-        [HttpGet("Slug/{slug}")]
-        [ProducesResponseType(typeof(ConferenceResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetBySlugOld(string slug)
-        {
-            try
-            {
-                var result = await _conferenceService.Get(slug);
-
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-            }
-
-            return BadRequest("Unable to return Conference");
-        }
-
         // GET: api/Conferences/Featured
         [HttpGet("Featured")]
         [ProducesResponseType(typeof(IEnumerable<ConferencesResult>), StatusCodes.Status200OK)]
