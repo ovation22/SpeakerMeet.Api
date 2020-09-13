@@ -27,7 +27,7 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Conferences
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ConferencesResult>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ConferencesResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetAll(int pageIndex = 0, int itemsPage = 100)
@@ -90,7 +90,7 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Conferences/Featured
         [HttpGet("Featured")]
-        [ProducesResponseType(typeof(IEnumerable<ConferencesResult>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ConferenceFeatured), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetFeatured()

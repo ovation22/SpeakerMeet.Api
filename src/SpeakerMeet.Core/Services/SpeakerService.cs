@@ -67,20 +67,23 @@ namespace SpeakerMeet.Core.Services
             };
         }
 
-        public async Task<IEnumerable<SpeakersResult>> GetAll(int pageIndex, int itemsPage)
+        public async Task<SpeakersResult> GetAll(int pageIndex, int itemsPage)
         {
             var spec = new SpeakerSpecification(itemsPage * pageIndex, itemsPage);
 
             var speakers = await _repository.List(spec);
             var total = await _repository.Count<Speaker>();
 
-            return speakers.Select(x => new SpeakersResult
+            return new SpeakersResult
             {
-                Id = x.Id,
-                Location = x.Location,
-                Name = x.Name,
-                Slug = x.Slug,
-                Description = x.Description,
+                Speakers = speakers.Select(x => new SpeakersResult.Speaker
+                {
+                    Id = x.Id,
+                    Location = x.Location,
+                    Name = x.Name,
+                    Slug = x.Slug,
+                    Description = x.Description,
+                }),
                 PaginationInfo = new PaginationInfo
                 {
                     ActualPage = pageIndex,
@@ -95,12 +98,12 @@ namespace SpeakerMeet.Core.Services
                         : "",
                     Previous = pageIndex == 0 ? "is-disabled" : ""
                 }
-            });
+            };
         }
 
-        public async Task<IEnumerable<SpeakersResult>> GetFeatured()
+        public async Task<IEnumerable<SpeakerFeatured>> GetFeatured()
         {
-            IEnumerable<SpeakersResult> results;
+            IEnumerable<SpeakerFeatured> results;
             const string cacheKey = CacheKeys.FeaturedSpeakers;
 
             var cacheValue = await _cache.GetStringAsync(cacheKey);
@@ -112,13 +115,13 @@ namespace SpeakerMeet.Core.Services
             }
             else
             {
-                results = JsonSerializer.Deserialize<List<SpeakersResult>>(cacheValue);
+                results = JsonSerializer.Deserialize<List<SpeakerFeatured>>(cacheValue);
             }
 
             return results;
         }
 
-        private async Task SetCache(string cacheKey, IEnumerable<SpeakersResult> results)
+        private async Task SetCache(string cacheKey, IEnumerable<SpeakerFeatured> results)
         {
             var options = new DistributedCacheEntryOptions
             {
@@ -128,11 +131,11 @@ namespace SpeakerMeet.Core.Services
             await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(results), options);
         }
 
-        private async Task<IEnumerable<SpeakersResult>> GetRandomSpeakers()
+        private async Task<IEnumerable<SpeakerFeatured>> GetRandomSpeakers()
         {
             var speakers = await _repository.List(new SpeakerRandomSpecification());
 
-            var results = speakers.Select(x => new SpeakersResult
+            var results = speakers.Select(x => new SpeakerFeatured
             {
                 Id = x.Id,
                 Location = x.Location,

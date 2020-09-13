@@ -9,7 +9,7 @@ namespace SpeakerMeet.Core.Interfaces.Services
     {
         Task<ConferenceResult> Get(Guid id);
         Task<ConferenceResult> Get(string slug);
-        Task<IEnumerable<ConferencesResult>> GetAll(int pageIndex, int itemsPage);
-        Task<IEnumerable<ConferencesResult>> GetFeatured();
+        Task<ConferencesResult> GetAll(int pageIndex, int itemsPage);
+        Task<IEnumerable<ConferenceFeatured>> GetFeatured();
     }
 }

@@ -18,7 +18,7 @@ namespace SpeakerMeet.Core.Tests.Services.SpeakerServiceTests
 
             // Assert
             Assert.NotNull(speakers);
-            Assert.IsAssignableFrom<IEnumerable<SpeakersResult>>(speakers);
+            Assert.IsAssignableFrom<SpeakersResult>(speakers);
         }
 
         [Fact]
