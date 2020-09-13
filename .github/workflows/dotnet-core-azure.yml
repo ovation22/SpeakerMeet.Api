@@ -37,10 +37,10 @@ jobs:
       run: dotnet restore
 
     - name: Build app
-      run: dotnet build src\SpeakerMeet.Api\SpeakerMeet.Api.csproj --configuration Release --no-restore
+      run: dotnet build */**/SpeakerMeet.Api.csproj --configuration Release --no-restore
 
     - name: Publish app for deploy
-      run: dotnet publish src\SpeakerMeet.Api\SpeakerMeet.Api.csproj --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      run: dotnet publish */**/SpeakerMeet.Api.csproj --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v1
