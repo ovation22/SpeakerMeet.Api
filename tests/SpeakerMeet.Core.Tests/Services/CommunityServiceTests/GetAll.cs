@@ -18,7 +18,7 @@ namespace SpeakerMeet.Core.Tests.Services.CommunityServiceTests
 
             // Assert
             Assert.NotNull(communities);
-            Assert.IsAssignableFrom<IEnumerable<CommunitiesResult>>(communities);
+            Assert.IsAssignableFrom<CommunitiesResult>(communities);
         }
 
         [Fact]

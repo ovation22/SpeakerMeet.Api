@@ -67,20 +67,23 @@ namespace SpeakerMeet.Core.Services
             };
         }
 
-        public async Task<IEnumerable<ConferencesResult>> GetAll(int pageIndex, int itemsPage)
+        public async Task<ConferencesResult> GetAll(int pageIndex, int itemsPage)
         {
             var spec = new ConferenceSpecification(itemsPage * pageIndex, itemsPage);
 
             var conferences = await _repository.List(spec);
-            var total = await _repository.Count<Speaker>();
+            var total = await _repository.Count<Conference>();
 
-            return conferences.Select(x => new ConferencesResult
+            return new ConferencesResult
             {
-                Id = x.Id,
-                Location = x.Location,
-                Name = x.Name,
-                Slug = x.Slug,
-                Description = x.Description,
+                Conferences = conferences.Select(x => new ConferencesResult.Conference
+                {
+                    Id = x.Id,
+                    Location = x.Location,
+                    Name = x.Name,
+                    Slug = x.Slug,
+                    Description = x.Description,
+                }),
                 PaginationInfo = new PaginationInfo
                 {
                     ActualPage = pageIndex,
@@ -95,12 +98,12 @@ namespace SpeakerMeet.Core.Services
                         : "",
                     Previous = pageIndex == 0 ? "is-disabled" : ""
                 }
-            });
+            };
         }
 
-        public async Task<IEnumerable<ConferencesResult>> GetFeatured()
+        public async Task<IEnumerable<ConferenceFeatured>> GetFeatured()
         {
-            IEnumerable<ConferencesResult> results;
+            IEnumerable<ConferenceFeatured> results;
             const string cacheKey = CacheKeys.FeaturedConferences;
 
             var cacheValue = await _cache.GetStringAsync(cacheKey);
@@ -112,13 +115,13 @@ namespace SpeakerMeet.Core.Services
             }
             else
             {
-                results = JsonSerializer.Deserialize<List<ConferencesResult>>(cacheValue);
+                results = JsonSerializer.Deserialize<List<ConferenceFeatured>>(cacheValue);
             }
 
             return results;
         }
 
-        private async Task SetCache(string cacheKey, IEnumerable<ConferencesResult> results)
+        private async Task SetCache(string cacheKey, IEnumerable<ConferenceFeatured> results)
         {
             var options = new DistributedCacheEntryOptions
             {
@@ -128,11 +131,11 @@ namespace SpeakerMeet.Core.Services
             await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(results), options);
         }
 
-        private async Task<IEnumerable<ConferencesResult>> GetRandomConferences()
+        private async Task<IEnumerable<ConferenceFeatured>> GetRandomConferences()
         {
             var conferences = await _repository.List(new ConferenceRandomSpecification());
 
-            var results = conferences.Select(x => new ConferencesResult
+            var results = conferences.Select(x => new ConferenceFeatured
             {
                 Id = x.Id,
                 Location = x.Location,

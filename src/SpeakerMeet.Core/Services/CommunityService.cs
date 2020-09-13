@@ -67,20 +67,22 @@ namespace SpeakerMeet.Core.Services
             };
         }
 
-        public async Task<IEnumerable<CommunitiesResult>> GetAll(int pageIndex, int itemsPage)
+        public async Task<CommunitiesResult> GetAll(int pageIndex, int itemsPage)
         {
             var spec = new CommunitySpecification(itemsPage * pageIndex, itemsPage);
 
             var communities = await _repository.List(spec);
             var total = await _repository.Count<Community>();
 
-            return communities.Select(x => new CommunitiesResult
-            {
-                Id = x.Id,
-                Location = x.Location,
-                Name = x.Name,
-                Slug = x.Slug,
-                Description = x.Description,
+            return new CommunitiesResult{
+                Communities = communities.Select(x => new CommunitiesResult.Community
+                {
+                    Id = x.Id,
+                    Location = x.Location,
+                    Name = x.Name,
+                    Slug = x.Slug,
+                    Description = x.Description,
+                }),
                 PaginationInfo = new PaginationInfo
                 {
                     ActualPage = pageIndex,
@@ -95,12 +97,12 @@ namespace SpeakerMeet.Core.Services
                         : "",
                     Previous = pageIndex == 0 ? "is-disabled" : ""
                 }
-            });
+            };
         }
 
-        public async Task<IEnumerable<CommunitiesResult>> GetFeatured()
+        public async Task<IEnumerable<CommunityFeatured>> GetFeatured()
         {
-            IEnumerable<CommunitiesResult> results;
+            IEnumerable<CommunityFeatured> results;
             const string cacheKey = CacheKeys.FeaturedCommunities;
 
             var cacheValue = await _cache.GetStringAsync(cacheKey);
@@ -112,13 +114,13 @@ namespace SpeakerMeet.Core.Services
             }
             else
             {
-                results = JsonSerializer.Deserialize<List<CommunitiesResult>>(cacheValue);
+                results = JsonSerializer.Deserialize<List<CommunityFeatured>>(cacheValue);
             }
 
             return results;
         }
 
-        private async Task SetCache(string cacheKey, IEnumerable<CommunitiesResult> results)
+        private async Task SetCache(string cacheKey, IEnumerable<CommunityFeatured> results)
         {
             var options = new DistributedCacheEntryOptions
             {
@@ -128,11 +130,11 @@ namespace SpeakerMeet.Core.Services
             await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(results), options);
         }
 
-        private async Task<IEnumerable<CommunitiesResult>> GetRandomCommunities()
+        private async Task<IEnumerable<CommunityFeatured>> GetRandomCommunities()
         {
             var communities = await _repository.List(new CommunityRandomSpecification());
 
-            var results = communities.Select(x => new CommunitiesResult
+            var results = communities.Select(x => new CommunityFeatured
             {
                 Id = x.Id,
                 Location = x.Location,
