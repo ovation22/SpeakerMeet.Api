@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using SpeakerMeet.Core.Entities;
 using Xunit;
 
-namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
+namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetRepositoryTests
 {
     [Collection("ContextFixture")]
     [Trait("Category", "SpeakerMeetRepository")]
-    public class Delete : EFRepositoryTestBase
+    public class Delete : SpeakerMeetRepositoryTestBase
     {
         private readonly Speaker _speaker;
 

@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using SpeakerMeet.Core.Entities;
 using Xunit;
 
-namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
+namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetRepositoryTests
 {
     [Collection("ContextFixture")]
-    public class Update : EFRepositoryTestBase
+    public class Update : SpeakerMeetRepositoryTestBase
     {
         private readonly Speaker _speaker;
 
