@@ -4,11 +4,11 @@ using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Core.Specifications;
 using Xunit;
 
-namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
+namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetRepositoryTests
 {
     [Collection("ContextFixture")]
     [Trait("Category", "SpeakerMeetRepository")]
-    public class Get : EFRepositoryTestBase
+    public class Get : SpeakerMeetRepositoryTestBase
     {
         private readonly Guid _id;
 

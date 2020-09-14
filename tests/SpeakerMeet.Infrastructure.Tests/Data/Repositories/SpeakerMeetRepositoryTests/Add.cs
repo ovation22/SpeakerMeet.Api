@@ -2,11 +2,11 @@
 using SpeakerMeet.Core.Entities;
 using Xunit;
 
-namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.EFRepositoryTests
+namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetRepositoryTests
 {
     [Collection("ContextFixture")]
     [Trait("Category", "SpeakerMeetRepository")]
-    public class Add : EFRepositoryTestBase
+    public class Add : SpeakerMeetRepositoryTestBase
     {
         public Add(ContextFixture fixture) : base(fixture)
         {

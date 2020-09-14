@@ -10,9 +10,9 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
 {
     public abstract class EFRepository : IEFRepository
     {
-        private readonly SpeakerMeetContext _context;
+        private readonly DbContext _context;
 
-        protected EFRepository(SpeakerMeetContext context)
+        protected EFRepository(DbContext context)
         {
             _context = context;
         }
@@ -29,13 +29,6 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
             var specificationResult = ApplySpecification(spec);
 
             return await specificationResult.ToListAsync();
-        }
-
-        public async Task<IEnumerable<T>> GetAll<T>() where T : class
-        {
-            var dbSet = _context.Set<T>();
-
-            return await dbSet.ToListAsync();
         }
 
         public async Task<int> Count<T>() where T : class

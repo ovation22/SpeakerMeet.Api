@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Specifications;
 using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetRepositoryTests
@@ -15,15 +15,16 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
         }
 
         [Fact]
-        public async Task ItReturnsAllSpeakerByExpression()
+        public async Task ItReturnsAllSpeaker()
         {
             // Arrange
+            var spec = new SpeakerSpecification(1, 1);
+
             // Act
-            var speakers = (List<Speaker>)await Repository.GetAll<Speaker>();
+            var speakers = (List<Speaker>)await Repository.List(spec);
 
             // Assert
             Assert.IsAssignableFrom<IEnumerable<Speaker>>(speakers);
-            Assert.Equal(Context.Speakers.Count(), speakers.Count);
         }
     }
 }
