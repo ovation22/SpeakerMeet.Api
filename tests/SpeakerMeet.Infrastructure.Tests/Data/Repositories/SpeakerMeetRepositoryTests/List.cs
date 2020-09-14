@@ -8,9 +8,9 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
 {
     [Collection("ContextFixture")]
     [Trait("Category", "SpeakerMeetRepository")]
-    public class GetAll : SpeakerMeetRepositoryTestBase
+    public class List : SpeakerMeetRepositoryTestBase
     {
-        public GetAll(ContextFixture fixture) : base(fixture)
+        public List(ContextFixture fixture) : base(fixture)
         {
         }
 
