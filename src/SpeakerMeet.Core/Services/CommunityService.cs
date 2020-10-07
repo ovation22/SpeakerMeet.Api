@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Options;
 using SpeakerMeet.Core.Cache;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
@@ -18,19 +15,16 @@ namespace SpeakerMeet.Core.Services
 {
     public class CommunityService : ICommunityService
     {
-        private readonly int _cacheExpirationMinutes;
-        private readonly IDistributedCacheAdapter _cache;
+        private readonly ICacheManager _cache;
         private readonly ISpeakerMeetRepository _repository;
 
         public CommunityService(
-            IDistributedCacheAdapter cache,
-            ISpeakerMeetRepository repository,
-            IOptions<CacheConfig> cacheOptions
+            ICacheManager cache,
+            ISpeakerMeetRepository repository
         )
         {
             _cache = cache;
             _repository = repository;
-            _cacheExpirationMinutes = cacheOptions.Value.DefaultExpirationMinutes;
         }
 
         public async Task<CommunityResult> Get(Guid id)
@@ -102,32 +96,7 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<IEnumerable<CommunityFeatured>> GetFeatured()
         {
-            IEnumerable<CommunityFeatured> results;
-            const string cacheKey = CacheKeys.FeaturedCommunities;
-
-            var cacheValue = await _cache.GetStringAsync(cacheKey);
-
-            if (string.IsNullOrEmpty(cacheValue))
-            {
-                results = (await GetRandomCommunities()).ToList();
-                await SetCache(cacheKey, results);
-            }
-            else
-            {
-                results = JsonSerializer.Deserialize<List<CommunityFeatured>>(cacheValue);
-            }
-
-            return results;
-        }
-
-        private async Task SetCache(string cacheKey, IEnumerable<CommunityFeatured> results)
-        {
-            var options = new DistributedCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(_cacheExpirationMinutes)
-            };
-
-            await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(results), options);
+            return await _cache.GetOrCreate(CacheKeys.FeaturedCommunities, async () => await GetRandomCommunities());
         }
 
         private async Task<IEnumerable<CommunityFeatured>> GetRandomCommunities()
