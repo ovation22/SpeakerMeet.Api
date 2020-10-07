@@ -5,11 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SpeakerMeet.Api.Config;
+using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Logging;
 using SpeakerMeet.Core.Interfaces.Repositories;
 using SpeakerMeet.Core.Interfaces.Services;
 using SpeakerMeet.Core.Interfaces.Utilities;
 using SpeakerMeet.Core.Services;
+using SpeakerMeet.Infrastructure.Caching;
 using SpeakerMeet.Infrastructure.Data.Repositories;
 using SpeakerMeet.Infrastructure.Logging;
 using SpeakerMeet.Infrastructure.Utilities;
@@ -43,6 +45,7 @@ namespace SpeakerMeet.Api
             }
 
             services.AddSingleton<ITimeManager, TimeManager>();
+            services.AddSingleton<ICacheManager, CacheManager>();
             services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
             services.AddScoped(typeof(ISpeakerMeetRepository), typeof(SpeakerMeetRepository));
 
