@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
 using SpeakerMeet.Core.DTOs;
@@ -29,14 +30,29 @@ namespace SpeakerMeet.Core.Tests.Services.ConferenceServiceTests
         }
 
         [Fact]
-        public async Task ItCallsRepository()
+        public async Task ItGetsFromRepository()
+        {
+            // Arrange
+            Cache.Setup(x => x.GetOrCreate(It.IsAny<string>(), It.IsAny<Func<Task<IEnumerable<ConferenceFeatured>>>>()))
+                .Callback((string key, Func<Task<IEnumerable<ConferenceFeatured>>> action) => action());
+
+            // Act
+            await Service.GetFeatured();
+
+            // Assert
+            Repository.Verify(x => x.List(It.IsAny<ConferenceRandomSpecification>()), Times.Once());
+        }
+
+        [Fact]
+        public async Task ItGetsFromCache()
         {
             // Arrange
             // Act
             await Service.GetFeatured();
 
             // Assert
-            Repository.Verify(x => x.List(It.IsAny<ConferenceRandomSpecification>()), Times.Once());
+            Repository.Verify(x => x.List(It.IsAny<ConferenceRandomSpecification>()), Times.Never());
+            Cache.Verify(x => x.GetOrCreate(It.IsAny<string>(), It.IsAny<Func<Task<IEnumerable<ConferenceFeatured>>>>()), Times.Once());
         }
     }
 }
