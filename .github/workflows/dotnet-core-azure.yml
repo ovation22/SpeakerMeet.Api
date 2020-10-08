@@ -34,7 +34,7 @@ jobs:
         dotnet-version: ${{ env.NETCORE_VERSION }}
     
     - name: Restore packages
-      run: dotnet restore
+      run: dotnet restore SpeakerMeet.Api.sln
 
     - name: Build app
       run: dotnet build src/SpeakerMeet.Api/SpeakerMeet.Api.csproj --configuration Release --no-restore
