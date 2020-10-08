@@ -25,6 +25,8 @@ namespace SpeakerMeet.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Seed();
+
             modelBuilder.Entity<Search>(x =>
             {
                 x.HasNoKey();
