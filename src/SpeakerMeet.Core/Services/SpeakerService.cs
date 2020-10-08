@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Options;
 using SpeakerMeet.Core.Cache;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
@@ -18,19 +15,16 @@ namespace SpeakerMeet.Core.Services
 {
     public class SpeakerService : ISpeakerService
     {
-        private readonly int _cacheExpirationMinutes;
-        private readonly IDistributedCacheAdapter _cache;
+        private readonly ICacheManager _cache;
         private readonly ISpeakerMeetRepository _repository;
 
         public SpeakerService(
-            IDistributedCacheAdapter cache,
-            ISpeakerMeetRepository repository,
-            IOptions<CacheConfig> cacheOptions
+            ICacheManager cache,
+            ISpeakerMeetRepository repository
         )
         {
             _cache = cache;
             _repository = repository;
-            _cacheExpirationMinutes = cacheOptions.Value.DefaultExpirationMinutes;
         }
 
         public async Task<SpeakerResult> Get(Guid id)
@@ -103,39 +97,14 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<IEnumerable<SpeakerFeatured>> GetFeatured()
         {
-            IEnumerable<SpeakerFeatured> results;
-            const string cacheKey = CacheKeys.FeaturedSpeakers;
-
-            var cacheValue = await _cache.GetStringAsync(cacheKey);
-
-            if (string.IsNullOrEmpty(cacheValue))
-            {
-                results = (await GetRandomSpeakers()).ToList();
-                await SetCache(cacheKey, results);
-            }
-            else
-            {
-                results = JsonSerializer.Deserialize<List<SpeakerFeatured>>(cacheValue);
-            }
-
-            return results;
-        }
-
-        private async Task SetCache(string cacheKey, IEnumerable<SpeakerFeatured> results)
-        {
-            var options = new DistributedCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(_cacheExpirationMinutes)
-            };
-
-            await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(results), options);
+            return await _cache.GetOrCreate(CacheKeys.FeaturedSpeakers, async () => await GetRandomSpeakers());
         }
 
         private async Task<IEnumerable<SpeakerFeatured>> GetRandomSpeakers()
         {
-            var speakers = await _repository.List(new SpeakerRandomSpecification());
+            var communities = await _repository.List(new SpeakerRandomSpecification());
 
-            var results = speakers.Select(x => new SpeakerFeatured
+            var results = communities.Select(x => new SpeakerFeatured
             {
                 Id = x.Id,
                 Location = x.Location,
