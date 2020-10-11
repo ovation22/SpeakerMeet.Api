@@ -12,6 +12,7 @@ using SpeakerMeet.Core.Interfaces.Services;
 using SpeakerMeet.Core.Interfaces.Utilities;
 using SpeakerMeet.Core.Services;
 using SpeakerMeet.Infrastructure.Caching;
+using SpeakerMeet.Infrastructure.Data;
 using SpeakerMeet.Infrastructure.Data.Repositories;
 using SpeakerMeet.Infrastructure.Logging;
 using SpeakerMeet.Infrastructure.Utilities;
@@ -62,12 +63,14 @@ namespace SpeakerMeet.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SpeakerMeetContext db)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsEnvironment("Local"))
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            db.Database.EnsureCreated();
 
             app.UseHttpsRedirection();
 
