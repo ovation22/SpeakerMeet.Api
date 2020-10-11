@@ -7,6 +7,13 @@
 
 If you're looking for the front-end UI, check out the [SpeakerMeet.UI](https://github.com/ovation22/SpeakerMeet.UI) repository.
 
+## Getting Started
+There is a docker-compose file that will help get you started. This will build a container for the API and a container for the database.
+
+```
+docker-compose up --build
+```
+
 ## Give a Star! :star:
 If you like the project, please consider giving it a star!
 

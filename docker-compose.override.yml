@@ -4,8 +4,6 @@ services:
   speakermeet.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Local
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=http://0.0.0.0:80
     ports:
-      - "80"
-    volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - "56042:80"
