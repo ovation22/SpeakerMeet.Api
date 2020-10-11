@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Options;
 using SpeakerMeet.Core.Cache;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
@@ -18,19 +15,16 @@ namespace SpeakerMeet.Core.Services
 {
     public class ConferenceService : IConferenceService
     {
-        private readonly int _cacheExpirationMinutes;
-        private readonly IDistributedCacheAdapter _cache;
+        private readonly ICacheManager _cache;
         private readonly ISpeakerMeetRepository _repository;
 
         public ConferenceService(
-            IDistributedCacheAdapter cache,
-            ISpeakerMeetRepository repository,
-            IOptions<CacheConfig> cacheOptions
+            ICacheManager cache,
+            ISpeakerMeetRepository repository
         )
         {
             _cache = cache;
             _repository = repository;
-            _cacheExpirationMinutes = cacheOptions.Value.DefaultExpirationMinutes;
         }
 
         public async Task<ConferenceResult> Get(Guid id)
@@ -103,32 +97,7 @@ namespace SpeakerMeet.Core.Services
 
         public async Task<IEnumerable<ConferenceFeatured>> GetFeatured()
         {
-            IEnumerable<ConferenceFeatured> results;
-            const string cacheKey = CacheKeys.FeaturedConferences;
-
-            var cacheValue = await _cache.GetStringAsync(cacheKey);
-
-            if (string.IsNullOrEmpty(cacheValue))
-            {
-                results = (await GetRandomConferences()).ToList();
-                await SetCache(cacheKey, results);
-            }
-            else
-            {
-                results = JsonSerializer.Deserialize<List<ConferenceFeatured>>(cacheValue);
-            }
-
-            return results;
-        }
-
-        private async Task SetCache(string cacheKey, IEnumerable<ConferenceFeatured> results)
-        {
-            var options = new DistributedCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(_cacheExpirationMinutes)
-            };
-
-            await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(results), options);
+            return await _cache.GetOrCreate(CacheKeys.FeaturedConferences, async () => await GetRandomConferences());
         }
 
         private async Task<IEnumerable<ConferenceFeatured>> GetRandomConferences()
