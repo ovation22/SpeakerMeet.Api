@@ -24,6 +24,25 @@ namespace SpeakerMeet.Infrastructure.Caching
             _cacheExpirationMinutes = cacheOptions.Value.DefaultExpirationMinutes;
         }
 
+        public async Task<T> GetOrCreate<T>(string key, Func<Task<T>> createItem) where T : class
+        {
+            T result;
+            var cacheEntry = await _cache.GetStringAsync(key);
+
+            if (string.IsNullOrEmpty(cacheEntry))
+            {
+                result = (await createItem());
+
+                await SetCache(key, result);
+            }
+            else
+            {
+                result = JsonSerializer.Deserialize<T>(cacheEntry);
+            }
+
+            return result;
+        }
+
         public async Task<IEnumerable<T>> GetOrCreate<T>(string key, Func<Task<IEnumerable<T>>> createItem) where T : class
         {
             IEnumerable<T> results;
@@ -41,6 +60,16 @@ namespace SpeakerMeet.Infrastructure.Caching
             }
 
             return results;
+        }
+
+        private async Task SetCache<T>(string cacheKey, T results) where T : class
+        {
+            var options = new DistributedCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(_cacheExpirationMinutes)
+            };
+
+            await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(results), options);
         }
 
         private async Task SetCache<T>(string cacheKey, IEnumerable<T> results) where T : class

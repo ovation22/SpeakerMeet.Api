@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Options;
+﻿using System.Threading.Tasks;
 using SpeakerMeet.Core.Cache;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
@@ -14,49 +10,21 @@ namespace SpeakerMeet.Core.Services
 {
     public class StatisticsService : IStatisticsService
     {
-        private readonly int _cacheExpirationMinutes;
-        private readonly IDistributedCacheAdapter _cache;
+        private readonly ICacheManager _cache;
         private readonly ISpeakerMeetRepository _repository;
 
         public StatisticsService(
-            IDistributedCacheAdapter cache,
-            ISpeakerMeetRepository repository,
-            IOptions<CacheConfig> cacheOptions
+            ICacheManager cache,
+            ISpeakerMeetRepository repository
         )
         {
             _cache = cache;
             _repository = repository;
-            _cacheExpirationMinutes = cacheOptions.Value.DefaultExpirationMinutes;
         }
 
         public async Task<CountResult> GetCounts()
         {
-            CountResult result;
-            const string cacheKey = CacheKeys.Counts;
-
-            var cacheValue = await _cache.GetStringAsync(cacheKey);
-
-            if (string.IsNullOrEmpty(cacheValue))
-            {
-                result = await GetCountResult();
-                await SetCache(cacheKey, result);
-            }
-            else
-            {
-                result = JsonSerializer.Deserialize<CountResult>(cacheValue);
-            }
-
-            return result;
-        }
-
-        private async Task SetCache(string cacheKey, CountResult result)
-        {
-            var options = new DistributedCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(_cacheExpirationMinutes)
-            };
-
-            await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(result), options);
+            return await _cache.GetOrCreate(CacheKeys.Counts, async () => await GetCountResult());
         }
 
         private async Task<CountResult> GetCountResult()
