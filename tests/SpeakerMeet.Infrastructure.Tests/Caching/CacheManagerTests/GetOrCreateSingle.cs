@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 using Moq;
@@ -10,24 +8,17 @@ using Xunit;
 namespace SpeakerMeet.Infrastructure.Tests.Caching.CacheManagerTests
 {
     [Trait("Category", "CacheManager")]
-    public class GetOrCreate : CacheManagerTestBase
+    public class GetOrCreateSingle : CacheManagerTestBase
     {
         private bool _methodCalled;
         private readonly string _key;
-        private readonly List<CommunityFeatured>? _results;
+        private readonly CommunityFeatured _results;
 
-        public GetOrCreate()
+        public GetOrCreateSingle()
         {
             _key = "key";
             _methodCalled = false;
-            _results = new List<CommunityFeatured>
-            {
-                new CommunityFeatured
-                {
-                    Name = "Name",
-                    Description = "Description"
-                }
-            };
+            _results = new CommunityFeatured {Name = "Name", Description = "Description"};
         }
 
         [Fact]
@@ -42,8 +33,7 @@ namespace SpeakerMeet.Infrastructure.Tests.Caching.CacheManagerTests
 
             // Assert
             Assert.False(_methodCalled);
-            Assert.IsAssignableFrom<IEnumerable<CommunityFeatured>>(result);
-            Assert.Single(result);
+            Assert.IsAssignableFrom<CommunityFeatured>(result);
         }
 
         [Fact]
@@ -58,8 +48,7 @@ namespace SpeakerMeet.Infrastructure.Tests.Caching.CacheManagerTests
 
             // Assert
             Assert.True(_methodCalled);
-            Assert.IsAssignableFrom<IEnumerable<CommunityFeatured>>(result);
-            Assert.Single(result);
+            Assert.IsAssignableFrom<CommunityFeatured>(result);
         }
 
         [Fact]
@@ -73,15 +62,15 @@ namespace SpeakerMeet.Infrastructure.Tests.Caching.CacheManagerTests
             await CacheManager.GetOrCreate(_key, async () => await DefaultMethod());
 
             // Assert
-            var value = JsonSerializer.Serialize(_results!.ToList());
+            var value = JsonSerializer.Serialize(_results!);
             CacheAdapter.Verify(x => x.SetStringAsync(_key, value, It.IsAny<DistributedCacheEntryOptions>()));
         }
 
-        private async Task<IEnumerable<CommunityFeatured>> DefaultMethod()
+        private async Task<CommunityFeatured> DefaultMethod()
         {
             _methodCalled = true;
 
-            return await Task.FromResult(_results.AsEnumerable());
+            return await Task.FromResult(_results);
         }
     }
 }
