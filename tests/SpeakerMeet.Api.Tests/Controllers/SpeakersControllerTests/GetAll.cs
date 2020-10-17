@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using SpeakerMeet.Core.Constants;
 using Xunit;
 
 namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
@@ -24,17 +25,17 @@ namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
         {
             // Arrange
             // Act
-            await Controller.GetAll(0, 1);
+            await Controller.GetAll(0, 1, nameof(Direction.Asc));
 
             // Assert
-            SpeakerService.Verify(x => x.GetAll(0, 1), Times.Once());
+            SpeakerService.Verify(x => x.GetAll(0, 1, nameof(Direction.Asc)), Times.Once());
         }
 
         [Fact]
         public async Task GivenException_ThenBadRequestResult()
         {
             // Arrange
-            SpeakerService.Setup(x => x.GetAll(0, 1)).Throws(new Exception());
+            SpeakerService.Setup(x => x.GetAll(0, 1, null)).Throws(new Exception());
 
             // Act
             var result = await Controller.GetAll(0, 1);
@@ -48,7 +49,7 @@ namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
         {
             // Arrange
             var ex = new Exception();
-            SpeakerService.Setup(x => x.GetAll(0, 1)).Throws(ex);
+            SpeakerService.Setup(x => x.GetAll(0, 1, null)).Throws(ex);
 
             // Act
             await Controller.GetAll(0, 1);

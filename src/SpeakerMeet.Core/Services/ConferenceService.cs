@@ -61,9 +61,9 @@ namespace SpeakerMeet.Core.Services
             };
         }
 
-        public async Task<ConferencesResult> GetAll(int pageIndex, int itemsPage)
+        public async Task<ConferencesResult> GetAll(int pageIndex, int itemsPage, string? direction)
         {
-            var spec = new ConferenceSpecification(itemsPage * pageIndex, itemsPage);
+            var spec = new ConferenceSpecification(itemsPage * pageIndex, itemsPage, direction);
 
             var conferences = await _repository.List(spec);
             var total = await _repository.Count<Conference>();

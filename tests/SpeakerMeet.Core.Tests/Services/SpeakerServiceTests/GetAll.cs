@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Moq;
+using SpeakerMeet.Core.Constants;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Specifications;
 using Xunit;
@@ -13,7 +14,7 @@ namespace SpeakerMeet.Core.Tests.Services.SpeakerServiceTests
         {
             // Arrange
             // Act
-            var speakers = await Service.GetAll(0, 1);
+            var speakers = await Service.GetAll(0, 1, nameof(Direction.Asc));
 
             // Assert
             Assert.NotNull(speakers);
@@ -25,7 +26,7 @@ namespace SpeakerMeet.Core.Tests.Services.SpeakerServiceTests
         {
             // Arrange
             // Act
-            await Service.GetAll(0, 1);
+            await Service.GetAll(0, 1, nameof(Direction.Desc));
 
             // Assert
             Repository.Verify(x => x.List(It.IsAny<SpeakerSpecification>()), Times.Once());
