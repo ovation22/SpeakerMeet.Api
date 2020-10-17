@@ -1,5 +1,6 @@
 ﻿using System;
 using Ardalis.Specification;
+using SpeakerMeet.Core.Constants;
 using SpeakerMeet.Core.Entities;
 
 namespace SpeakerMeet.Core.Specifications
@@ -20,8 +21,17 @@ namespace SpeakerMeet.Core.Specifications
             WithIncludes();
         }
 
-        public SpeakerSpecification(int skip, int take)
+        public SpeakerSpecification(int skip, int take, string? direction)
         {
+            if (string.Equals(direction, nameof(Direction.Asc), StringComparison.InvariantCultureIgnoreCase))
+            {
+                Query.OrderBy(x => x.Name);
+            }
+            if (string.Equals(direction, nameof(Direction.Desc), StringComparison.InvariantCultureIgnoreCase))
+            {
+                Query.OrderByDescending(x => x.Name);
+            }
+
             Query
                 .Skip(skip)
                 .Take(take);
