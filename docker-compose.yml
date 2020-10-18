@@ -8,10 +8,8 @@ services:
       dockerfile: src/SpeakerMeet.Api/Dockerfile
     depends_on:
       - db
+      - redis
   db:
     image: "mcr.microsoft.com/mssql/server"
-    environment:
-        MSSQL_SA_PASSWORD: "Pa55w0rd2019"
-        ACCEPT_EULA: "Y"
-    ports: 
-      - "1446:1433" 
+  redis:
+    image: redis:alpine
