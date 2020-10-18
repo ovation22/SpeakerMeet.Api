@@ -22,7 +22,7 @@ namespace SpeakerMeet.Api.Config
             services.Configure<CacheConfig>(configuration.GetSection("Cache"));
             services.AddSingleton(typeof(IDistributedCacheAdapter), typeof(DistributedCacheAdapter));
 
-            if (hostContext.IsDevelopment() || hostContext.IsEnvironment("Local"))
+            if (hostContext.IsDevelopment())
             {
                 services.AddDistributedMemoryCache();
             }
