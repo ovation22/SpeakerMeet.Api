@@ -8,5 +8,6 @@ namespace SpeakerMeet.Core.Interfaces.Caching
     {
         Task<T> GetOrCreate<T>(string key, Func<Task<T>> createItem) where T : class;
         Task<IEnumerable<T>> GetOrCreate<T>(string key, Func<Task<IEnumerable<T>>> createItem) where T : class;
+        Task Remove(string key);
     }
 }
