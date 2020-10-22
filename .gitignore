@@ -11,6 +11,8 @@ log*.txt
 
 # TestResults
 **/TestResults/*
+TestResults/
+coverage.cobertura.xml
 
 # .NET Core
 **/Properties/launchSettings.json
