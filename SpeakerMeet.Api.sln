@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Integration.Tes
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2A9C2ECE-39CC-48B3-A228-7AE7D924D5B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Tests.Integration.DB", "tests\SpeakerMeet.Tests.Integration.DB\SpeakerMeet.Tests.Integration.DB.csproj", "{7315E6B9-0F5C-42C4-9548-688D1A560CBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{2A9C2ECE-39CC-48B3-A228-7AE7D924D5B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A9C2ECE-39CC-48B3-A228-7AE7D924D5B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A9C2ECE-39CC-48B3-A228-7AE7D924D5B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7315E6B9-0F5C-42C4-9548-688D1A560CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7315E6B9-0F5C-42C4-9548-688D1A560CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7315E6B9-0F5C-42C4-9548-688D1A560CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7315E6B9-0F5C-42C4-9548-688D1A560CBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{C4FCCCBD-7918-4B52-B96F-974324F38E3F} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 		{1FF6A4B7-9A35-4598-913E-F260703282CA} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 		{87E35739-1E3C-45FD-991C-5160AF930F46} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
+		{7315E6B9-0F5C-42C4-9548-688D1A560CBC} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2B1E90C-5AF5-4A8A-BB74-5F5FF469E7ED}

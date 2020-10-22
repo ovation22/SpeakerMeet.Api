@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  speakermeet.api:
+  api:
     image: ${DOCKER_REGISTRY-}speakermeetapi
     build:
       context: .
@@ -9,7 +9,20 @@ services:
     depends_on:
       - db
       - redis
+  
   db:
     image: "mcr.microsoft.com/mssql/server"
+  
   redis:
     image: redis:alpine
+  
+  tests:
+    build:
+      context: .
+      dockerfile: tests/SpeakerMeet.Tests.Integration.DB/Dockerfile
+    volumes: 
+      - ./tests/SpeakerMeet.Tests.Integration.DB:/tests/SpeakerMeet.Tests.Integration.DB
+    depends_on:
+      - db
+      - redis
+      - api      
