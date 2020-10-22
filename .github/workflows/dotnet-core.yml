@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build SpeakerMeet.Api.sln --configuration Release --no-restore 
     - name: Test
-      run: dotnet test SpeakerMeet.Api.sln --no-restore --verbosity normal /p:Exclude="[Tests*].*" --collect:"XPlat Code Coverage"
+      run: dotnet test SpeakerMeet.Api.sln --filter "FullyQualifiedName!~SpeakerMeet.Tests.Integration.DB" --no-restore --verbosity normal /p:Exclude="[Tests*].*" --collect:"XPlat Code Coverage"
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
