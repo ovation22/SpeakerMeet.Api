@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Infrastructure.Data;
 
-namespace SpeakerMeet.Integration.Tests
+namespace SpeakerMeet.Tests.Integration
 {
     public class CustomWebApplicationFactory<TStartup>
         : WebApplicationFactory<TStartup> where TStartup : class

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using SpeakerMeet.Api;
 using Xunit;
 
-namespace SpeakerMeet.Integration.Tests
+namespace SpeakerMeet.Tests.Integration
 {
     public class SpeakersTests :
         IClassFixture<CustomWebApplicationFactory<Startup>>
