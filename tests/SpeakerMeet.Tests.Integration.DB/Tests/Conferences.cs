@@ -8,26 +8,26 @@ using Xunit;
 namespace SpeakerMeet.Tests.Integration.DB.Tests
 {
     [Collection(ApiTestCollection.CollectionName)]
-    public class Speakers
+    public class Conferences
     {
         private readonly HttpClient _client;
 
-        public Speakers(ApiTestContext testContext)
+        public Conferences(ApiTestContext testContext)
         {
             _client = testContext.HttpClient;
         }
 
         [Fact]
-        public async Task ItGetsSpeakers()
+        public async Task ItGetsConferences()
         {
             // Arrange
             // Act
-            var response = await _client.GetAsync("/api/Speakers");
+            var response = await _client.GetAsync("/api/Conferences");
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var viewResult = Assert.IsType<HttpResponseMessage>(response);
-            var model = Assert.IsAssignableFrom<SpeakersResult>(JsonSerializer.Deserialize<SpeakersResult>(await viewResult.Content.ReadAsStringAsync()));
+            var model = Assert.IsAssignableFrom<ConferencesResult>(JsonSerializer.Deserialize<ConferencesResult>(await viewResult.Content.ReadAsStringAsync()));
             Assert.NotNull(model);
         }
     }
