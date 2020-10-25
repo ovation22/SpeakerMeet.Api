@@ -3,6 +3,8 @@ version: '3.4'
 services:
   api:
     environment:
+      - WAIT_BEFORE_HOSTS=5
+      - WAIT_HOSTS=db:1433
       - ASPNETCORE_ENVIRONMENT=Local
       - ASPNETCORE_URLS=http://0.0.0.0:80
     ports:
@@ -34,5 +36,6 @@ services:
 
   tests:
     environment:
+      WAIT_BEFORE_HOSTS: 10
       WAIT_HOSTS: api:80
       API_URL: http://api

@@ -21,4 +21,9 @@ RUN dotnet publish "SpeakerMeet.Api.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SpeakerMeet.Api.dll"]
+
+
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.5.0/wait /wait
+RUN /bin/bash -c 'ls -la /wait; chmod +x /wait; ls -la /wait'
+
+CMD /wait && dotnet SpeakerMeet.Api.dll
