@@ -14,9 +14,6 @@ log*.txt
 TestResults/
 coverage.cobertura.xml
 
-# .NET Core
-**/Properties/launchSettings.json
-
 # User-specific files
 *.rsuser
 *.suo
