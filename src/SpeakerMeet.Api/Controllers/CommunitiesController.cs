@@ -26,10 +26,10 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Communities
         [HttpGet]
-        [ProducesResponseType(typeof(CommunitiesResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetAll(int pageIndex = 0, int itemsPage = 100, string? direction = null)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<CommunitiesResult>> GetAll(int pageIndex = 0, int itemsPage = 100, string? direction = null)
         {
             try
             {
@@ -47,10 +47,10 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Communities/5
         [HttpGet("{id:Guid}")]
-        [ProducesResponseType(typeof(CommunityResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Get(Guid id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<CommunityResult>> Get(Guid id)
         {
             try
             {
@@ -68,10 +68,10 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Communities/slug-name
         [HttpGet("{slug}")]
-        [ProducesResponseType(typeof(CommunityResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetBySlug(string slug)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<CommunityResult>> GetBySlug(string slug)
         {
             try
             {
@@ -89,10 +89,10 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Communities/Featured
         [HttpGet("Featured")]
-        [ProducesResponseType(typeof(CommunitiesResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetFeatured()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<CommunitiesResult>> GetFeatured()
         {
             try
             {

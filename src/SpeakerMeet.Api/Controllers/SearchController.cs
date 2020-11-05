@@ -27,10 +27,10 @@ namespace SpeakerMeet.Api.Controllers
         
         // GET: api/Search
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<SearchResults>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetResults(string terms)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<SearchResults>>> GetResults(string terms)
         {
             try
             {

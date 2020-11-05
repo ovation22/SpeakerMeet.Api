@@ -26,10 +26,10 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Conferences
         [HttpGet]
-        [ProducesResponseType(typeof(ConferencesResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetAll(int pageIndex = 0, int itemsPage = 100, string? direction = null)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ConferencesResult>> GetAll(int pageIndex = 0, int itemsPage = 100, string? direction = null)
         {
             try
             {
@@ -47,10 +47,10 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Conferences/5
         [HttpGet("{id:Guid}")]
-        [ProducesResponseType(typeof(ConferenceResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Get(Guid id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ConferenceResult>> Get(Guid id)
         {
             try
             {
@@ -68,10 +68,10 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Conferences/slug-name
         [HttpGet("{slug}")]
-        [ProducesResponseType(typeof(ConferenceResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetBySlug(string slug)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ConferenceResult>> GetBySlug(string slug)
         {
             try
             {
@@ -89,10 +89,10 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Conferences/Featured
         [HttpGet("Featured")]
-        [ProducesResponseType(typeof(ConferenceFeatured), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetFeatured()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ConferenceFeatured>> GetFeatured()
         {
             try
             {
