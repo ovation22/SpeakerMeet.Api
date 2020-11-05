@@ -16,7 +16,7 @@ namespace SpeakerMeet.Api.Tests.Controllers.StatisticsControllerTests
             var result = await Controller.GetCounts();
 
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace SpeakerMeet.Api.Tests.Controllers.StatisticsControllerTests
             var result = await Controller.GetCounts();
 
             // Assert
-            Assert.IsAssignableFrom<BadRequestObjectResult>(result);
+            Assert.IsAssignableFrom<BadRequestObjectResult>(result.Result);
         }
 
         [Fact]

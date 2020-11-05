@@ -23,7 +23,7 @@ namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
             var result = await Controller.GetPresentations(_id);
 
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace SpeakerMeet.Api.Tests.Controllers.SpeakersControllerTests
             var result = await Controller.GetPresentations(_id);
 
             // Assert
-            Assert.IsAssignableFrom<BadRequestObjectResult>(result);
+            Assert.IsAssignableFrom<BadRequestObjectResult>(result.Result);
         }
 
         [Fact]

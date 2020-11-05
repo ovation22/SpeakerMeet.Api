@@ -27,10 +27,10 @@ namespace SpeakerMeet.Api.Controllers
 
         // GET: api/Statistics/Counts
         [HttpGet("Counts")]
-        [ProducesResponseType(typeof(CountResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetCounts()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<CountResult>> GetCounts()
         {
             try
             {
