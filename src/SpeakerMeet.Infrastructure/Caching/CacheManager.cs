@@ -37,10 +37,10 @@ namespace SpeakerMeet.Infrastructure.Caching
             }
             else
             {
-                result = JsonSerializer.Deserialize<T>(cacheEntry);
+                result = JsonSerializer.Deserialize<T>(cacheEntry)!;
             }
 
-            return result;
+            return result!;
         }
 
         public async Task<IEnumerable<T>> GetOrCreate<T>(string key, Func<Task<IEnumerable<T>>> createItem) where T : class
@@ -56,7 +56,7 @@ namespace SpeakerMeet.Infrastructure.Caching
             }
             else
             {
-                results = JsonSerializer.Deserialize<List<T>>(cacheEntry);
+                results = JsonSerializer.Deserialize<List<T>>(cacheEntry)!;
             }
 
             return results;

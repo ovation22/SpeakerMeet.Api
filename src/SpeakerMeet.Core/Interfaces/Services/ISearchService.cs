@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.Azure.Search.Models;
 using SpeakerMeet.Core.DTOs;
+using Microsoft.Azure.Search.Models;
 
 namespace SpeakerMeet.Core.Interfaces.Services
 {
