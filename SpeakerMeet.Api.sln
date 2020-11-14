@@ -9,8 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		.github\workflows\dotnet-core-azure.yml = .github\workflows\dotnet-core-azure.yml
-		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
+		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
+		.github\workflows\deploy-to-azure.yml = .github\workflows\deploy-to-azure.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -31,7 +31,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Tests.Integration.DB", "tests\SpeakerMeet.Tests.Integration.DB\SpeakerMeet.Tests.Integration.DB.csproj", "{7315E6B9-0F5C-42C4-9548-688D1A560CBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Tests.Integration", "tests\SpeakerMeet.Tests.Integration\SpeakerMeet.Tests.Integration.csproj", "{C0F3C528-6A80-417C-BEEB-1FE44989239A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Tests.Integration", "tests\SpeakerMeet.Tests.Integration\SpeakerMeet.Tests.Integration.csproj", "{C0F3C528-6A80-417C-BEEB-1FE44989239A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
