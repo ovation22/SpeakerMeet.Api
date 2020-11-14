@@ -1,4 +1,4 @@
-# This workflow will build and push a .NET Core application to an Azure Web App on every push to the master branch.
+# This workflow will build and push a .NET application to an Azure Web App on every push to the master branch.
 #
 # To configure this workflow:
 #
@@ -9,7 +9,7 @@
 #
 # For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
-name: "Deploy to Azure"
+name: "Build and deploy"
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
     - name: Publish app for deploy
       run: dotnet publish src/SpeakerMeet.Api/SpeakerMeet.Api.csproj --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
-    - name: 'Run Azure webapp deploy action using publish profile credentials'
+    - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v1
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
