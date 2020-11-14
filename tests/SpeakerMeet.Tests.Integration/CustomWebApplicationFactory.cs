@@ -16,7 +16,7 @@ namespace SpeakerMeet.Tests.Integration
         {
             builder.ConfigureServices(services =>
             {
-                var descriptor = services.SingleOrDefault(
+                var descriptor = services.Single(
                     d => d.ServiceType ==
                          typeof(DbContextOptions<SpeakerMeetContext>));
 

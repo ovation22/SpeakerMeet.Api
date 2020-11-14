@@ -81,7 +81,7 @@ namespace SpeakerMeet.Infrastructure.Tests.Caching.CacheManagerTests
         {
             _methodCalled = true;
 
-            return await Task.FromResult(_results.AsEnumerable());
+            return await Task.FromResult(_results!.AsEnumerable());
         }
     }
 }
