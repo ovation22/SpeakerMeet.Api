@@ -31,34 +31,14 @@ namespace SpeakerMeet.Core.Services
         {
             var speaker =  await _repository.Get(new SpeakerSpecification(id));
 
-            return new SpeakerResult
-            {
-                Id = speaker.Id,
-                Location = speaker.Location,
-                Name = speaker.Name,
-                Slug = speaker.Slug,
-                Description = speaker.Description
-            };
+            return Map(speaker);
         }
 
         public async Task<SpeakerResult> Get(string slug)
         {
             var speaker =  await _repository.Get(new SpeakerSpecification(slug));
 
-            return new SpeakerResult
-            {
-                Id = speaker.Id,
-                Location = speaker.Location,
-                Name = speaker.Name,
-                Slug = speaker.Slug,
-                Description = speaker.Description,
-                Tags = speaker.SpeakerTags.Select(x => x.Tag.Name),
-                SocialPlatforms = speaker.SpeakerSocialPlatforms.Select(x => new SocialMedia
-                {
-                    Name = x.SocialPlatform.Name,
-                    Url = x.Url
-                })
-            };
+            return Map(speaker);
         }
 
         public async Task<SpeakersResult> GetAll(int pageIndex, int itemsPage, string? direction)
@@ -93,6 +73,24 @@ namespace SpeakerMeet.Core.Services
         public async Task<IEnumerable<SpeakerFeatured>> GetFeatured()
         {
             return await _cache.GetOrCreate(CacheKeys.FeaturedSpeakers, async () => await GetRandomSpeakers());
+        }
+
+        private static SpeakerResult Map(Speaker speaker)
+        {
+            return new SpeakerResult
+            {
+                Id = speaker.Id,
+                Location = speaker.Location,
+                Name = speaker.Name,
+                Slug = speaker.Slug,
+                Description = speaker.Description,
+                Tags = speaker.SpeakerTags.Select(x => x.Tag.Name),
+                SocialPlatforms = speaker.SpeakerSocialPlatforms.Select(x => new SocialMedia
+                {
+                    Name = x.SocialPlatform.Name,
+                    Url = x.Url
+                })
+            };
         }
 
         private async Task<IEnumerable<SpeakerFeatured>> GetRandomSpeakers()
