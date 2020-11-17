@@ -31,34 +31,14 @@ namespace SpeakerMeet.Core.Services
         {
             var community =  await _repository.Get(new CommunitySpecification(id));
 
-            return new CommunityResult
-            {
-                Id = community.Id,
-                Location = community.Location,
-                Name = community.Name,
-                Slug = community.Slug,
-                Description = community.Description
-            };
+            return Map(community);
         }
 
         public async Task<CommunityResult> Get(string slug)
         {
             var community =  await _repository.Get(new CommunitySpecification(slug));
 
-            return new CommunityResult
-            {
-                Id = community.Id,
-                Location = community.Location,
-                Name = community.Name,
-                Slug = community.Slug,
-                Description = community.Description,
-                Tags = community.CommunityTags.Select(x => x.Tag.Name),
-                SocialPlatforms = community.CommunitySocialPlatforms.Select(x => new SocialMedia
-                {
-                    Name = x.SocialPlatform.Name,
-                    Url = x.Url
-                })
-            };
+            return Map(community);
         }
 
         public async Task<CommunitiesResult> GetAll(int pageIndex, int itemsPage, string? direction)
@@ -92,6 +72,24 @@ namespace SpeakerMeet.Core.Services
         public async Task<IEnumerable<CommunityFeatured>> GetFeatured()
         {
             return await _cache.GetOrCreate(CacheKeys.FeaturedCommunities, async () => await GetRandomCommunities());
+        }
+
+        private static CommunityResult Map(Community community)
+        {
+            return new CommunityResult
+            {
+                Id = community.Id,
+                Location = community.Location,
+                Name = community.Name,
+                Slug = community.Slug,
+                Description = community.Description,
+                Tags = community.CommunityTags.Select(x => x.Tag.Name),
+                SocialPlatforms = community.CommunitySocialPlatforms.Select(x => new SocialMedia
+                {
+                    Name = x.SocialPlatform.Name,
+                    Url = x.Url
+                })
+            };
         }
 
         private async Task<IEnumerable<CommunityFeatured>> GetRandomCommunities()

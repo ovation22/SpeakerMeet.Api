@@ -31,34 +31,14 @@ namespace SpeakerMeet.Core.Services
         {
             var conference =  await _repository.Get(new ConferenceSpecification(id));
 
-            return new ConferenceResult
-            {
-                Id = conference.Id,
-                Location = conference.Location,
-                Name = conference.Name,
-                Slug = conference.Slug,
-                Description = conference.Description
-            };
+            return Map(conference);
         }
 
         public async Task<ConferenceResult> Get(string slug)
         {
             var conference =  await _repository.Get(new ConferenceSpecification(slug));
 
-            return new ConferenceResult
-            {
-                Id = conference.Id,
-                Location = conference.Location,
-                Name = conference.Name,
-                Slug = conference.Slug,
-                Description = conference.Description,
-                Tags = conference.ConferenceTags.Select(x => x.Tag.Name),
-                SocialPlatforms = conference.ConferenceSocialPlatforms.Select(x => new SocialMedia
-                {
-                    Name = x.SocialPlatform.Name,
-                    Url = x.Url
-                })
-            };
+            return Map(conference);
         }
 
         public async Task<ConferencesResult> GetAll(int pageIndex, int itemsPage, string? direction)
@@ -93,6 +73,24 @@ namespace SpeakerMeet.Core.Services
         public async Task<IEnumerable<ConferenceFeatured>> GetFeatured()
         {
             return await _cache.GetOrCreate(CacheKeys.FeaturedConferences, async () => await GetRandomConferences());
+        }
+
+        private static ConferenceResult Map(Conference conference)
+        {
+            return new ConferenceResult
+            {
+                Id = conference.Id,
+                Location = conference.Location,
+                Name = conference.Name,
+                Slug = conference.Slug,
+                Description = conference.Description,
+                Tags = conference.ConferenceTags.Select(x => x.Tag.Name),
+                SocialPlatforms = conference.ConferenceSocialPlatforms.Select(x => new SocialMedia
+                {
+                    Name = x.SocialPlatform.Name,
+                    Url = x.Url
+                })
+            };
         }
 
         private async Task<IEnumerable<ConferenceFeatured>> GetRandomConferences()
