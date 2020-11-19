@@ -69,7 +69,7 @@ claims, or has the right to claim, any right in any invention or patent related 
 represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that
 conflicts with the terms of this license.
 
-Elizabeth Schneider acknowledges that, except as explicitly described in this Agreement, any Contribution which
+John Callaway acknowledges that, except as explicitly described in this Agreement, any Contribution which
 you provide is on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED,
 INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS
 FOR A PARTICULAR PURPOSE.
