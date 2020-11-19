@@ -9,10 +9,12 @@ services:
     depends_on:
       - db
       - redis
-  
+
   db:
-    image: "mcr.microsoft.com/mssql/server"
-  
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      - ACCEPT_EULA=Y
+
   redis:
     image: redis:alpine
   
