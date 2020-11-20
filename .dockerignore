@@ -1,3 +1,8 @@
+.git
+Dockerfile
+k8s-dependencies.yaml
+k8s.yaml
+
 **/.classpath
 **/.dockerignore
 **/.env

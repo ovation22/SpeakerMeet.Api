@@ -12,10 +12,10 @@ services:
 
   db:
     environment:
-      MSSQL_SA_PASSWORD: "Pa55w0rd2019"
-      ACCEPT_EULA: "Y"
-    ports: 
-      - "1446:1433" 
+      - SA_PASSWORD=Pa55w0rd2019
+      - ACCEPT_EULA=Y
+    ports:
+      - "1446:1433"
 
   redis:
     ports:
@@ -36,6 +36,6 @@ services:
 
   tests:
     environment:
-      WAIT_BEFORE_HOSTS: 10
-      WAIT_HOSTS: api:80
-      API_URL: http://api
+      - WAIT_BEFORE_HOSTS=10
+      - WAIT_HOSTS=api:80
+      - API_URL=http://api
