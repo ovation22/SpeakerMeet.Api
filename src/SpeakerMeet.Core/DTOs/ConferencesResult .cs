@@ -3,23 +3,23 @@ using System.Collections.Generic;
 
 namespace SpeakerMeet.Core.DTOs
 {
-    public class ConferencesResult
+    public record ConferencesResult
     {
-        public PaginationInfo PaginationInfo { get; set; } = default!;
+        public PaginationInfo PaginationInfo { get; init; } = default!;
 
-        public IEnumerable<Conference> Conferences { get; set; } = new List<Conference>();
+        public IEnumerable<Conference> Conferences { get; init; } = new List<Conference>();
 
-        public class Conference
+        public record Conference
         {
-            public Guid Id { get; set; }
+            public Guid Id { get; init; }
 
-            public string Name { get; set; } = null!;
+            public string Name { get; init; } = null!;
 
-            public string Slug { get; set; } = null!;
+            public string Slug { get; init; } = null!;
 
-            public string Location { get; set; } = null!;
+            public string Location { get; init; } = null!;
 
-            public string Description { get; set; } = null!;
+            public string Description { get; init; } = null!;
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace SpeakerMeet.Core.DTOs
 {
-    public class SocialMedia
+    public record SocialMedia
     {
-        public string Name { get; set; } = default!;
+        public string Name { get; init; } = default!;
 
-        public string Url { get; set; } = default!;
+        public string Url { get; init; } = default!;
     }
 }
