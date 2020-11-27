@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 namespace SpeakerMeet.Core.DTOs
 {
-    public class ConferenceResult
+    public record ConferenceResult
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; init; }
 
-        public string Name { get; set; } = null!;
+        public string Name { get; init; } = null!;
 
-        public string Slug { get; set; } = null!;
+        public string Slug { get; init; } = null!;
 
-        public string Location { get; set; } = null!;
+        public string Location { get; init; } = null!;
 
-        public string Description { get; set; } = null!;
+        public string Description { get; init; } = null!;
 
-        public IEnumerable<string>? Tags { get; set; }
+        public IEnumerable<string>? Tags { get; init; }
 
-        public IEnumerable<SocialMedia>? SocialPlatforms { get; set; }
+        public IEnumerable<SocialMedia>? SocialPlatforms { get; init; }
     }
 }

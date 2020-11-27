@@ -2,18 +2,18 @@
 
 namespace SpeakerMeet.Core.DTOs
 {
-    public class SearchResults
+    public record SearchResults
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; init; }
 
-        public string Name { get; set; } = null!;
+        public string Name { get; init; } = null!;
 
-        public string Slug { get; set; } = null!;
+        public string Slug { get; init; } = null!;
 
-        public string Location { get; set; } = null!;
+        public string Location { get; init; } = null!;
 
-        public string Description { get; set; } = null!;
+        public string Description { get; init; } = null!;
 
-        public string Type { get; set; } = null!;
+        public string Type { get; init; } = null!;
     }
 }

@@ -2,14 +2,14 @@
 
 namespace SpeakerMeet.Core.DTOs
 {
-    public class SpeakerPresentationsResult
+    public record SpeakerPresentationsResult
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; init; }
 
-        public Guid SpeakerId { get; set; }
+        public Guid SpeakerId { get; init; }
 
-        public string Title { get; set; } = default!;
+        public string Title { get; init; } = default!;
 
-        public string Synopsis { get; set; } = default!;
+        public string Synopsis { get; init; } = default!;
     }
 }

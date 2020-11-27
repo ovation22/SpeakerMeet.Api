@@ -1,10 +1,10 @@
 ﻿namespace SpeakerMeet.Core.DTOs
 {
-    public class PaginationInfo
+    public record PaginationInfo
     {
-        public int TotalItems { get; set; }
-        public int ItemsPerPage { get; set; }
-        public int ActualPage { get; set; }
-        public int TotalPages { get; set; }
+        public int TotalItems { get; init; }
+        public int ItemsPerPage { get; init; }
+        public int ActualPage { get; init; }
+        public int TotalPages { get; init; }
     }
 }
