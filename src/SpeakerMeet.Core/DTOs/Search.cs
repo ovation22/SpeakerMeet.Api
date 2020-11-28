@@ -9,8 +9,8 @@ namespace SpeakerMeet.Core.DTOs
         public int PageSize { get; init; } = 10;
         public bool IncludeFacets { get; init; } = false;
         public string Text { get; init; } = default!;
-        public Dictionary<string, string> Filters { get; init; } = new Dictionary<string, string>();
-        public List<string> Facets { get; init; } = new List<string>();
+        public Dictionary<string, string> Filters { get; init; } = new();
+        public List<string> Facets { get; init; } = new();
         public string OrderBy { get; init; } = "";
         public string QueryType { get; init; } = "simple";
         public SearchMode SearchMode { get; init; } = SearchMode.Any;

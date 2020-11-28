@@ -52,10 +52,10 @@ namespace SpeakerMeet.Core.Tests.Specifications
         {
             return new List<SpeakerPresentation>
             {
-                new SpeakerPresentation{ SpeakerId = new Guid("00AB8E90-F7EF-4BF2-8277-F1733EB323E5") }, 
-                new SpeakerPresentation{ SpeakerId = new Guid("3D031965-BA62-46F1-AA87-6ED204B4A5CF") }, 
-                new SpeakerPresentation{ SpeakerId = _speakerId }, 
-                new SpeakerPresentation{ SpeakerId = new Guid("45DB5C19-0CF1-4625-8829-67E157AF5DED") }
+                new() { SpeakerId = new Guid("00AB8E90-F7EF-4BF2-8277-F1733EB323E5") }, 
+                new() { SpeakerId = new Guid("3D031965-BA62-46F1-AA87-6ED204B4A5CF") }, 
+                new() { SpeakerId = _speakerId }, 
+                new() { SpeakerId = new Guid("45DB5C19-0CF1-4625-8829-67E157AF5DED") }
             };
         }
     }

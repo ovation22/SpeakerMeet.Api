@@ -70,10 +70,10 @@ namespace SpeakerMeet.Core.Tests.Specifications
         {
             return new List<Community>
             {
-                new Community{ Id = new Guid("D7728576-CC03-40E2-A92B-2E47FC791C60") }, 
-                new Community{ Id = new Guid("B067FA84-7940-4D6D-9170-F0EDAD986C87") }, 
-                new Community{ Id = _id, Slug = _slug }, 
-                new Community{ Id = new Guid("D6506015-E4E5-4057-9B42-A112C8B08C56") }
+                new() { Id = new Guid("D7728576-CC03-40E2-A92B-2E47FC791C60") }, 
+                new() { Id = new Guid("B067FA84-7940-4D6D-9170-F0EDAD986C87") }, 
+                new() { Id = _id, Slug = _slug }, 
+                new() { Id = new Guid("D6506015-E4E5-4057-9B42-A112C8B08C56") }
             };
         }
     }

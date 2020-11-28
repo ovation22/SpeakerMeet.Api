@@ -76,7 +76,7 @@ namespace SpeakerMeet.Core.Services
 
         private static CommunityResult Map(Community community)
         {
-            return new CommunityResult
+            return new()
             {
                 Id = community.Id,
                 Location = community.Location,
