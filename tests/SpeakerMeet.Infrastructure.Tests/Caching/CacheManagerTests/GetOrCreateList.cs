@@ -22,7 +22,7 @@ namespace SpeakerMeet.Infrastructure.Tests.Caching.CacheManagerTests
             _methodCalled = false;
             _results = new List<CommunityFeatured>
             {
-                new CommunityFeatured
+                new()
                 {
                     Name = "Name",
                     Description = "Description"
