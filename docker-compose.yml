@@ -20,6 +20,7 @@ services:
     build:
       context: .
       dockerfile: tests/SpeakerMeet.Tests.Integration.DB/Dockerfile
+      target: build
     volumes: 
       - ./tests/SpeakerMeet.Tests.Integration.DB:/tests/SpeakerMeet.Tests.Integration.DB
     depends_on:
