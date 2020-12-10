@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
 		.github\workflows\deploy-to-azure.yml = .github\workflows\deploy-to-azure.yml
+		k8s-dependencies.yaml = k8s-dependencies.yaml
+		k8s.yaml = k8s.yaml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection

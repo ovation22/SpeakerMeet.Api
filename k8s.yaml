@@ -24,7 +24,7 @@ spec:
         - name: ASPNETCORE_URLS
           value: http://+:80
         - name: ConnectionStrings__SpeakerMeet
-          value: Server=db;Database=SpeakerMeet;User=sa;Password=P@55w0rd2019
+          value: Server=db;Database=SpeakerMeet;User=sa;Password=P#55w0rd2019
         - name: Cache__Configuration
           value: redis:6379
         - name: Cache__Instancename
