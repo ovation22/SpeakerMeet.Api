@@ -9,12 +9,16 @@ services:
     depends_on:
       - db
       - redis
+      - seq
   
   db:
     image: "mcr.microsoft.com/mssql/server"
   
   redis:
     image: redis:alpine
+
+  seq:
+    image: datalust/seq:latest
   
   tests:
     build:
