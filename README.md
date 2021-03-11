@@ -37,6 +37,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://6figuredev.com/"><img src="https://avatars0.githubusercontent.com/u/7606265?v=4?s=100" width="100px;" alt=""/><br /><sub><b>John Callaway</b></sub></a><br /><a href="https://github.com/ovation22/SpeakerMeet.Api/commits?author=ovation22" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/ClaytonHunt"><img src="https://avatars1.githubusercontent.com/u/1760277?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Clayton Hunt</b></sub></a><br /><a href="https://github.com/ovation22/SpeakerMeet.Api/commits?author=ClaytonHunt" title="Code">💻</a></td>
     <td align="center"><a href="http://soltisweb.com"><img src="https://avatars.githubusercontent.com/u/13591910?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bryan Soltis</b></sub></a><br /><a href="https://github.com/ovation22/SpeakerMeet.Api/commits?author=bryanSoltis" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ashjonm"><img src="https://avatars.githubusercontent.com/u/9940007?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jonathan Ash</b></sub></a><br /><a href="https://github.com/ovation22/SpeakerMeet.Api/commits?author=ashjonm" title="Code">💻</a></td>
   </tr>
 </table>
 
