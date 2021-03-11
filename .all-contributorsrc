@@ -23,6 +23,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "bryanSoltis",
+      "name": "Bryan Soltis",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13591910?v=4",
+      "profile": "http://soltisweb.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
