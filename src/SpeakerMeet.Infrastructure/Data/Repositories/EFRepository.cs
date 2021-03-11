@@ -62,7 +62,7 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
 
         private IQueryable<T> ApplySpecification<T>(ISpecification<T> spec) where T : class
         {
-            var evaluator = new SpecificationEvaluator<T>();
+            var evaluator = new SpecificationEvaluator();
 
             return evaluator.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
