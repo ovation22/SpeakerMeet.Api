@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +29,7 @@ namespace SpeakerMeet.Api.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<SearchResults>>> GetResults(string terms)
+        public async Task<ActionResult<SpeakerMeetSearchResults>> GetResults(string terms)
         {
             try
             {
