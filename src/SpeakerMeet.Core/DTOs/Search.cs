@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Azure.Search.Models;
+using Azure.Search.Documents.Models;
 
 namespace SpeakerMeet.Core.DTOs
 {

@@ -1,9 +1,9 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Azure.Search;
-using Microsoft.Azure.Search.Models;
+using Azure;
+using Azure.Search.Documents;
+using Azure.Search.Documents.Models;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Interfaces.Services;
 
@@ -11,23 +11,15 @@ namespace SpeakerMeet.Core.Services
 {
     public class SearchService : ISearchService
     {
-        private readonly string _searchIndexName;
-        private readonly SearchServiceClient _client;
-        private readonly ConcurrentDictionary<string, ISearchIndexClient> _indexClients;
+        private readonly SearchClient _client;
 
         public SearchService(string accountName, string queryKey, string searchIndexName)
         {
-            _searchIndexName = searchIndexName;
-            _indexClients = new ConcurrentDictionary<string, ISearchIndexClient>();
-            _client = new SearchServiceClient(accountName, new SearchCredentials(queryKey));
+            _client = new SearchClient(new Uri($"https://{accountName}.search.windows.net"), 
+                searchIndexName, new AzureKeyCredential(queryKey));
         }
 
-        private ISearchIndexClient GetClient(string indexName)
-        {
-            return _indexClients.GetOrAdd(indexName, _client.Indexes.GetClient(indexName));
-        }
-
-        public async Task<DocumentSearchResult<SearchResults>> Search(string terms)
+        public async Task<SpeakerMeetSearchResults> Search(string terms)
         {
             var fuzzyTerms = terms + "~";
             var splitTerms = terms.Replace(" ", "~ ");
@@ -38,36 +30,84 @@ namespace SpeakerMeet.Core.Services
                 QueryType = "full"
             };
 
-            return await Search(_searchIndexName, payload);
+            return await Search(payload);
         }
 
-        public async Task<DocumentSearchResult<SearchResults>> Search(string indexName, Search payload)
+        private async Task<SpeakerMeetSearchResults> Search(Search payload)
         {
-            var indexClient = GetClient(indexName);
-            var searchParameters = new SearchParameters {Top = payload.PageSize, Skip = (payload.Page - 1) * payload.PageSize};
-            
-            if (payload.Filters != null)
-            {
-                searchParameters.Filter = string.Join(" and ", payload.Filters.Select(x => $"{x.Key} eq '{x.Value}'").ToArray());
-            }
-            
-            searchParameters.OrderBy = payload.OrderBy.Split(',');
-            searchParameters.QueryType = "full".Equals(payload.QueryType) ? QueryType.Full : QueryType.Simple;
-            searchParameters.SearchMode = payload.SearchMode;
+            var searchOptions =
+                new SearchOptions
+                {
+                    Size = payload.PageSize,
+                    Skip = (payload.Page - 1) * payload.PageSize,
+                    QueryType = "full".Equals(payload.QueryType) ? SearchQueryType.Full : SearchQueryType.Simple,
+                    SearchMode = payload.SearchMode,
+                    IncludeTotalCount = true
+                };
 
+            ApplyFilter(payload, searchOptions);
+            ApplyFacets(payload, searchOptions);
+            ApplyOrderBy(payload, searchOptions);
+            ApplyScoringProfile(payload, searchOptions);
+
+            SearchResults<SpeakerMeetSearchResult> results = await _client.SearchAsync<SpeakerMeetSearchResult>(payload.Text, searchOptions);
+
+            return new SpeakerMeetSearchResults
+            {
+                Count = results.TotalCount,
+                Results = results.GetResults().Select(x => new SpeakerMeetSearchResultDocument
+                {
+                    Document =
+                        new SpeakerMeetSearchResult
+                        {
+                            Id = x.Document.Id,
+                            Location = x.Document.Location,
+                            Slug = x.Document.Slug,
+                            Name = x.Document.Name,
+                            Type = x.Document.Type,
+                            Description = x.Document.Description
+                        }
+                })
+            };
+        }
+
+        private static void ApplyFacets(Search payload, SearchOptions searchOptions)
+        {
+            if (!payload.IncludeFacets)
+            {
+                return;
+            }
+
+            var appliedFacets = (payload.Filters).Select(x => x.Key);
+
+            foreach (var facet in payload.Facets.Except(appliedFacets).ToList())
+            {
+                searchOptions.Facets.Add(facet);
+            }
+        }
+
+        private static void ApplyScoringProfile(Search payload, SearchOptions searchOptions)
+        {
             if (!string.IsNullOrEmpty(payload.ScoringProfile))
             {
-                searchParameters.ScoringProfile = payload.ScoringProfile;
+                searchOptions.ScoringProfile = payload.ScoringProfile;
             }
-            searchParameters.IncludeTotalResultCount = true;
-            
-            if (payload.IncludeFacets)
-            {
-                var appliedFilters = (payload.Filters ?? new Dictionary<string, string>()).Select(x => x.Key);
-                searchParameters.Facets = payload.Facets.Except(appliedFilters).ToList();
-            }
+        }
 
-            return await indexClient.Documents.SearchAsync<SearchResults>(payload.Text, searchParameters);
+        private static void ApplyOrderBy(Search payload, SearchOptions searchOptions)
+        {
+            foreach (var orderBy in payload.OrderBy.Split(','))
+            {
+                searchOptions.OrderBy.Add(orderBy);
+            }
+        }
+
+        private static void ApplyFilter(Search payload, SearchOptions searchOptions)
+        {
+            if (payload.Filters.Count > 0)
+            {
+                searchOptions.Filter = string.Join(" and ", payload.Filters.Select(x => $"{x.Key} eq '{x.Value}'").ToArray());
+            }
         }
     }
 }
