@@ -27,7 +27,7 @@ steps:
 - task: SonarQubePrepare@4
   inputs:
     displayName: 'Prepare analysis on SonarQube'
-    SonarQube: AzureDevOps
+    SonarQube: SonarQube
     projectKey: $(SonarQubeToken)
     projectName: 'SpeakerMeet.Api'
     extraProperties: sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml      
