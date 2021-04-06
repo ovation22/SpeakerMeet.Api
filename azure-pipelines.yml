@@ -45,7 +45,6 @@ steps:
   inputs:
     command: 'restore'
     feedsToUse: "config"
-    nugetConfigPath: "$(Build.SourcesDirectory)/nuget.config"
     verbosityRestore: quiet
     arguments: '--locked-mode'
     projects: '**/*.csproj'
