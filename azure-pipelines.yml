@@ -44,10 +44,9 @@ steps:
   displayName: dotnet restore
   inputs:
     command: 'restore'
-    feedsToUse: "config"
-    verbosityRestore: quiet
-    arguments: '--locked-mode'
     projects: '**/*.csproj'
+    feedsToUse: 'select'
+    verbosityRestore: 'quiet'
     
 - task: DotNetCoreCLI@2
   displayName: dotnet build
