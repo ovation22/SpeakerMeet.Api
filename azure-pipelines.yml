@@ -59,7 +59,7 @@ steps:
   displayName: 'Run unit tests - $(buildConfiguration)'
   inputs:
     command: 'test'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=opencover'
+    arguments: '--configuration $(buildConfiguration) --filter "FullyQualifiedName!~SpeakerMeet.Tests.Integration.DB" /p:CollectCoverage=true --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=opencover'
     projects: '**/*.csproj'
     nobuild: true
   continueOnError: true
