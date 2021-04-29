@@ -16,97 +16,102 @@ variables:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
-steps:
-- task: UseDotNet@2
-  inputs:
-    displayName: 'Use .NET core 2.x for sonarqube'
-    packageType: sdk
-    version: 2.2.203
-  condition: eq(variables.isMaster, true)
+stages:
+- stage: BuildAndTest
+  pool: BuildPool
+  jobs:
+  - job: BuildAndTest
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        displayName: 'Use .NET core 2.x for sonarqube'
+        packageType: sdk
+        version: 2.2.203
+      condition: eq(variables.isMaster, true)
 
-- task: SonarQubePrepare@4
-  inputs:
-    displayName: 'Prepare analysis on SonarQube'
-    SonarQube: SonarQube
-    projectKey: '$(SonarQubeToken)'
-    projectName: 'SpeakerMeet.Api'
-    extraProperties: sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml      
-  condition: eq(variables.isMaster, true)
+    - task: SonarQubePrepare@4
+      inputs:
+        displayName: 'Prepare analysis on SonarQube'
+        SonarQube: SonarQube
+        projectKey: '$(SonarQubeToken)'
+        projectName: 'SpeakerMeet.Api'
+        extraProperties: sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml      
+      condition: eq(variables.isMaster, true)
     
-- task: UseDotNet@2
-  displayName: 'Use .NET sdk'
-  inputs:
-    packageType: sdk
-    version: 5.x
-    installationPath: $(Agent.ToolsDirectory)/dotnet
+    - task: UseDotNet@2
+      displayName: 'Use .NET sdk'
+      inputs:
+        packageType: sdk
+        version: 5.x
+        installationPath: $(Agent.ToolsDirectory)/dotnet
     
-- task: DotNetCoreCLI@2
-  displayName: dotnet restore
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-    feedsToUse: 'select'
-    verbosityRestore: 'quiet'
+    - task: DotNetCoreCLI@2
+      displayName: dotnet restore
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+        feedsToUse: 'select'
+        verbosityRestore: 'quiet'
     
-- task: DotNetCoreCLI@2
-  displayName: dotnet build
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--no-restore --configuration $(BuildConfiguration)'
+    - task: DotNetCoreCLI@2
+      displayName: dotnet build
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--no-restore --configuration $(BuildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run unit tests - $(buildConfiguration)'
-  inputs:
-    command: 'test'
-    arguments: '--configuration $(buildConfiguration) --filter "FullyQualifiedName!~SpeakerMeet.Tests.Integration.DB" /p:CollectCoverage=true --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=opencover'
-    projects: '**/*.csproj'
-    nobuild: true
-  continueOnError: true
+    - task: DotNetCoreCLI@2
+      displayName: 'Run unit tests - $(buildConfiguration)'
+      inputs:
+        command: 'test'
+        arguments: '--configuration $(buildConfiguration) --filter "FullyQualifiedName!~SpeakerMeet.Tests.Integration.DB" /p:CollectCoverage=true --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=opencover'
+        projects: '**/*.csproj'
+        nobuild: true
+      continueOnError: true
 
-- task: SonarQubeAnalyze@4
-  displayName: 'Run Code Analysis'
-  condition: eq(variables.isMaster, true)
+    - task: SonarQubeAnalyze@4
+      displayName: 'Run Code Analysis'
+      condition: eq(variables.isMaster, true)
 
-- task: SonarQubePublish@4
-  displayName: 'Publish Quality Gate Result'
-  inputs:
-    pollingTimeoutSec: '300'
-  condition: eq(variables.isMaster, true)
+    - task: SonarQubePublish@4
+      displayName: 'Publish Quality Gate Result'
+      inputs:
+        pollingTimeoutSec: '300'
+      condition: eq(variables.isMaster, true)
 
-- script: |
-    dotnet tool install -g dotnet-reportgenerator-globaltool --ignore-failed-sources
-    reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:Cobertura
-  displayName: Create Code coverage report
+    - script: |
+        dotnet tool install -g dotnet-reportgenerator-globaltool --ignore-failed-sources
+        reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:Cobertura
+      displayName: Create Code coverage report
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
-    pathToSources: '$(Build.SourcesDirectory)'
+    - task: PublishCodeCoverageResults@1
+      displayName: 'Publish code coverage'
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+        pathToSources: '$(Build.SourcesDirectory)'
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'VSTest'
-    testResultsFiles: '**/*.trx'
-    searchFolder: '$(Agent.TempDirectory)'
-    mergeTestResults: true
-    failTaskOnFailedTests: true
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/*.trx'
+        searchFolder: '$(Agent.TempDirectory)'
+        mergeTestResults: true
+        failTaskOnFailedTests: true
     
-- task: DotNetCoreCLI@2
-  displayName: Build Artifact
-  inputs:
-    command: publish
-    projects: '**/SpeakerMeet.Api.csproj'
-    publishWebProjects: false
-    arguments: '--no-build --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
+    - task: DotNetCoreCLI@2
+      displayName: Build Artifact
+      inputs:
+        command: publish
+        projects: '**/SpeakerMeet.Api.csproj'
+        publishWebProjects: false
+        arguments: '--no-build --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: True
 
-- task: PublishBuildArtifacts@1
-  displayName: Publish Artifact
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'SpeakerMeet.Api'
-    condition: succeeded()
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Artifact
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: 'SpeakerMeet.Api'
+        condition: succeeded()
     
