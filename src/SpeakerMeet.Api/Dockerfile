@@ -1,14 +1,18 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.5.0/wait /wait
-RUN /bin/bash -c 'ls -la /wait; chmod +x /wait; ls -la /wait'
+RUN apk add icu-libs
+# https://www.abhith.net/blog/docker-sql-error-on-aspnet-core-alpine/
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.5.0/wait /wait
+RUN /bin/ash -c 'ls -la /wait; chmod +x /wait; ls -la /wait'
+
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS build
 WORKDIR /src
 COPY ["src/SpeakerMeet.Api/SpeakerMeet.Api.csproj", "src/SpeakerMeet.Api/"]
 COPY ["src/SpeakerMeet.Core/SpeakerMeet.Core.csproj", "src/SpeakerMeet.Core/"]
