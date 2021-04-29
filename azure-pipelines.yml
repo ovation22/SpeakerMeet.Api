@@ -116,6 +116,12 @@ stages:
     
 - stage: DeployToQA
   jobs:
-  - job: DeployToQA
-    steps:
-    - bash: ls
+  - deployment: Playground
+    environment: Playground
+    strategy: 
+      runOnce:
+        deploy:
+            steps:
+            - bash: ls 
+            - bash: ls $(Pipeline.Workspace)
+            - bash: ls $(Pipeline.Workspace)/SpeakerMeet.Api
