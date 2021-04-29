@@ -12,7 +12,7 @@ services:
       - seq
   
   db:
-    image: "mcr.microsoft.com/mssql/server"
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
   
   redis:
     image: redis:alpine
