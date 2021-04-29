@@ -114,3 +114,8 @@ stages:
         artifactName: 'SpeakerMeet.Api'
         condition: succeeded()
     
+- stage: DeployToQA
+  jobs:
+  - job: DeployToQA
+    steps:
+    - bash: ls
