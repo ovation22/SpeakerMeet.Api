@@ -125,3 +125,9 @@ stages:
             - bash: ls 
             - bash: ls $(Pipeline.Workspace)
             - bash: ls $(Pipeline.Workspace)/SpeakerMeet.Api
+            - task: AzureWebApp@1
+              displayName: Azure Web App Deploy
+              inputs:
+                azureSubscription: Playground
+                appName: speakermeetdemo
+                package: $(Pipeline.Workspace)/SpeakerMeet.Api/*.zip
