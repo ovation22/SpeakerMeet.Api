@@ -16,7 +16,13 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
         {
             _id = Guid.NewGuid();
 
-            Context.Speakers.Add(new Speaker { Id = _id });
+            Context.Speakers.Add(new Speaker { 
+                Id = _id,
+                Name = "Test Speaker",
+                Slug = "test-speaker",
+                Location = "Tampa, FL",
+                Description = "Test Speaker from Tampa, FL"
+            });
             Context.SaveChanges();
         }
 

@@ -75,8 +75,6 @@ namespace SpeakerMeet.Api
 
             db.Database.EnsureCreated();
 
-            app.UseHttpsRedirection();
-
             app.UseSwaggerConfig();
             app.UseCorsConfig();
             app.UseHttpsRedirection();

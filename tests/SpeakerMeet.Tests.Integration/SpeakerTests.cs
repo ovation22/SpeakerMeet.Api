@@ -20,7 +20,7 @@ namespace SpeakerMeet.Tests.Integration
         public async Task Get_Speaker_ReturnsOk()
         {
             // Arrange
-            const string slug = "slug";
+            const string slug = "test-speaker";
 
             //Act
             var response = await _client.GetAsync($"api/Speakers/{slug}");
