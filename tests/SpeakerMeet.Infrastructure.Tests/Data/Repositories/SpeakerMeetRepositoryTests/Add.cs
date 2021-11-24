@@ -16,7 +16,13 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
         public async Task ItAddsSpeaker()
         {
             // Arrange
-            var speaker = new Speaker();
+            var speaker = new Speaker
+            {
+                Name = "Test Speaker",
+                Slug = "test-speaker",
+                Location = "Tampa, FL",
+                Description = "Test Speaker from Tampa, FL"
+            };
 
             // Act
             await Repository.Add(speaker);
@@ -29,7 +35,13 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
         public async Task ItReturnsNewlyAddedSpeaker()
         {
             // Arrange
-            var speaker = new Speaker();
+            var speaker = new Speaker
+            {
+                Name = "Test Speaker",
+                Slug = "test-speaker",
+                Location = "Tampa, FL",
+                Description = "Test Speaker from Tampa, FL"
+            };
 
             // Act
             var newlyAddedSpeaker = await Repository.Add(speaker);

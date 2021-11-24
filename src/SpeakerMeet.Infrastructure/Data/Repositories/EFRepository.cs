@@ -21,7 +21,7 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
         {
             var specificationResult = ApplySpecification(spec);
 
-            return await specificationResult.SingleOrDefaultAsync();
+            return (await specificationResult.SingleOrDefaultAsync())!;
         }
 
         public async Task<IReadOnlyList<T>> List<T>(ISpecification<T> spec) where T : class

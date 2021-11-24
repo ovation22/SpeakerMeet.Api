@@ -45,7 +45,10 @@ namespace SpeakerMeet.Tests.Integration
             db.Speakers.Add(new Speaker
             {
                 Id = Guid.NewGuid(),
-                Slug = "slug"
+                Name = "Test Speaker",
+                Slug = "test-speaker",
+                Location = "Tampa, FL",
+                Description = "Test Speaker from Tampa, FL"
             });
             db.SaveChanges();
         }

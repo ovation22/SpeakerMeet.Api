@@ -12,7 +12,14 @@ namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetReposito
 
         public Update(ContextFixture fixture) : base(fixture)
         {
-            _speaker = new Speaker { Id = new Guid("5FD2E324-A935-484E-8F9F-F52E7921EF21") };
+            _speaker = new Speaker
+            {
+                Id = new Guid("5FD2E324-A935-484E-8F9F-F52E7921EF21"),
+                Name = "Test Speaker",
+                Slug = "test-speaker",
+                Location = "Tampa, FL",
+                Description = "Test Speaker from Tampa, FL"
+            };
             Context.Speakers.Add(_speaker);
             Context.SaveChanges();
         }
