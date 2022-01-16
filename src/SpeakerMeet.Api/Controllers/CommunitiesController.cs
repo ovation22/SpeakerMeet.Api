@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Exceptions;
 using SpeakerMeet.Core.Interfaces.Logging;
