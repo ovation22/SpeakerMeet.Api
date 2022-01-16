@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -110,20 +111,26 @@ namespace SpeakerMeet.Api.Controllers
 
         // POST: api/Conferences
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesDefaultResponseType]
+        public IActionResult Post([FromBody] string value)
         {
+            return StatusCode((int)HttpStatusCode.NotImplemented);
         }
 
         // PUT: api/Conferences/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id:Guid}")]
+        [ProducesDefaultResponseType]
+        public IActionResult Put(Guid id, [FromBody] string value)
         {
+            return StatusCode((int)HttpStatusCode.NotImplemented);
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE: api/Conferences/5
+        [HttpDelete("{id:Guid}")]
+        [ProducesDefaultResponseType]
+        public IActionResult Delete(Guid id)
         {
+            return StatusCode((int)HttpStatusCode.NotImplemented);
         }
     }
 }
