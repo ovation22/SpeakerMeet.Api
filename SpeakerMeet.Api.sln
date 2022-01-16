@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29609.76
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Api", "src\SpeakerMeet.Api\SpeakerMeet.Api.csproj", "{4DED4745-1FB4-44FB-9D37-1F859A73066D}"
 EndProject
@@ -33,6 +33,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Tests.Integration.DB", "tests\SpeakerMeet.Tests.Integration.DB\SpeakerMeet.Tests.Integration.DB.csproj", "{7315E6B9-0F5C-42C4-9548-688D1A560CBC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Tests.Integration", "tests\SpeakerMeet.Tests.Integration\SpeakerMeet.Tests.Integration.csproj", "{C0F3C528-6A80-417C-BEEB-1FE44989239A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Benchmarks", "tests\SpeakerMeet.Benchmarks\SpeakerMeet.Benchmarks.csproj", "{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +78,10 @@ Global
 		{C0F3C528-6A80-417C-BEEB-1FE44989239A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0F3C528-6A80-417C-BEEB-1FE44989239A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0F3C528-6A80-417C-BEEB-1FE44989239A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{1FF6A4B7-9A35-4598-913E-F260703282CA} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 		{7315E6B9-0F5C-42C4-9548-688D1A560CBC} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 		{C0F3C528-6A80-417C-BEEB-1FE44989239A} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
+		{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2B1E90C-5AF5-4A8A-BB74-5F5FF469E7ED}
