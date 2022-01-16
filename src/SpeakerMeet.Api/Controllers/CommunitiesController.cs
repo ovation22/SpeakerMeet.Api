@@ -65,7 +65,7 @@ namespace SpeakerMeet.Api.Controllers
             {
                 _logger.LogWarning(ex, ex.Message);
 
-                return NotFound();
+                return NotFound("Unable to find Community");
             }
             catch (Exception ex)
             {
@@ -92,7 +92,7 @@ namespace SpeakerMeet.Api.Controllers
             {
                 _logger.LogWarning(ex, ex.Message);
 
-                return NotFound();
+                return NotFound("Unable to find Community");
             }
             catch (Exception ex)
             {
