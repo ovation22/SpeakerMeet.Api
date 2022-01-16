@@ -3,7 +3,9 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using SpeakerMeet.Core.DTOs;
+using SpeakerMeet.Core.Exceptions;
 using SpeakerMeet.Core.Interfaces.Logging;
 using SpeakerMeet.Core.Interfaces.Services;
 
@@ -59,6 +61,12 @@ namespace SpeakerMeet.Api.Controllers
 
                 return Ok(result);
             }
+            catch (EntityNotFoundException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+
+                return NotFound();
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
@@ -79,6 +87,12 @@ namespace SpeakerMeet.Api.Controllers
                 var result = await _communityService.Get(slug);
 
                 return Ok(result);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+
+                return NotFound();
             }
             catch (Exception ex)
             {
