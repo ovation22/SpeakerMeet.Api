@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using SpeakerMeet.Api.Config;
 using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Logging;
@@ -74,6 +75,8 @@ namespace SpeakerMeet.Api
             }
 
             db.Database.EnsureCreated();
+
+            app.UseSerilogRequestLogging();
 
             app.UseSwaggerConfig();
             app.UseCorsConfig();
