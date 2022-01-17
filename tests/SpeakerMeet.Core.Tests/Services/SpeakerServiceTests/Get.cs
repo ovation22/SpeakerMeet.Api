@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Moq;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Exceptions;
 using SpeakerMeet.Core.Specifications;
 using Xunit;
 
@@ -11,17 +12,16 @@ namespace SpeakerMeet.Core.Tests.Services.SpeakerServiceTests
     public class Get : SpeakerServiceTestBase
     {
         private readonly Guid _id;
-        private readonly Speaker _speaker;
 
         public Get()
         {
             _id = new Guid("1BF95F24-0C0B-4C9A-8B80-46110CA9413E");
-            _speaker = new Speaker
-                {
-                    Id = _id
-                };
+            var speaker = new Speaker
+            {
+                Id = _id
+            };
 
-            Repository.Setup(x => x.Get(It.IsAny<SpeakerSpecification>())).ReturnsAsync(_speaker);
+            Repository.Setup(x => x.Get(It.IsAny<SpeakerSpecification>())).ReturnsAsync(speaker);
         }
 
         [Fact]
@@ -34,6 +34,19 @@ namespace SpeakerMeet.Core.Tests.Services.SpeakerServiceTests
             // Assert
             Assert.NotNull(speaker);
             Assert.IsAssignableFrom<SpeakerResult>(speaker);
+        }
+
+        [Fact]
+        public async Task WhenSpeakerNull_ThenEntityNotFoundException()
+        {
+            // Arrange
+            Repository.Setup(x => x.Get(It.IsAny<SpeakerSpecification>())).ReturnsAsync((Speaker?)null);
+
+            // Act
+            Task Act() => Service.Get(_id);
+
+            // Assert
+            await Assert.ThrowsAsync<EntityNotFoundException>(Act);
         }
     }
 }

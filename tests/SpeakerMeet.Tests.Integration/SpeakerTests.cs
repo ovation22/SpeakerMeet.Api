@@ -30,7 +30,7 @@ namespace SpeakerMeet.Tests.Integration
         }
 
         [Fact]
-        public async Task WhenSpeakerNotFound_ThenBadResult()
+        public async Task WhenSpeakerNotFound_ThenNotFound()
         {
             // Arrange
             const string slug = "doesn't exist";
@@ -39,7 +39,7 @@ namespace SpeakerMeet.Tests.Integration
             var response = await _client.GetAsync($"api/Speakers/{slug}");
 
             // Assert
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
     }
 }

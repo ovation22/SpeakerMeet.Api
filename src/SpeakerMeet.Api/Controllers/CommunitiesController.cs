@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileProviders;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Exceptions;
 using SpeakerMeet.Core.Interfaces.Logging;
@@ -53,6 +52,7 @@ namespace SpeakerMeet.Api.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CommunityResult>> Get(Guid id)
         {
             try
@@ -80,6 +80,7 @@ namespace SpeakerMeet.Api.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CommunityResult>> GetBySlug(string slug)
         {
             try

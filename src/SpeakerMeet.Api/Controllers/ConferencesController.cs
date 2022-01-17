@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpeakerMeet.Core.DTOs;
+using SpeakerMeet.Core.Exceptions;
 using SpeakerMeet.Core.Interfaces.Logging;
 using SpeakerMeet.Core.Interfaces.Services;
 
@@ -51,6 +52,7 @@ namespace SpeakerMeet.Api.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ConferenceResult>> Get(Guid id)
         {
             try
@@ -58,6 +60,12 @@ namespace SpeakerMeet.Api.Controllers
                 var result = await _conferenceService.Get(id);
 
                 return Ok(result);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+
+                return NotFound("Unable to find Conference");
             }
             catch (Exception ex)
             {
@@ -72,6 +80,7 @@ namespace SpeakerMeet.Api.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ConferenceResult>> GetBySlug(string slug)
         {
             try
@@ -79,6 +88,12 @@ namespace SpeakerMeet.Api.Controllers
                 var result = await _conferenceService.Get(slug);
 
                 return Ok(result);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+
+                return NotFound("Unable to find Conference");
             }
             catch (Exception ex)
             {
