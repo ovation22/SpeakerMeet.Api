@@ -2,6 +2,7 @@
 using Moq;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Exceptions;
 using SpeakerMeet.Core.Specifications;
 using Xunit;
 
@@ -10,17 +11,16 @@ namespace SpeakerMeet.Core.Tests.Services.ConferenceServiceTests
     public class GetBySlug : ConferenceServiceTestBase
     {
         private readonly string _slug;
-        private readonly Conference _conference;
 
         public GetBySlug()
         {
             _slug = "test-slug";
-            _conference = new Conference
-                {
-                    Slug = _slug
-                };
+            var conference = new Conference
+            {
+                Slug = _slug
+            };
 
-            Repository.Setup(x => x.Get(It.IsAny<ConferenceSpecification>())).ReturnsAsync(_conference);
+            Repository.Setup(x => x.Get(It.IsAny<ConferenceSpecification>())).ReturnsAsync(conference);
         }
 
         [Fact]
@@ -33,6 +33,19 @@ namespace SpeakerMeet.Core.Tests.Services.ConferenceServiceTests
             // Assert
             Assert.NotNull(conference);
             Assert.IsAssignableFrom<ConferenceResult>(conference);
+        }
+
+        [Fact]
+        public async Task WhenConferenceNull_ThenEntityNotFoundException()
+        {
+            // Arrange
+            Repository.Setup(x => x.Get(It.IsAny<ConferenceSpecification>())).ReturnsAsync((Conference?)null);
+
+            // Act
+            Task Act() => Service.Get(_slug);
+
+            // Assert
+            await Assert.ThrowsAsync<EntityNotFoundException>(Act);
         }
     }
 }

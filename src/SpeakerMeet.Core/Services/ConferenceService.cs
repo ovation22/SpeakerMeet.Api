@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SpeakerMeet.Core.Cache;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Exceptions;
 using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Repositories;
 using SpeakerMeet.Core.Interfaces.Services;
@@ -31,12 +32,22 @@ namespace SpeakerMeet.Core.Services
         {
             var conference =  await _repository.Get(new ConferenceSpecification(id));
 
+            if (conference == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
             return Map(conference);
         }
 
         public async Task<ConferenceResult> Get(string slug)
         {
             var conference =  await _repository.Get(new ConferenceSpecification(slug));
+
+            if (conference == null)
+            {
+                throw new EntityNotFoundException();
+            }
 
             return Map(conference);
         }

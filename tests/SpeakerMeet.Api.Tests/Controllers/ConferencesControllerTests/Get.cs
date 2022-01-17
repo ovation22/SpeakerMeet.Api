@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using SpeakerMeet.Core.Exceptions;
 using Xunit;
 
 namespace SpeakerMeet.Api.Tests.Controllers.ConferencesControllerTests
@@ -35,6 +36,33 @@ namespace SpeakerMeet.Api.Tests.Controllers.ConferencesControllerTests
 
             // Assert
             ConferenceService.Verify(x => x.Get(_id), Times.Once());
+        }
+
+        [Fact]
+        public async Task GivenEntityNotFoundException_ThenNotFoundResult()
+        {
+            // Arrange
+            ConferenceService.Setup(x => x.Get(_id)).Throws(new EntityNotFoundException());
+
+            // Act
+            var result = await Controller.Get(_id);
+
+            // Assert
+            Assert.IsAssignableFrom<NotFoundObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task GivenEntityNotFoundException_ThenItLogsWarning()
+        {
+            // Arrange
+            var ex = new EntityNotFoundException();
+            ConferenceService.Setup(x => x.Get(_id)).Throws(ex);
+
+            // Act
+            await Controller.Get(_id);
+
+            // Assert
+            Logger.Verify(x => x.LogWarning(ex, ex.Message), Times.Once());
         }
 
         [Fact]

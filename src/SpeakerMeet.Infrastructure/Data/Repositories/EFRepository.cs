@@ -17,7 +17,7 @@ namespace SpeakerMeet.Infrastructure.Data.Repositories
             _context = context;
         }
 
-        public async Task<T> Get<T>(ISpecification<T> spec) where T : class
+        public async Task<T?> Get<T>(ISpecification<T> spec) where T : class
         {
             var specificationResult = ApplySpecification(spec);
 
