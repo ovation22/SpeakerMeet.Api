@@ -61,9 +61,14 @@ namespace SpeakerMeet.Api
             services.AddScoped<ISpeakerPresentationService, SpeakerPresentationService>();
 
             services.AddSingleton<ISearchService>(
-                new SearchService(Configuration["SearchServiceName"], Configuration["SearchServiceQueryApiKey"], Configuration["SearchIndexName"]));
-				
-			services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>((module, o) => { module.EnableSqlCommandTextInstrumentation = true; }); 
+                new SearchService(Configuration["SearchServiceName"], Configuration["SearchServiceQueryApiKey"],
+                    Configuration["SearchIndexName"]));
+
+            services.AddApplicationInsightsTelemetry(opt => opt.EnableActiveTelemetryConfigurationSetup = true);
+            services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>((module, _) =>
+            {
+                module.EnableSqlCommandTextInstrumentation = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
