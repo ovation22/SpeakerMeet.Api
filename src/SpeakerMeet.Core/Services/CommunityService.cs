@@ -59,7 +59,7 @@ namespace SpeakerMeet.Core.Services
             var communities = await _repository.List(spec);
             var total = await _repository.Count<Community>();
 
-            return new CommunitiesResult{
+            return new CommunitiesResult {
                 Communities = communities.Select(x => new CommunitiesResult.Community
                 {
                     Id = x.Id,
@@ -67,16 +67,9 @@ namespace SpeakerMeet.Core.Services
                     Name = x.Name,
                     Slug = x.Slug,
                     Description = x.Description,
-                }),
-                PaginationInfo = new PaginationInfo
-                {
-                    ActualPage = pageIndex,
-                    ItemsPerPage = communities.Count,
-                    TotalItems = total,
-                    TotalPages =
-                        int.Parse(Math.Ceiling((decimal)total / itemsPage)
-                            .ToString(CultureInfo.InvariantCulture))
-                }
+                }).ToList(),
+                PaginationInfo = new PaginationInfo(total, communities.Count, pageIndex, int.Parse(Math.Ceiling((decimal)total / itemsPage)
+                            .ToString(CultureInfo.InvariantCulture)))
             };
         }
 
@@ -94,12 +87,12 @@ namespace SpeakerMeet.Core.Services
                 Name = community.Name,
                 Slug = community.Slug,
                 Description = community.Description,
-                Tags = community.CommunityTags.Select(x => x.Tag.Name),
+                Tags = community.CommunityTags.Select(x => x.Tag.Name).ToList(),
                 SocialPlatforms = community.CommunitySocialPlatforms.Select(x => new SocialMedia
                 {
                     Name = x.SocialPlatform.Name,
                     Url = x.Url
-                })
+                }).ToList()
             };
         }
 

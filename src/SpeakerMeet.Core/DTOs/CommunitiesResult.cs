@@ -7,9 +7,9 @@ namespace SpeakerMeet.Core.DTOs
     {
         public PaginationInfo PaginationInfo { get; init; } = default!;
 
-        public IEnumerable<Community> Communities { get; set; } = new List<Community>();
+        public IReadOnlyCollection<Community> Communities { get; set; } = Array.Empty<Community>();
 
-        public record Community
+        public readonly record struct Community
         {
             public Guid Id { get; init; }
 
