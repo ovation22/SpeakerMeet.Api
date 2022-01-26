@@ -68,16 +68,9 @@ namespace SpeakerMeet.Core.Services
                     Name = x.Name,
                     Slug = x.Slug,
                     Description = x.Description,
-                }),
-                PaginationInfo = new PaginationInfo
-                {
-                    ActualPage = pageIndex,
-                    ItemsPerPage = speakers.Count,
-                    TotalItems = total,
-                    TotalPages =
-                        int.Parse(Math.Ceiling((decimal)total / itemsPage)
-                            .ToString(CultureInfo.InvariantCulture))
-                }
+                }).ToList(),
+                PaginationInfo = new PaginationInfo(total, speakers.Count, pageIndex, int.Parse(Math.Ceiling((decimal)total / itemsPage)
+                            .ToString(CultureInfo.InvariantCulture)))
             };
         }
 
@@ -95,12 +88,12 @@ namespace SpeakerMeet.Core.Services
                 Name = speaker.Name,
                 Slug = speaker.Slug,
                 Description = speaker.Description,
-                Tags = speaker.SpeakerTags.Select(x => x.Tag.Name),
+                Tags = speaker.SpeakerTags.Select(x => x.Tag.Name).ToList(),
                 SocialPlatforms = speaker.SpeakerSocialPlatforms.Select(x => new SocialMedia
                 {
                     Name = x.SocialPlatform.Name,
                     Url = x.Url
-                })
+                }).ToList()
             };
         }
 

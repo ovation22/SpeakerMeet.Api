@@ -15,8 +15,8 @@ namespace SpeakerMeet.Core.DTOs
 
         public string Description { get; init; } = null!;
 
-        public IEnumerable<string>? Tags { get; init; }
+        public IReadOnlyCollection<string>? Tags { get; init; }
 
-        public IEnumerable<SocialMedia>? SocialPlatforms { get; init; }
+        public IReadOnlyCollection<SocialMedia>? SocialPlatforms { get; init; }
     }
 }
