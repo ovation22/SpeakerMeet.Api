@@ -74,9 +74,11 @@ namespace SpeakerMeet.Core.Services
             };
         }
 
-        public async Task<IEnumerable<ConferenceFeatured>> GetFeatured()
+        public async Task<IReadOnlyCollection<ConferenceFeatured>> GetFeatured()
         {
-            return await _cache.GetOrCreate(CacheKeys.FeaturedConferences, async () => await GetRandomConferences());
+            return (await _cache.GetOrCreate(CacheKeys.FeaturedConferences, async () => await GetRandomConferences()))
+                .ToList()
+                .AsReadOnly();
         }
 
         private static ConferenceResult Map(Conference conference)

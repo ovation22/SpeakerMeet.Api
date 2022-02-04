@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -108,7 +109,7 @@ namespace SpeakerMeet.Api.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<CommunitiesResult>> GetFeatured()
+        public async Task<ActionResult<IReadOnlyCollection<CommunityFeatured>>> GetFeatured()
         {
             try
             {

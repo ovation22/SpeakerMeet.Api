@@ -10,6 +10,6 @@ namespace SpeakerMeet.Core.Interfaces.Services
         Task<SpeakerResult> Get(Guid id);
         Task<SpeakerResult> Get(string slug);
         Task<SpeakersResult> GetAll(int pageIndex, int itemsPage, string? direction);
-        Task<IEnumerable<SpeakerFeatured>> GetFeatured();
+        Task<IReadOnlyCollection<SpeakerFeatured>> GetFeatured();
     }
 }

@@ -34,7 +34,7 @@ namespace SpeakerMeet.Core.Tests.Services.CommunityServiceTests
         {
             // Arrange
             Cache.Setup(x => x.GetOrCreate(It.IsAny<string>(), It.IsAny<Func<Task<IEnumerable<CommunityFeatured>>>>()))
-                .Callback((string key, Func<Task<IEnumerable<CommunityFeatured>>> action) => action());
+                .Callback((string _, Func<Task<IEnumerable<CommunityFeatured>>> action) => action());
 
             // Act
             await Service.GetFeatured();

@@ -43,9 +43,9 @@ namespace SpeakerMeet.Infrastructure.Caching
             return result!;
         }
 
-        public async Task<IEnumerable<T>> GetOrCreate<T>(string key, Func<Task<IEnumerable<T>>> createItem) where T : class
+        public async Task<IReadOnlyCollection<T>> GetOrCreate<T>(string key, Func<Task<IReadOnlyCollection<T>>> createItem) where T : class
         {
-            IEnumerable<T> results;
+            IReadOnlyCollection<T> results;
             var cacheEntry = await _cache.GetStringAsync(key);
 
             if (string.IsNullOrEmpty(cacheEntry))

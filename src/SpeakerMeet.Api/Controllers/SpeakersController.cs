@@ -112,7 +112,7 @@ namespace SpeakerMeet.Api.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<SpeakerPresentationsResult>>> GetPresentations(Guid id)
+        public async Task<ActionResult<IReadOnlyCollection<SpeakerPresentationsResult>>> GetPresentations(Guid id)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace SpeakerMeet.Api.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<SpeakerFeatured>>> GetFeatured()
+        public async Task<ActionResult<IReadOnlyCollection<SpeakerFeatured>>> GetFeatured()
         {
             try
             {
