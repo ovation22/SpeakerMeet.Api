@@ -18,17 +18,19 @@ namespace SpeakerMeet.Core.Services
             _repository = repository;
         }
 
-        public async Task<IEnumerable<SpeakerPresentationsResult>> GetAll(Guid id)
+        public async Task<IReadOnlyCollection<SpeakerPresentationsResult>> GetAll(Guid id)
         {
             var speakerPresentations = await _repository.List(new SpeakerPresentationSpecification(id));
 
             return speakerPresentations.Select(x => new SpeakerPresentationsResult
-            {
-                Id = x.Id,
-                SpeakerId = x.SpeakerId,
-                Title = x.Title,
-                Synopsis = x.Synopsis
-            });
+                {
+                    Id = x.Id,
+                    SpeakerId = x.SpeakerId,
+                    Title = x.Title,
+                    Synopsis = x.Synopsis
+                })
+                .ToList()
+                .AsReadOnly();
         }
     }
 }
