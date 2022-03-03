@@ -23,9 +23,7 @@ namespace SpeakerMeet.Core.Tests.Specifications
             var spec = new SpeakerPresentationSpecification(_speakerId);
 
             // Act
-            var result = GetTestCollection()
-                .AsQueryable()
-                .Where(spec.WhereExpressions.Single());
+            var result = spec.Evaluate(GetTestCollection());
 
             // Assert
             Assert.NotNull(result);
@@ -40,9 +38,7 @@ namespace SpeakerMeet.Core.Tests.Specifications
             var spec = new SpeakerPresentationSpecification(badSpeakerId);
 
             // Act
-            var result = GetTestCollection()
-                .AsQueryable()
-                .Where(spec.WhereExpressions.Single());
+            var result = spec.Evaluate(GetTestCollection());
 
             // Assert
             Assert.Empty(result);
