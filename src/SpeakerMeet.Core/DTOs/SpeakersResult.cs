@@ -9,9 +9,9 @@ namespace SpeakerMeet.Core.DTOs
 
         public IReadOnlyCollection<Speaker> Speakers { get; init; } = Array.Empty<Speaker>();
 
-        public readonly record struct Speaker
+        public readonly record struct Speaker()
         {
-            public Guid Id { get; init; }
+            public Guid Id { get; init; } = default!;
 
             public string Name { get; init; } = null!;
 
@@ -20,7 +20,6 @@ namespace SpeakerMeet.Core.DTOs
             public string Description { get; init; } = null!;
 
             public string Location { get; init; } = null!;
-
         }
     }
 }

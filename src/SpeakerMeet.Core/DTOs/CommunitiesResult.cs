@@ -9,9 +9,9 @@ namespace SpeakerMeet.Core.DTOs
 
         public IReadOnlyCollection<Community> Communities { get; set; } = Array.Empty<Community>();
 
-        public readonly record struct Community
+        public readonly record struct Community()
         {
-            public Guid Id { get; init; }
+            public Guid Id { get; init; } = default!;
 
             public string Name { get; init; } = null!;
 

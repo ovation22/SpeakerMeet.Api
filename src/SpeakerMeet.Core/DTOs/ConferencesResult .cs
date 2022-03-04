@@ -9,9 +9,9 @@ namespace SpeakerMeet.Core.DTOs
 
         public IReadOnlyCollection<Conference> Conferences { get; init; } = Array.Empty<Conference>();
 
-        public readonly record struct Conference
+        public readonly record struct Conference()
         {
-            public Guid Id { get; init; }
+            public Guid Id { get; init; } = default!;
 
             public string Name { get; init; } = null!;
 

@@ -25,9 +25,7 @@ namespace SpeakerMeet.Core.Tests.Specifications
             var spec = new ConferenceSpecification(_id);
 
             // Act
-            var result = GetTestCollection()
-                .AsQueryable()
-                .Single(spec.WhereExpressions.Single());
+            var result = spec.Evaluate(GetTestCollection()).Single();
 
             // Assert
             Assert.NotNull(result);
@@ -42,9 +40,7 @@ namespace SpeakerMeet.Core.Tests.Specifications
             var spec = new ConferenceSpecification(badConferenceId);
 
             // Act
-            var result = GetTestCollection()
-                .AsQueryable()
-                .FirstOrDefault(spec.WhereExpressions.Single());
+            var result = spec.Evaluate(GetTestCollection()).SingleOrDefault();
 
             // Assert
             Assert.Null(result);
@@ -57,9 +53,7 @@ namespace SpeakerMeet.Core.Tests.Specifications
             var spec = new ConferenceSpecification(_slug);
 
             // Act
-            var result = GetTestCollection()
-                .AsQueryable()
-                .Single(spec.WhereExpressions.Single());
+            var result = spec.Evaluate(GetTestCollection()).Single();
 
             // Assert
             Assert.NotNull(result);
