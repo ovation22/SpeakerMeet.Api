@@ -49,6 +49,15 @@ jobs:
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
+    - name: Application Insights Annotations
+      uses: wictorwilen/application-insights-action@v1
+      with:
+        applicationId: ${{ secrets.APPLICATION_ID }}
+        apiKey: ${{secrets.API_KEY}}
+        releaseName: ${{ github.event_name }}
+        message: ${{ github.event.head_commit.message }}
+        actor: ${{ github.actor }}
+
     - name: Publish artifacts
       uses: actions/upload-artifact@v1.0.0
       with:
