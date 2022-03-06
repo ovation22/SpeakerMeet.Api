@@ -62,10 +62,11 @@ EnsureDb(app.Services);
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerConfig();
     app.UseHealthCheckConfig();
 }
+
+app.UseCorsConfig();
 
 app.UseSerilogRequestLogging();
 
