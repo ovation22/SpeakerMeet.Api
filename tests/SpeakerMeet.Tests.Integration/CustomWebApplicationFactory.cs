@@ -15,14 +15,8 @@ public class CustomWebApplicationFactory<TStartup>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseEnvironment("Development");
-
         builder.ConfigureServices(services =>
         {
-            services.AddLogging(c =>
-                c.ClearProviders()
-            );
-
             ServiceDescriptor descriptor = services.Single(
                 d => d.ServiceType ==
                      typeof(DbContextOptions<SpeakerMeetContext>));
