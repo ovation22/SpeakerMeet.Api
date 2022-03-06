@@ -1,45 +1,47 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using SpeakerMeet.Api;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
-namespace SpeakerMeet.Tests.Integration
+namespace SpeakerMeet.Tests.Integration;
+
+[Collection("Sequential")]
+public class SpeakersTests :
+    IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    public class SpeakersTests :
-        IClassFixture<CustomWebApplicationFactory<Startup>>
+    private readonly CustomWebApplicationFactory<Program> _factory;
+
+    public SpeakersTests(CustomWebApplicationFactory<Program> factory)
     {
-        private readonly HttpClient _client;
+        _factory = factory;
+    }
 
-        public SpeakersTests(CustomWebApplicationFactory<Startup> factory)
-        {
-            _client = factory.CreateClient();
-        }
+    [Fact]
+    public async Task Get_Speaker_ReturnsOk()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        const string slug = "test-speaker";
 
-        [Fact]
-        public async Task Get_Speaker_ReturnsOk()
-        {
-            // Arrange
-            const string slug = "test-speaker";
+        //Act
+        using HttpResponseMessage response = await client.GetAsync($"api/Speakers/{slug}");
 
-            //Act
-            var response = await _client.GetAsync($"api/Speakers/{slug}");
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
 
-            // Assert
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        }
+    [Fact]
+    public async Task WhenSpeakerNotFound_ThenNotFound()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        const string slug = "doesn't exist";
 
-        [Fact]
-        public async Task WhenSpeakerNotFound_ThenNotFound()
-        {
-            // Arrange
-            const string slug = "doesn't exist";
+        //Act
+        HttpResponseMessage response = await client.GetAsync($"api/Speakers/{slug}");
 
-            //Act
-            var response = await _client.GetAsync($"api/Speakers/{slug}");
-
-            // Assert
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-        }
+        // Assert
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 }
