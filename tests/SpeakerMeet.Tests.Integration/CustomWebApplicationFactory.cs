@@ -4,53 +4,64 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Infrastructure.Data;
 
-namespace SpeakerMeet.Tests.Integration
+namespace SpeakerMeet.Tests.Integration;
+
+public class CustomWebApplicationFactory<TStartup>
+    : WebApplicationFactory<TStartup> where TStartup : class
 {
-    public class CustomWebApplicationFactory<TStartup>
-        : WebApplicationFactory<TStartup> where TStartup : class
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
+        builder.ConfigureServices(services =>
         {
-            builder.ConfigureServices(services =>
+            ServiceDescriptor descriptor = services.Single(
+                d => d.ServiceType ==
+                     typeof(DbContextOptions<SpeakerMeetContext>));
+
+            services.Remove(descriptor);
+
+            services.AddDbContextPool<SpeakerMeetContext>(options =>
             {
-                var descriptor = services.Single(
-                    d => d.ServiceType ==
-                         typeof(DbContextOptions<SpeakerMeetContext>));
+                options.UseInMemoryDatabase("Default");
+            });
 
-                services.Remove(descriptor);
+            ServiceProvider? sp = services.BuildServiceProvider();
 
-                services.AddDbContextPool<SpeakerMeetContext>(options =>
-                {
-                    options.UseInMemoryDatabase("Default");
-                });
+            using IServiceScope scope = sp.CreateScope();
+            IServiceProvider scopedServices = scope.ServiceProvider;
+            SpeakerMeetContext db = scopedServices.GetRequiredService<SpeakerMeetContext>();
 
-                var sp = services.BuildServiceProvider();
+            ILogger<CustomWebApplicationFactory<TStartup>> logger = scopedServices
+                .GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
 
-                using var scope = sp.CreateScope();
-                var scopedServices = scope.ServiceProvider;
-                var db = scopedServices.GetRequiredService<SpeakerMeetContext>();
+            db.Database.EnsureCreated();
 
-                db.Database.EnsureCreated();
-
+            try
+            {
                 InitializeDbForTests(db);
-            });
-        }
-
-        private void InitializeDbForTests(SpeakerMeetContext db)
-        {
-            db.Speakers.RemoveRange(db.Speakers);
-            db.Speakers.Add(new Speaker
+            }
+            catch (Exception ex)
             {
-                Id = Guid.NewGuid(),
-                Name = "Test Speaker",
-                Slug = "test-speaker",
-                Location = "Tampa, FL",
-                Description = "Test Speaker from Tampa, FL"
-            });
-            db.SaveChanges();
-        }
+                logger.LogError(ex, "An error occurred seeding the " +
+                                    "database with test messages. Error: {Message}", ex.Message);
+            }
+        });
+    }
+
+    private void InitializeDbForTests(SpeakerMeetContext db)
+    {
+        db.Speakers.RemoveRange(db.Speakers);
+        db.Speakers.Add(new Speaker
+        {
+            Id = Guid.NewGuid(),
+            Name = "Test Speaker",
+            Slug = "test-speaker",
+            Location = "Tampa, FL",
+            Description = "Test Speaker from Tampa, FL"
+        });
+        db.SaveChanges();
     }
 }
