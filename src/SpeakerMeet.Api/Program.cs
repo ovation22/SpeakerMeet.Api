@@ -63,6 +63,10 @@ EnsureDb(app.Services);
 if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerConfig();
+    app.UseDeveloperExceptionPage();
+}
+if (!app.Environment.IsDevelopment())
+{
     app.UseHealthCheckConfig();
 }
 
