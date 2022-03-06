@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace SpeakerMeet.Tests.Integration;
@@ -21,7 +20,7 @@ public class SpeakersTests :
     public async Task Get_Speaker_ReturnsOk()
     {
         // Arrange
-        var client = _factory.CreateClient();
+        using HttpClient client = _factory.CreateClient();
         const string slug = "test-speaker";
 
         //Act
@@ -35,11 +34,11 @@ public class SpeakersTests :
     public async Task WhenSpeakerNotFound_ThenNotFound()
     {
         // Arrange
-        var client = _factory.CreateClient();
+        using HttpClient client = _factory.CreateClient();
         const string slug = "doesn't exist";
 
         //Act
-        HttpResponseMessage response = await client.GetAsync($"api/Speakers/{slug}");
+        using HttpResponseMessage response = await client.GetAsync($"api/Speakers/{slug}");
 
         // Assert
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
