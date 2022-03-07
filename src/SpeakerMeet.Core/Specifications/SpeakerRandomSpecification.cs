@@ -2,17 +2,17 @@
 using Ardalis.Specification;
 using SpeakerMeet.Core.Entities;
 
-namespace SpeakerMeet.Core.Specifications
-{
-    public sealed class SpeakerRandomSpecification : Specification<Speaker>
-    {
-        public SpeakerRandomSpecification()
-        {
-            Query
-                .Where(x => x.IsActive)
-                .OrderBy(x => Guid.NewGuid());
+namespace SpeakerMeet.Core.Specifications;
 
-            Query.Take(4);
-        }
+public sealed class SpeakerRandomSpecification : Specification<Speaker>
+{
+    public SpeakerRandomSpecification()
+    {
+        Query
+            .Where(x => x.IsActive)
+            .AsNoTracking()
+            .OrderBy(x => Guid.NewGuid());
+
+        Query.Take(4);
     }
 }

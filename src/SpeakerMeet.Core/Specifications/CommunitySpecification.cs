@@ -16,32 +16,38 @@ namespace SpeakerMeet.Core.Specifications
 
         public CommunitySpecification(string slug)
         {
-            Query.Where(x => x.Slug == slug);
+            Query
+                .AsNoTracking()
+                .Where(x => x.Slug == slug);
 
             WithIncludes();
         }
 
         public CommunitySpecification(int skip, int take, string? direction)
         {
-            if (string.Equals(direction, nameof(Direction.Asc), StringComparison.OrdinalIgnoreCase))
-            {
-                Query.OrderBy(x => x.Name);
-            }
             if (string.Equals(direction, nameof(Direction.Desc), StringComparison.OrdinalIgnoreCase))
             {
-                Query.OrderByDescending(x => x.Name);
+                Query
+                    .AsNoTracking()
+                    .OrderByDescending(x => x.Name)
+                    .Skip(skip)
+                    .Take(take);
             }
-
-            Query
-                .Skip(skip)
-                .Take(take);
+            else
+            {
+                Query
+                    .AsNoTracking()
+                    .OrderBy(x => x.Name)
+                    .Skip(skip)
+                    .Take(take);
+            }
         }
 
         private void WithIncludes()
         {
-            Query.Include(x => x.CommunityTags).ThenInclude(x => x.Tag);
+            Query.Include(x => x.CommunityTags).ThenInclude(x => x.Tag).AsSplitQuery();
 
-            Query.Include(x => x.CommunitySocialPlatforms).ThenInclude(x => x.SocialPlatform);
+            Query.Include(x => x.CommunitySocialPlatforms).ThenInclude(x => x.SocialPlatform).AsSplitQuery();
         }
     }
 }
