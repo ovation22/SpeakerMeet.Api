@@ -16,25 +16,31 @@ namespace SpeakerMeet.Core.Specifications
 
         public ConferenceSpecification(string slug)
         {
-            Query.Where(x => x.Slug == slug);
+            Query
+                .AsNoTracking()
+                .Where(x => x.Slug == slug);
 
             WithIncludes();
         }
 
         public ConferenceSpecification(int skip, int take, string? direction)
         {
-            if (string.Equals(direction, nameof(Direction.Asc), StringComparison.OrdinalIgnoreCase))
-            {
-                Query.OrderBy(x => x.Name);
-            }
             if (string.Equals(direction, nameof(Direction.Desc), StringComparison.OrdinalIgnoreCase))
             {
-                Query.OrderByDescending(x => x.Name);
+                Query
+                    .AsNoTracking()
+                    .OrderByDescending(x => x.Name)
+                    .Skip(skip)
+                    .Take(take);
             }
-
-            Query
-                .Skip(skip)
-                .Take(take);
+            else
+            {
+                Query
+                    .AsNoTracking()
+                    .OrderBy(x => x.Name)
+                    .Skip(skip)
+                    .Take(take);
+            }
         }
 
         private void WithIncludes()
