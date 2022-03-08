@@ -45,9 +45,9 @@ namespace SpeakerMeet.Core.Specifications
 
         private void WithIncludes()
         {
-            Query.Include(x => x.SpeakerTags).ThenInclude(x => x.Tag);
+            Query.Include(x => x.SpeakerTags).ThenInclude(x => x.Tag).AsSplitQuery();
 
-            Query.Include(x => x.SpeakerSocialPlatforms).ThenInclude(x => x.SocialPlatform);
+            Query.Include(x => x.SpeakerSocialPlatforms).ThenInclude(x => x.SocialPlatform).AsSplitQuery();
         }
     }
 }
