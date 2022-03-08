@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SpeakerMeet.Core.Interfaces.Logging;
 using SpeakerMeet.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Exceptions;
 
@@ -169,6 +170,14 @@ namespace SpeakerMeet.Api.Controllers
         [HttpDelete("{id:Guid}")]
         [ProducesDefaultResponseType]
         public IActionResult Delete(Guid id)
+        {
+            return StatusCode((int)HttpStatusCode.NotImplemented);
+        }
+
+        // PATCH: api/Speakers/5
+        [HttpPatch("{id:Guid}")]
+        [ProducesDefaultResponseType]
+        public IActionResult Patch(Guid id, JsonPatchDocument<SpeakerPatch> patchDoc)
         {
             return StatusCode((int)HttpStatusCode.NotImplemented);
         }

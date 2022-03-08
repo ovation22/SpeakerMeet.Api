@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Exceptions;
@@ -124,7 +125,7 @@ namespace SpeakerMeet.Api.Controllers
 
             return BadRequest("Unable to return Communities");
         }
-        
+
         // POST: api/Communities
         [HttpPost]
         [ProducesDefaultResponseType]
@@ -145,6 +146,14 @@ namespace SpeakerMeet.Api.Controllers
         [HttpDelete("{id:Guid}")]
         [ProducesDefaultResponseType]
         public IActionResult Delete(Guid id)
+        {
+            return StatusCode((int)HttpStatusCode.NotImplemented);
+        }
+
+        // PATCH: api/Communities/5
+        [HttpPatch("{id:Guid}")]
+        [ProducesDefaultResponseType]
+        public IActionResult Patch(Guid id, JsonPatchDocument<CommunityPatch> patchDoc)
         {
             return StatusCode((int)HttpStatusCode.NotImplemented);
         }
