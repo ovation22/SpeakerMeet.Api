@@ -26,7 +26,6 @@ builder.Services.AddCorsConfig();
 builder.Services.AddControllersConfig();
 builder.Services.AddDatabaseConfig(builder.Configuration);
 builder.Services.AddSwaggerConfig();
-builder.Services.AddApplicationInsightsTelemetry();
 
 builder.Services.AddHealthCheckConfig(builder.Configuration);
 
