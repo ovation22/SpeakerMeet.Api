@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Models.Entities;
 
 namespace SpeakerMeet.Infrastructure.Data
 {

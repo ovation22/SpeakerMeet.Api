@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using SpeakerMeet.Core.Cache;
-using SpeakerMeet.Core.DTOs;
-using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Repositories;
 using SpeakerMeet.Core.Interfaces.Services;
+using SpeakerMeet.Core.Models.DTOs;
+using SpeakerMeet.Core.Models.Entities;
 
 namespace SpeakerMeet.Core.Services
 {

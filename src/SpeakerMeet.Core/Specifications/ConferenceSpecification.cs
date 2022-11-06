@@ -1,7 +1,7 @@
 ﻿using System;
 using Ardalis.Specification;
 using SpeakerMeet.Core.Constants;
-using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Models.Entities;
 
 namespace SpeakerMeet.Core.Specifications
 {

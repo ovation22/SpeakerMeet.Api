@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Moq;
-using SpeakerMeet.Core.DTOs;
-using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Models.DTOs;
+using SpeakerMeet.Core.Models.Entities;
 using Xunit;
 
 namespace SpeakerMeet.Core.Tests.Services.StatisticsServiceTests

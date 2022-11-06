@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Moq;
 using SpeakerMeet.Core.Constants;
-using SpeakerMeet.Core.DTOs;
+using SpeakerMeet.Core.Models.DTOs;
 using SpeakerMeet.Core.Specifications;
 using Xunit;
 

@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 using Moq;
-using SpeakerMeet.Core.DTOs;
+using SpeakerMeet.Core.Models.DTOs;
 using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Caching.CacheManagerTests

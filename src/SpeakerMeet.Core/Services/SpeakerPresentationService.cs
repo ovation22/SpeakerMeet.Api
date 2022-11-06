@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Interfaces.Repositories;
 using SpeakerMeet.Core.Interfaces.Services;
+using SpeakerMeet.Core.Models.DTOs;
 using SpeakerMeet.Core.Specifications;
 
 namespace SpeakerMeet.Core.Services

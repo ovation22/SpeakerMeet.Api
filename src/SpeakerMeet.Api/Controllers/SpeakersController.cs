@@ -7,8 +7,8 @@ using SpeakerMeet.Core.Interfaces.Logging;
 using SpeakerMeet.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
-using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Exceptions;
+using SpeakerMeet.Core.Models.DTOs;
 
 namespace SpeakerMeet.Api.Controllers
 {

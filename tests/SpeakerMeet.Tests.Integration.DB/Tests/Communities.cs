@@ -2,7 +2,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using SpeakerMeet.Core.DTOs;
+using SpeakerMeet.Core.Models.DTOs;
 using Xunit;
 
 namespace SpeakerMeet.Tests.Integration.DB.Tests
