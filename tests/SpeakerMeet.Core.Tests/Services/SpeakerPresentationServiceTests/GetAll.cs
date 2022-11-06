@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
-using SpeakerMeet.Core.DTOs;
+using SpeakerMeet.Core.Models.DTOs;
 using SpeakerMeet.Core.Specifications;
 using Xunit;
 

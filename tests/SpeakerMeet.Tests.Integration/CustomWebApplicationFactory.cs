@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Models.Entities;
 using SpeakerMeet.Infrastructure.Data;
 
 namespace SpeakerMeet.Tests.Integration;

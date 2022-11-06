@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Models.Entities;
 using Xunit;
 
 namespace SpeakerMeet.Infrastructure.Tests.Data.Repositories.SpeakerMeetRepositoryTests

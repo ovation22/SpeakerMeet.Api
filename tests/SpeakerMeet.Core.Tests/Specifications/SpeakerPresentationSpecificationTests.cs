@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Models.Entities;
 using SpeakerMeet.Core.Specifications;
 using Xunit;
 

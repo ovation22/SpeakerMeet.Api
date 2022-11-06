@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Models.Entities;
 using SpeakerMeet.Core.Specifications;
 using Xunit;
 

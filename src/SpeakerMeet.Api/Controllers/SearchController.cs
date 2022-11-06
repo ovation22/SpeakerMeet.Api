@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Interfaces.Logging;
 using SpeakerMeet.Core.Interfaces.Services;
+using SpeakerMeet.Core.Models.DTOs;
 
 namespace SpeakerMeet.Api.Controllers
 {

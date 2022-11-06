@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Search.Documents;
 using Azure.Search.Documents.Models;
-using SpeakerMeet.Core.DTOs;
 using SpeakerMeet.Core.Interfaces.Services;
+using SpeakerMeet.Core.Models.DTOs;
 
 namespace SpeakerMeet.Core.Services
 {

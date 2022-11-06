@@ -28,13 +28,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Core.Tests", "t
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Infrastructure.Tests", "tests\SpeakerMeet.Infrastructure.Tests\SpeakerMeet.Infrastructure.Tests.csproj", "{1FF6A4B7-9A35-4598-913E-F260703282CA}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2A9C2ECE-39CC-48B3-A228-7AE7D924D5B8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Tests.Integration.DB", "tests\SpeakerMeet.Tests.Integration.DB\SpeakerMeet.Tests.Integration.DB.csproj", "{7315E6B9-0F5C-42C4-9548-688D1A560CBC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Tests.Integration", "tests\SpeakerMeet.Tests.Integration\SpeakerMeet.Tests.Integration.csproj", "{C0F3C528-6A80-417C-BEEB-1FE44989239A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Benchmarks", "tests\SpeakerMeet.Benchmarks\SpeakerMeet.Benchmarks.csproj", "{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeakerMeet.Benchmarks", "tests\SpeakerMeet.Benchmarks\SpeakerMeet.Benchmarks.csproj", "{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakerMeet.Architecture.Tests", "tests\SpeakerMeet.Architecture.Tests\SpeakerMeet.Architecture.Tests.csproj", "{2D4C6541-DE2F-4EA7-BF23-4C198CE7D39A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,10 +66,6 @@ Global
 		{1FF6A4B7-9A35-4598-913E-F260703282CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF6A4B7-9A35-4598-913E-F260703282CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF6A4B7-9A35-4598-913E-F260703282CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A9C2ECE-39CC-48B3-A228-7AE7D924D5B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A9C2ECE-39CC-48B3-A228-7AE7D924D5B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A9C2ECE-39CC-48B3-A228-7AE7D924D5B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A9C2ECE-39CC-48B3-A228-7AE7D924D5B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7315E6B9-0F5C-42C4-9548-688D1A560CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7315E6B9-0F5C-42C4-9548-688D1A560CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7315E6B9-0F5C-42C4-9548-688D1A560CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -82,6 +78,10 @@ Global
 		{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D4C6541-DE2F-4EA7-BF23-4C198CE7D39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4C6541-DE2F-4EA7-BF23-4C198CE7D39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D4C6541-DE2F-4EA7-BF23-4C198CE7D39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4C6541-DE2F-4EA7-BF23-4C198CE7D39A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +93,7 @@ Global
 		{7315E6B9-0F5C-42C4-9548-688D1A560CBC} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 		{C0F3C528-6A80-417C-BEEB-1FE44989239A} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 		{2E0F7A96-4C2F-41D8-B4D5-E3D6EEEEC577} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
+		{2D4C6541-DE2F-4EA7-BF23-4C198CE7D39A} = {E661D1E7-B6FC-445F-AC2F-353CA25BD2E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2B1E90C-5AF5-4A8A-BB74-5F5FF469E7ED}

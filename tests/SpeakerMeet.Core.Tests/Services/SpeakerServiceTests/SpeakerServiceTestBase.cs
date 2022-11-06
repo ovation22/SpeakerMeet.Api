@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Moq;
-using SpeakerMeet.Core.Entities;
 using SpeakerMeet.Core.Interfaces.Caching;
 using SpeakerMeet.Core.Interfaces.Repositories;
+using SpeakerMeet.Core.Models.Entities;
 using SpeakerMeet.Core.Services;
 using SpeakerMeet.Core.Specifications;
 

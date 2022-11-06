@@ -1,5 +1,5 @@
 ﻿using System;
-using SpeakerMeet.Core.Entities;
+using SpeakerMeet.Core.Models.Entities;
 using SpeakerMeet.Infrastructure.Data;
 using SpeakerMeet.Infrastructure.Data.Repositories;
 using Xunit;

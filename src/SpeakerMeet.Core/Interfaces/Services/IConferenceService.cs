@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SpeakerMeet.Core.DTOs;
+using SpeakerMeet.Core.Models.DTOs;
 
 namespace SpeakerMeet.Core.Interfaces.Services
 {
